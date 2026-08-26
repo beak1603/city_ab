@@ -367,6 +367,7 @@
 
     const panel = document.createElement("div");
     panel.className = "guide-detail__panel guide-detail__panel--scenes";
+    panel.dataset.guideId = id;
     config.scenes.forEach(function (scene, index) {
       panel.appendChild(createScene(scene, index));
     });
