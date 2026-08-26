@@ -418,19 +418,38 @@ main,
   }
 }
 
-/* 3-2. 토큰상점: preserve the full screenshot and place its center on the right. */
+/* 3-2. 토큰상점: enlarge the screenshot's center on the right and fade it into black. */
 #guide .guide-detail__panel--scenes .guide-scene:nth-child(5)::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background-color: #020604;
   background-image: url("./token-shop-bg.png");
   background-repeat: no-repeat;
   background-position: right center;
-  background-size: contain;
+  background-size: 70% auto;
   filter: brightness(0.94) saturate(1.02) contrast(1.03);
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 27%,
+    rgba(0, 0, 0, 0.12) 34%,
+    rgba(0, 0, 0, 0.4) 44%,
+    rgba(0, 0, 0, 0.78) 55%,
+    #000 68%,
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 27%,
+    rgba(0, 0, 0, 0.12) 34%,
+    rgba(0, 0, 0, 0.4) 44%,
+    rgba(0, 0, 0, 0.78) 55%,
+    #000 68%,
+    #000 100%
+  );
 }
 
 #guide .guide-detail__panel--scenes .guide-scene:nth-child(5) .guide-scene__shade {
@@ -438,11 +457,13 @@ main,
   background: linear-gradient(
     90deg,
     rgba(0, 0, 0, 0.99) 0%,
-    rgba(0, 0, 0, 0.95) 26%,
-    rgba(0, 0, 0, 0.82) 44%,
-    rgba(0, 0, 0, 0.38) 66%,
-    rgba(0, 0, 0, 0.10) 84%,
-    rgba(0, 0, 0, 0.03) 100%
+    rgba(0, 0, 0, 0.98) 24%,
+    rgba(0, 0, 0, 0.90) 38%,
+    rgba(0, 0, 0, 0.68) 50%,
+    rgba(0, 0, 0, 0.34) 61%,
+    rgba(0, 0, 0, 0.10) 72%,
+    rgba(0, 0, 0, 0.02) 82%,
+    rgba(0, 0, 0, 0) 100%
   );
 }
 
@@ -452,9 +473,10 @@ main,
 
 @media (max-width: 720px) {
   #guide .guide-detail__panel--scenes .guide-scene:nth-child(5)::before {
-    inset: 0;
-    background-size: contain;
-    background-position: right center;
+    background-size: auto 115%;
+    background-position: 30% center;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.28) 28%, #000 68%);
+    mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.28) 28%, #000 68%);
   }
 }
 
