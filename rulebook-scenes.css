@@ -233,6 +233,21 @@ main,
   }
 }
 
+/* Ability introduction: remove the scanner/detection object and let the carousel use the space. */
+#abilities .ability-scanner {
+  display: none !important;
+}
+
+#abilities .ability-showcase {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+
+#abilities .ability-control {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
 @media (max-width: 720px) {
   html,
   body,
