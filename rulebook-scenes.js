@@ -29,8 +29,11 @@
     "game-start": {
       label: "진행 방식",
       scenes: [
-        { title: "자기장" },
-        { title: "추가 내용" },
+        { title: "1. 자기장" },
+        { title: "2. 필드상자" },
+        { title: "3. 토큰시스템" },
+        { title: "3-1. 토큰생성소" },
+        { title: "3-1. 토큰상점" },
       ],
     },
     "other-systems": {
