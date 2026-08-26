@@ -2,6 +2,7 @@
   "use strict";
 
   const GUIDE_ID = "guide-detail";
+  const TOP_NAV_GUIDE_IDS = ["pre-game", "game-start", "other-systems"];
 
   const guides = {
     "pre-game": {
@@ -33,6 +34,10 @@
     return Array.from(document.querySelectorAll("#guide .guide-tab"));
   }
 
+  function getTopNavLinks() {
+    return Array.from(document.querySelectorAll(".top-nav a"));
+  }
+
   function keepLabelsCurrent() {
     getTabs().forEach(function (tab) {
       const config = guides[tab.id];
@@ -40,11 +45,28 @@
         tab.textContent = config.label;
       }
     });
+
+    getTopNavLinks().forEach(function (link, index) {
+      const guideId = TOP_NAV_GUIDE_IDS[index];
+      const config = guides[guideId];
+      if (!config) return;
+
+      if (link.textContent.trim() !== config.label) {
+        link.textContent = config.label;
+      }
+      if (link.getAttribute("href") !== "#guide") {
+        link.setAttribute("href", "#guide");
+      }
+      if (link.dataset.guideTarget !== guideId) {
+        link.dataset.guideTarget = guideId;
+      }
+    });
   }
 
   function createScene(scene, index) {
     const section = document.createElement("section");
     section.className = "guide-scene";
+    section.style.setProperty("--scene-index", String(index));
 
     if (scene.image) {
       const image = document.createElement("div");
@@ -60,7 +82,6 @@
 
     const content = document.createElement("div");
     content.className = "guide-scene__content";
-    content.style.setProperty("--scene-index", String(index));
 
     const title = document.createElement("h3");
     title.textContent = scene.title;
@@ -77,6 +98,10 @@
       tab.classList.toggle("is-selected", selected);
       tab.setAttribute("aria-selected", selected ? "true" : "false");
     });
+
+    getTopNavLinks().forEach(function (link) {
+      link.classList.toggle("is-active", link.dataset.guideTarget === id);
+    });
   }
 
   function closeGuide() {
@@ -88,12 +113,12 @@
     detail.setAttribute("aria-hidden", "true");
   }
 
-  function openGuide(id) {
+  function openGuide(id, forceOpen) {
     const config = guides[id];
     if (!config) return;
 
     if (activeGuide === id) {
-      closeGuide();
+      if (!forceOpen) closeGuide();
       return;
     }
 
@@ -119,12 +144,24 @@
   document.addEventListener(
     "click",
     function (event) {
+      const topNavLink = event.target.closest && event.target.closest(".top-nav a[data-guide-target]");
+      if (topNavLink && guides[topNavLink.dataset.guideTarget]) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        openGuide(topNavLink.dataset.guideTarget, true);
+        const guide = document.getElementById("guide");
+        if (guide) {
+          guide.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+        return;
+      }
+
       const tab = event.target.closest && event.target.closest("#guide .guide-tab");
       if (!tab || !guides[tab.id]) return;
 
       event.preventDefault();
       event.stopImmediatePropagation();
-      openGuide(tab.id);
+      openGuide(tab.id, false);
     },
     true
   );
