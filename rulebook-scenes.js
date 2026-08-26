@@ -87,8 +87,45 @@
         transform: translate3d(0, 0, 0);
       }
 
+      /* Ability collection: reveal each card as a left-to-right wave. */
+      #collection .collection-grid.city-scroll-rise {
+        opacity: 1;
+        filter: none;
+        transform: none;
+        transition: none;
+        will-change: auto;
+      }
+
+      #collection .collection-grid.city-scroll-rise .collection-card {
+        opacity: 0;
+        transform: translate3d(0, 30px, 0) scale(0.97);
+        transition:
+          opacity 500ms cubic-bezier(0.16, 1, 0.3, 1),
+          transform 650ms cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, transform;
+      }
+
+      #collection .collection-grid.city-scroll-rise.is-risen .collection-card {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+
+      #collection .collection-grid .collection-card:nth-child(6n + 1) { transition-delay: 0ms; }
+      #collection .collection-grid .collection-card:nth-child(6n + 2) { transition-delay: 70ms; }
+      #collection .collection-grid .collection-card:nth-child(6n + 3) { transition-delay: 140ms; }
+      #collection .collection-grid .collection-card:nth-child(6n + 4) { transition-delay: 210ms; }
+      #collection .collection-grid .collection-card:nth-child(6n + 5) { transition-delay: 280ms; }
+      #collection .collection-grid .collection-card:nth-child(6n + 6) { transition-delay: 350ms; }
+
+      @media (max-width: 720px) {
+        #collection .collection-grid .collection-card:nth-child(3n + 1) { transition-delay: 0ms; }
+        #collection .collection-grid .collection-card:nth-child(3n + 2) { transition-delay: 85ms; }
+        #collection .collection-grid .collection-card:nth-child(3n + 3) { transition-delay: 170ms; }
+      }
+
       @media (prefers-reduced-motion: reduce) {
-        .city-scroll-rise {
+        .city-scroll-rise,
+        #collection .collection-grid.city-scroll-rise .collection-card {
           opacity: 1 !important;
           filter: none !important;
           transform: none !important;
