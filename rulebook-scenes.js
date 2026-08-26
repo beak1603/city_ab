@@ -3,6 +3,7 @@
 
   const GUIDE_ID = "guide-detail";
   const TOP_NAV_GUIDE_IDS = ["pre-game", "game-start", "other-systems"];
+  let revealObserver = null;
 
   const guides = {
     "pre-game": {
@@ -61,6 +62,106 @@
   };
 
   let activeGuide = null;
+
+  function ensureScrollRevealStyle() {
+    if (document.getElementById("city-scroll-reveal-style")) return;
+
+    const style = document.createElement("style");
+    style.id = "city-scroll-reveal-style";
+    style.textContent = `
+      .city-scroll-rise {
+        opacity: 0;
+        filter: blur(2px);
+        transform: translate3d(0, 24px, 0);
+        transition:
+          opacity 720ms cubic-bezier(0.16, 1, 0.3, 1),
+          transform 720ms cubic-bezier(0.16, 1, 0.3, 1),
+          filter 620ms ease;
+        transition-delay: var(--city-rise-delay, 0ms);
+        will-change: opacity, transform;
+      }
+
+      .city-scroll-rise.is-risen {
+        opacity: 1;
+        filter: blur(0);
+        transform: translate3d(0, 0, 0);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .city-scroll-rise {
+          opacity: 1 !important;
+          filter: none !important;
+          transform: none !important;
+          transition: none !important;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function installScrollReveal() {
+    ensureScrollRevealStyle();
+
+    const selector = [
+      ".game-goal__heading .eyebrow",
+      ".game-goal__heading h2",
+      ".game-goal__stat",
+      "#guide .section-heading .eyebrow",
+      "#guide .section-heading h2",
+      "#guide .section-heading > p",
+      "#guide .guide-tabs",
+      "#abilities .abilities__heading .eyebrow",
+      "#abilities .abilities__heading h2",
+      "#abilities .ability-control",
+      "#collection .collection__heading .eyebrow",
+      "#collection .collection__heading h2",
+      "#collection .collection__heading > p",
+      "#collection .collection-grid",
+      ".site-footer > p",
+      ".site-footer .to-top",
+    ].join(",");
+
+    const items = Array.from(document.querySelectorAll(selector)).filter(function (el) {
+      return !el.dataset.cityScrollReveal;
+    });
+
+    if (!items.length) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      items.forEach(function (el) {
+        el.dataset.cityScrollReveal = "1";
+        el.classList.add("city-scroll-rise", "is-risen");
+      });
+      return;
+    }
+
+    if (!revealObserver) {
+      revealObserver = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              requestAnimationFrame(function () {
+                entry.target.classList.add("is-risen");
+              });
+            } else {
+              entry.target.classList.remove("is-risen");
+            }
+          });
+        },
+        {
+          threshold: 0.12,
+          rootMargin: "-5% 0px -8% 0px",
+        }
+      );
+    }
+
+    items.forEach(function (el, index) {
+      el.dataset.cityScrollReveal = "1";
+      el.classList.add("city-scroll-rise");
+      el.style.setProperty("--city-rise-delay", String((index % 4) * 70) + "ms");
+      revealObserver.observe(el);
+    });
+  }
 
   function ensureGameGoal() {
     const guide = document.getElementById("guide");
@@ -260,6 +361,7 @@
   const labelObserver = new MutationObserver(function () {
     ensureGameGoal();
     keepLabelsCurrent();
+    installScrollReveal();
   });
   labelObserver.observe(document.documentElement, {
     childList: true,
@@ -269,9 +371,23 @@
 
   ensureGameGoal();
   keepLabelsCurrent();
+  installScrollReveal();
   closeGuide();
 
-  window.addEventListener("load", ensureGameGoal, { once: true });
-  window.setTimeout(ensureGameGoal, 350);
-  window.setTimeout(ensureGameGoal, 1200);
+  window.addEventListener(
+    "load",
+    function () {
+      ensureGameGoal();
+      installScrollReveal();
+    },
+    { once: true }
+  );
+  window.setTimeout(function () {
+    ensureGameGoal();
+    installScrollReveal();
+  }, 350);
+  window.setTimeout(function () {
+    ensureGameGoal();
+    installScrollReveal();
+  }, 1200);
 })();
