@@ -1,6 +1,8 @@
 (function () {
   "use strict";
 
+  function initializeRulebook() {
+
   const GUIDE_ID = "guide-detail";
   const TOP_NAV_GUIDE_IDS = ["pre-game", "game-start", "other-systems"];
   let revealObserver = null;
@@ -179,9 +181,8 @@
             if (entry.isIntersecting) {
               requestAnimationFrame(function () {
                 entry.target.classList.add("is-risen");
+                revealObserver.unobserve(entry.target);
               });
-            } else {
-              entry.target.classList.remove("is-risen");
             }
           });
         },
@@ -326,6 +327,7 @@
       const selected = tab.id === id;
       tab.classList.toggle("is-selected", selected);
       tab.setAttribute("aria-selected", selected ? "true" : "false");
+      tab.setAttribute("tabindex", selected ? "0" : "-1");
     });
 
     getTopNavLinks().forEach(function (link) {
@@ -346,14 +348,19 @@
     const config = guides[id];
     if (!config) return;
 
-    if (activeGuide === id) {
-      if (!forceOpen) closeGuide();
-      return;
-    }
-
     const detail = document.getElementById(GUIDE_ID);
     const detailInner = detail && detail.querySelector(".guide-detail__inner");
     if (!detail || !detailInner) return;
+
+    const isAlreadyOpen =
+      activeGuide === id &&
+      detail.classList.contains("is-open") &&
+      detailInner.childElementCount > 0;
+
+    if (isAlreadyOpen) {
+      if (!forceOpen) closeGuide();
+      return;
+    }
 
     activeGuide = id;
     detailInner.replaceChildren();
@@ -398,6 +405,7 @@
   const labelObserver = new MutationObserver(function () {
     ensureGameGoal();
     keepLabelsCurrent();
+    if (activeGuide) openGuide(activeGuide, true);
     installScrollReveal();
   });
   labelObserver.observe(document.documentElement, {
@@ -409,7 +417,7 @@
   ensureGameGoal();
   keepLabelsCurrent();
   installScrollReveal();
-  closeGuide();
+  openGuide("pre-game", true);
 
   window.addEventListener(
     "load",
@@ -427,4 +435,42 @@
     ensureGameGoal();
     installScrollReveal();
   }, 1200);
+  }
+
+  let hasStarted = false;
+
+  function startAfterHydration() {
+    if (hasStarted) return;
+    hasStarted = true;
+    window.requestAnimationFrame(function () {
+      window.requestAnimationFrame(initializeRulebook);
+    });
+  }
+
+  function hasHydrated() {
+    const root = document.documentElement;
+    return (
+      root.classList.contains("intro-active") ||
+      root.classList.contains("intro-seen") ||
+      root.classList.contains("intro-complete")
+    );
+  }
+
+  if (hasHydrated()) {
+    startAfterHydration();
+  } else {
+    const hydrationObserver = new MutationObserver(function () {
+      if (!hasHydrated()) return;
+      hydrationObserver.disconnect();
+      startAfterHydration();
+    });
+    hydrationObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+    window.setTimeout(function () {
+      hydrationObserver.disconnect();
+      startAfterHydration();
+    }, 2500);
+  }
 })();

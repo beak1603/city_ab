@@ -3,6 +3,7 @@ html,
 body {
   width: 100%;
   max-width: 100%;
+  overflow-x: clip;
 }
 
 body {
@@ -417,30 +418,31 @@ main,
   }
 }
 
-/* 3-2. 토큰상점: uploaded screenshot as a slightly zoomed, right-focused background. */
+/* 3-2. 토큰상점: preserve the full screenshot and place its center on the right. */
 #guide .guide-detail__panel--scenes .guide-scene:nth-child(5)::before {
   content: "";
   position: absolute;
-  inset: -6%;
+  inset: 0;
   z-index: 0;
   pointer-events: none;
-  background-image: url("./token-shop-bg.jpg");
+  background-color: #020604;
+  background-image: url("./token-shop-bg.png");
   background-repeat: no-repeat;
-  background-position: 78% center;
-  background-size: 116% auto;
-  filter: brightness(0.90) saturate(0.94) contrast(1.05);
+  background-position: right center;
+  background-size: contain;
+  filter: brightness(0.94) saturate(1.02) contrast(1.03);
 }
 
 #guide .guide-detail__panel--scenes .guide-scene:nth-child(5) .guide-scene__shade {
   z-index: 1;
   background: linear-gradient(
     90deg,
-    rgba(0, 3, 2, 0.995) 0%,
-    rgba(0, 3, 2, 0.96) 23%,
-    rgba(0, 3, 2, 0.80) 45%,
-    rgba(0, 3, 2, 0.42) 66%,
-    rgba(0, 3, 2, 0.13) 84%,
-    rgba(0, 3, 2, 0.02) 100%
+    rgba(0, 0, 0, 0.99) 0%,
+    rgba(0, 0, 0, 0.95) 26%,
+    rgba(0, 0, 0, 0.82) 44%,
+    rgba(0, 0, 0, 0.38) 66%,
+    rgba(0, 0, 0, 0.10) 84%,
+    rgba(0, 0, 0, 0.03) 100%
   );
 }
 
@@ -450,8 +452,17 @@ main,
 
 @media (max-width: 720px) {
   #guide .guide-detail__panel--scenes .guide-scene:nth-child(5)::before {
-    inset: -8%;
-    background-size: auto 120%;
-    background-position: 72% center;
+    inset: 0;
+    background-size: contain;
+    background-position: right center;
+  }
+}
+
+@media print {
+  .city-scroll-rise,
+  #collection .collection-grid.city-scroll-rise .collection-card {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
   }
 }
