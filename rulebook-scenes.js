@@ -7,22 +7,22 @@
     "pre-game": {
       label: "게임 시작 전",
       scenes: [
-        { title: "준비", image: "./rule-prep.webp" },
-        { title: "추가 내용", image: "./rule-prep-detail.webp" },
+        { title: "준비" },
+        { title: "추가 내용" },
       ],
     },
     "game-start": {
       label: "진행 방식",
       scenes: [
-        { title: "자기장", image: "./rule-zone.webp" },
-        { title: "추가 내용", image: "./rule-zone-detail.webp" },
+        { title: "자기장" },
+        { title: "추가 내용" },
       ],
     },
     "other-systems": {
       label: "보조 능력",
       scenes: [
-        { title: "보조 능력 소개", image: "./rule-support.webp" },
-        { title: "추가 내용", image: "./rule-support-detail.webp" },
+        { title: "보조 능력 소개" },
+        { title: "추가 내용" },
       ],
     },
   };
@@ -46,10 +46,13 @@
     const section = document.createElement("section");
     section.className = "guide-scene";
 
-    const image = document.createElement("div");
-    image.className = "guide-scene__image";
-    image.style.backgroundImage = 'url("' + scene.image + '")';
-    image.setAttribute("aria-hidden", "true");
+    if (scene.image) {
+      const image = document.createElement("div");
+      image.className = "guide-scene__image";
+      image.style.backgroundImage = 'url("' + scene.image + '")';
+      image.setAttribute("aria-hidden", "true");
+      section.appendChild(image);
+    }
 
     const shade = document.createElement("div");
     shade.className = "guide-scene__shade";
@@ -63,7 +66,6 @@
     title.textContent = scene.title;
 
     content.appendChild(title);
-    section.appendChild(image);
     section.appendChild(shade);
     section.appendChild(content);
     return section;
