@@ -29,28 +29,30 @@ main,
   min-width: 0;
 }
 
+/*
+  Keep the detail layer visually present while its grid row opens/closes.
+  The previous whole-panel opacity + child opacity animations stacked together
+  and caused a brief flash whenever a tab was selected.
+*/
 #guide .guide-detail {
   display: grid !important;
   grid-template-rows: 0fr;
   max-height: none !important;
   margin-top: 0 !important;
   overflow: hidden;
-  opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: translateY(-8px);
+  transform: translateY(-6px);
   transition:
-    grid-template-rows 680ms cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 360ms ease,
-    transform 680ms cubic-bezier(0.22, 1, 0.36, 1),
-    margin-top 680ms cubic-bezier(0.22, 1, 0.36, 1),
-    visibility 0s linear 680ms;
+    grid-template-rows 560ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 560ms cubic-bezier(0.22, 1, 0.36, 1),
+    margin-top 560ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 560ms;
 }
 
 #guide .guide-detail.is-open {
   grid-template-rows: 1fr;
   margin-top: clamp(24px, 4vw, 48px) !important;
-  opacity: 1;
   visibility: visible;
   pointer-events: auto;
   transform: translateY(0);
@@ -69,10 +71,6 @@ main,
   border-radius: 0;
   background: #07130b;
   box-shadow: none;
-}
-
-#guide .guide-detail.is-open .guide-detail__panel--scenes {
-  animation: guide-panel-enter 720ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 #guide .guide-scene {
@@ -102,10 +100,8 @@ main,
   background-size: contain;
   background-repeat: no-repeat;
   filter: saturate(0.82) contrast(1.04);
-  transform: scale(1.025);
   transform-origin: center;
-  animation: guide-image-enter 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: calc(var(--scene-index, 0) * 90ms);
+  animation: guide-image-enter 620ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 #guide .guide-scene__shade {
@@ -113,8 +109,6 @@ main,
   background:
     linear-gradient(90deg, rgba(3, 12, 7, 0.97) 0%, rgba(3, 12, 7, 0.86) 30%, rgba(3, 12, 7, 0.34) 64%, rgba(3, 12, 7, 0.08) 100%),
     linear-gradient(0deg, rgba(3, 12, 7, 0.42) 0%, transparent 38%, rgba(3, 12, 7, 0.08) 100%);
-  animation: guide-shade-enter 760ms ease both;
-  animation-delay: calc(60ms + var(--scene-index, 0) * 90ms);
 }
 
 #guide .guide-scene:not(:has(.guide-scene__image)) .guide-scene__shade {
@@ -129,8 +123,7 @@ main,
   max-width: 100%;
   padding: clamp(28px, 5vw, 64px);
   transform: translateY(-54%);
-  animation: guide-scene-enter 760ms cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: calc(120ms + var(--scene-index, 0) * 100ms);
+  animation: guide-scene-enter 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 #guide .guide-scene h3 {
@@ -161,44 +154,24 @@ main,
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
 }
 
-@keyframes guide-panel-enter {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 @keyframes guide-image-enter {
   from {
-    opacity: 0;
-    filter: saturate(0.72) contrast(1.02) blur(3px);
-    transform: scale(1.04);
+    opacity: 0.72;
+    transform: scale(1.018);
   }
   to {
     opacity: 1;
-    filter: saturate(0.82) contrast(1.04) blur(0);
     transform: scale(1);
   }
 }
 
-@keyframes guide-shade-enter {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
 @keyframes guide-scene-enter {
   from {
-    opacity: 0;
-    filter: blur(2px);
-    transform: translateY(calc(-54% + 22px));
+    opacity: 0.55;
+    transform: translateY(calc(-54% + 14px));
   }
   to {
     opacity: 1;
-    filter: blur(0);
     transform: translateY(-54%);
   }
 }
@@ -285,13 +258,11 @@ main,
 
   @keyframes guide-scene-enter {
     from {
-      opacity: 0;
-      filter: blur(2px);
-      transform: translateY(calc(-58% + 20px));
+      opacity: 0.55;
+      transform: translateY(calc(-58% + 14px));
     }
     to {
       opacity: 1;
-      filter: blur(0);
       transform: translateY(-58%);
     }
   }
@@ -323,9 +294,7 @@ main,
 
 @media (prefers-reduced-motion: reduce) {
   #guide .guide-detail,
-  #guide .guide-detail__panel--scenes,
   #guide .guide-scene__image,
-  #guide .guide-scene__shade,
   #guide .guide-scene__content {
     transition: none;
     animation: none;
