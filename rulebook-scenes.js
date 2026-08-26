@@ -2,11 +2,6 @@
   "use strict";
 
   const GUIDE_ID = "guide-detail";
-  const guide = document.getElementById("guide");
-  const detail = document.getElementById(GUIDE_ID);
-  const detailInner = detail && detail.querySelector(".guide-detail__inner");
-
-  if (!guide || !detail || !detailInner) return;
 
   const guides = {
     "pre-game": {
@@ -35,7 +30,7 @@
   let activeGuide = null;
 
   function getTabs() {
-    return Array.from(guide.querySelectorAll(".guide-tab"));
+    return Array.from(document.querySelectorAll("#guide .guide-tab"));
   }
 
   function keepLabelsCurrent() {
@@ -83,8 +78,10 @@
   }
 
   function closeGuide() {
+    const detail = document.getElementById(GUIDE_ID);
     activeGuide = null;
     setSelected(null);
+    if (!detail) return;
     detail.classList.remove("is-open");
     detail.setAttribute("aria-hidden", "true");
   }
@@ -97,6 +94,10 @@
       closeGuide();
       return;
     }
+
+    const detail = document.getElementById(GUIDE_ID);
+    const detailInner = detail && detail.querySelector(".guide-detail__inner");
+    if (!detail || !detailInner) return;
 
     activeGuide = id;
     detailInner.replaceChildren();
@@ -127,7 +128,11 @@
   );
 
   const labelObserver = new MutationObserver(keepLabelsCurrent);
-  labelObserver.observe(guide, { childList: true, subtree: true, characterData: true });
+  labelObserver.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    characterData: true,
+  });
 
   keepLabelsCurrent();
   closeGuide();
