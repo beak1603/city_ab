@@ -147,6 +147,20 @@ main,
   text-shadow: 0 3px 22px rgba(0, 0, 0, 0.5);
 }
 
+#guide .guide-scene__description {
+  max-width: 720px;
+  margin: 18px 0 0;
+  color: rgba(244, 255, 240, 0.76);
+  font-size: clamp(14px, 1.6vw, 18px);
+  font-weight: 500;
+  line-height: 1.75;
+  letter-spacing: -0.02em;
+  white-space: pre-line;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
+}
+
 @keyframes guide-panel-enter {
   from {
     opacity: 0;
@@ -258,8 +272,15 @@ main,
   }
 
   #guide .guide-scene h3 {
-    max-width: 9ch;
+    max-width: 12ch;
     font-size: clamp(36px, 11vw, 50px);
+  }
+
+  #guide .guide-scene__description {
+    max-width: min(88vw, 560px);
+    margin-top: 14px;
+    font-size: clamp(13px, 3.7vw, 16px);
+    line-height: 1.65;
   }
 
   @keyframes guide-scene-enter {
