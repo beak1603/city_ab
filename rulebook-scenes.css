@@ -94,8 +94,12 @@ main,
 #guide .guide-detail {
   display: grid !important;
   grid-template-rows: 0fr;
+  width: 100vw;
+  max-width: 100vw;
   max-height: none !important;
   margin-top: 0 !important;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
   overflow: hidden;
   visibility: hidden;
   pointer-events: none;
@@ -124,7 +128,10 @@ main,
 #guide .guide-detail__panel--scenes {
   overflow: hidden;
   padding: 0;
-  border: 1px solid rgba(210, 255, 195, 0.2);
+  border-top: 1px solid rgba(210, 255, 195, 0.2);
+  border-bottom: 1px solid rgba(210, 255, 195, 0.2);
+  border-left: 0;
+  border-right: 0;
   border-radius: 0;
   background: #07130b;
   box-shadow: none;
@@ -324,21 +331,8 @@ main,
     font-size: clamp(16px, 5vw, 22px);
   }
 
-  /* Expanded guide only: remove the green side gutters and span the full screen width. */
-  #guide .guide-detail {
-    width: 100vw;
-    max-width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-  }
-
   #guide .guide-detail.is-open {
     margin-top: 22px !important;
-  }
-
-  #guide .guide-detail__panel--scenes {
-    border-left: 0;
-    border-right: 0;
   }
 
   #guide .guide-scene {
