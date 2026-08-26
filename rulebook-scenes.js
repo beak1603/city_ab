@@ -257,7 +257,10 @@
     true
   );
 
-  const labelObserver = new MutationObserver(keepLabelsCurrent);
+  const labelObserver = new MutationObserver(function () {
+    ensureGameGoal();
+    keepLabelsCurrent();
+  });
   labelObserver.observe(document.documentElement, {
     childList: true,
     subtree: true,
@@ -267,4 +270,8 @@
   ensureGameGoal();
   keepLabelsCurrent();
   closeGuide();
+
+  window.addEventListener("load", ensureGameGoal, { once: true });
+  window.setTimeout(ensureGameGoal, 350);
+  window.setTimeout(ensureGameGoal, 1200);
 })();
