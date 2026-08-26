@@ -62,6 +62,58 @@
 
   let activeGuide = null;
 
+  function ensureGameGoal() {
+    const guide = document.getElementById("guide");
+    if (!guide || document.querySelector(".game-goal")) return;
+
+    const section = document.createElement("section");
+    section.className = "game-goal";
+    section.setAttribute("aria-labelledby", "game-goal-heading");
+
+    const heading = document.createElement("div");
+    heading.className = "game-goal__heading";
+
+    const eyebrow = document.createElement("p");
+    eyebrow.className = "eyebrow";
+    const line = document.createElement("span");
+    eyebrow.appendChild(line);
+    eyebrow.appendChild(document.createTextNode(" GAME OBJECTIVE"));
+
+    const title = document.createElement("h2");
+    title.id = "game-goal-heading";
+    title.textContent = "게임목표";
+
+    heading.appendChild(eyebrow);
+    heading.appendChild(title);
+
+    const stats = document.createElement("div");
+    stats.className = "game-goal__stats";
+    stats.setAttribute("aria-label", "60개의 능력, 20분의 시간, 1명의 생존자");
+
+    [
+      { number: "60", label: "개의 능력," },
+      { number: "20", label: "분의 시간," },
+      { number: "1", label: "명의 생존자" },
+    ].forEach(function (item) {
+      const stat = document.createElement("div");
+      stat.className = "game-goal__stat";
+
+      const number = document.createElement("strong");
+      number.textContent = item.number;
+
+      const label = document.createElement("span");
+      label.textContent = item.label;
+
+      stat.appendChild(number);
+      stat.appendChild(label);
+      stats.appendChild(stat);
+    });
+
+    section.appendChild(heading);
+    section.appendChild(stats);
+    guide.parentNode.insertBefore(section, guide);
+  }
+
   function getTabs() {
     return Array.from(document.querySelectorAll("#guide .guide-tab"));
   }
@@ -212,6 +264,7 @@
     characterData: true,
   });
 
+  ensureGameGoal();
   keepLabelsCurrent();
   closeGuide();
 })();
