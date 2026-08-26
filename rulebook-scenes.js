@@ -8,8 +8,22 @@
     "pre-game": {
       label: "게임 시작 전",
       scenes: [
-        { title: "준비" },
-        { title: "추가 내용" },
+        {
+          title: "1. 준비",
+          description: "12명의 플레이어가 모두 준비 아이콘을 우클릭하여 준비완료되면 인첸트룸으로 이동합니다",
+        },
+        {
+          title: "2. 능력 추첨",
+          description: "인첸트룸에서 능력뽑기권을 사용해 능력을 뽑습니다\n리롤은 단 한번만 가능합니다",
+        },
+        {
+          title: "3. 인첸트",
+          description: "기본템을 인첸트하여 도시에서 싸울 준비를 마칩니다",
+        },
+        {
+          title: "4. 최종 준비",
+          description: "모든 플레이어가 최종 준비가 되면\n최후의 1인을 가리는 게임이 시작됩니다",
+        },
       ],
     },
     "game-start": {
@@ -85,8 +99,15 @@
 
     const title = document.createElement("h3");
     title.textContent = scene.title;
-
     content.appendChild(title);
+
+    if (scene.description) {
+      const description = document.createElement("p");
+      description.className = "guide-scene__description";
+      description.textContent = scene.description;
+      content.appendChild(description);
+    }
+
     section.appendChild(shade);
     section.appendChild(content);
     return section;
