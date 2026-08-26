@@ -38,11 +38,13 @@ main,
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+  transform: translateY(-8px);
   transition:
-    grid-template-rows 620ms cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 260ms ease,
-    margin-top 620ms cubic-bezier(0.22, 1, 0.36, 1),
-    visibility 0s linear 620ms;
+    grid-template-rows 680ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 360ms ease,
+    transform 680ms cubic-bezier(0.22, 1, 0.36, 1),
+    margin-top 680ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 680ms;
 }
 
 #guide .guide-detail.is-open {
@@ -51,6 +53,7 @@ main,
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
+  transform: translateY(0);
   transition-delay: 0s;
 }
 
@@ -66,6 +69,10 @@ main,
   border-radius: 0;
   background: #07130b;
   box-shadow: none;
+}
+
+#guide .guide-detail.is-open .guide-detail__panel--scenes {
+  animation: guide-panel-enter 720ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 #guide .guide-scene {
@@ -95,6 +102,10 @@ main,
   background-size: contain;
   background-repeat: no-repeat;
   filter: saturate(0.82) contrast(1.04);
+  transform: scale(1.025);
+  transform-origin: center;
+  animation: guide-image-enter 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--scene-index, 0) * 90ms);
 }
 
 #guide .guide-scene__shade {
@@ -102,6 +113,8 @@ main,
   background:
     linear-gradient(90deg, rgba(3, 12, 7, 0.97) 0%, rgba(3, 12, 7, 0.86) 30%, rgba(3, 12, 7, 0.34) 64%, rgba(3, 12, 7, 0.08) 100%),
     linear-gradient(0deg, rgba(3, 12, 7, 0.42) 0%, transparent 38%, rgba(3, 12, 7, 0.08) 100%);
+  animation: guide-shade-enter 760ms ease both;
+  animation-delay: calc(60ms + var(--scene-index, 0) * 90ms);
 }
 
 #guide .guide-scene:not(:has(.guide-scene__image)) .guide-scene__shade {
@@ -116,8 +129,8 @@ main,
   max-width: 100%;
   padding: clamp(28px, 5vw, 64px);
   transform: translateY(-54%);
-  animation: guide-scene-enter 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: calc(var(--scene-index, 0) * 70ms);
+  animation: guide-scene-enter 760ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(120ms + var(--scene-index, 0) * 100ms);
 }
 
 #guide .guide-scene h3 {
@@ -134,13 +147,44 @@ main,
   text-shadow: 0 3px 22px rgba(0, 0, 0, 0.5);
 }
 
-@keyframes guide-scene-enter {
+@keyframes guide-panel-enter {
   from {
     opacity: 0;
-    transform: translateY(calc(-54% + 18px));
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes guide-image-enter {
+  from {
+    opacity: 0;
+    filter: saturate(0.72) contrast(1.02) blur(3px);
+    transform: scale(1.04);
+  }
+  to {
+    opacity: 1;
+    filter: saturate(0.82) contrast(1.04) blur(0);
+    transform: scale(1);
+  }
+}
+
+@keyframes guide-shade-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes guide-scene-enter {
+  from {
+    opacity: 0;
+    filter: blur(2px);
+    transform: translateY(calc(-54% + 22px));
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
     transform: translateY(-54%);
   }
 }
@@ -221,10 +265,12 @@ main,
   @keyframes guide-scene-enter {
     from {
       opacity: 0;
-      transform: translateY(calc(-58% + 16px));
+      filter: blur(2px);
+      transform: translateY(calc(-58% + 20px));
     }
     to {
       opacity: 1;
+      filter: blur(0);
       transform: translateY(-58%);
     }
   }
@@ -256,6 +302,9 @@ main,
 
 @media (prefers-reduced-motion: reduce) {
   #guide .guide-detail,
+  #guide .guide-detail__panel--scenes,
+  #guide .guide-scene__image,
+  #guide .guide-scene__shade,
   #guide .guide-scene__content {
     transition: none;
     animation: none;
