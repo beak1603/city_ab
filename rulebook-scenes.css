@@ -494,7 +494,7 @@ main,
   background-image: url("./field-box-bg-v2.webp");
   background-color: #000;
   background-size: cover;
-  background-position: center;
+  background-position: center 63%;
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before {
