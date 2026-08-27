@@ -570,12 +570,12 @@ main,
   background: linear-gradient(
     90deg,
     rgba(0, 0, 0, 0.98) 0%,
-    rgba(0, 0, 0, 0.98) 38%,
-    rgba(0, 0, 0, 0.92) 46%,
-    rgba(0, 0, 0, 0.66) 54%,
-    rgba(0, 0, 0, 0.34) 62%,
-    rgba(0, 0, 0, 0.12) 68%,
-    rgba(0, 0, 0, 0) 76%
+    rgba(0, 0, 0, 0.98) calc(100% - 760px),
+    rgba(0, 0, 0, 0.92) calc(100% - 700px),
+    rgba(0, 0, 0, 0.68) calc(100% - 580px),
+    rgba(0, 0, 0, 0.36) calc(100% - 470px),
+    rgba(0, 0, 0, 0.10) calc(100% - 380px),
+    rgba(0, 0, 0, 0) calc(100% - 300px)
   );
 }
 
@@ -613,6 +613,17 @@ main,
     background-position: right center;
     -webkit-mask-image: none;
     mask-image: none;
+  }
+
+  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2) .guide-scene__shade {
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.96) 0%,
+      rgba(0, 0, 0, 0.88) 34%,
+      rgba(0, 0, 0, 0.56) 56%,
+      rgba(0, 0, 0, 0.20) 76%,
+      rgba(0, 0, 0, 0) 100%
+    );
   }
 
   #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before {
