@@ -422,6 +422,7 @@ main,
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1)::before,
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3)::before,
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4)::before,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2)::before,
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before,
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(4)::before,
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(5)::before {
@@ -489,6 +490,12 @@ main,
   );
 }
 
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2)::before {
+  background-image: url("./field-box-bg.webp");
+  background-color: #000;
+  background-size: auto 100%;
+}
+
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before {
   background-image: url("./token-system-bg.webp");
   background-color: #000;
@@ -527,6 +534,7 @@ main,
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1) .guide-scene__shade,
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3) .guide-scene__shade,
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4) .guide-scene__shade,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2) .guide-scene__shade,
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3) .guide-scene__shade,
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(4) .guide-scene__shade,
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(5) .guide-scene__shade {
@@ -558,9 +566,23 @@ main,
   );
 }
 
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2) .guide-scene__shade {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.98) 0%,
+    rgba(0, 0, 0, 0.98) 38%,
+    rgba(0, 0, 0, 0.92) 46%,
+    rgba(0, 0, 0, 0.66) 54%,
+    rgba(0, 0, 0, 0.34) 62%,
+    rgba(0, 0, 0, 0.12) 68%,
+    rgba(0, 0, 0, 0) 76%
+  );
+}
+
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1) .guide-scene__content,
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3) .guide-scene__content,
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4) .guide-scene__content,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2) .guide-scene__content,
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3) .guide-scene__content,
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(4) .guide-scene__content,
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(5) .guide-scene__content {
@@ -571,6 +593,7 @@ main,
   #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1)::before,
   #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3)::before,
   #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4)::before,
+  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2)::before,
   #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before,
   #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(4)::before,
   #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(5)::before {
@@ -583,6 +606,13 @@ main,
   #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4)::before {
     background-size: auto 92%;
     background-position: center;
+  }
+
+  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2)::before {
+    background-size: contain;
+    background-position: right center;
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 
   #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before {
