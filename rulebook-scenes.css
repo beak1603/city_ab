@@ -493,8 +493,8 @@ main,
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2)::before {
   background-image: url("./field-box-bg-v2.webp");
   background-color: #000;
-  background-size: cover;
-  background-position: center 63%;
+  background-size: 88% auto;
+  background-position: right 63%;
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before {
@@ -530,6 +530,13 @@ main,
 
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(5)::before {
   background-image: url("./token-shop-bg.png");
+}
+
+@media (min-width: 721px) and (max-width: 1120px) {
+  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2)::before {
+    background-size: auto 100%;
+    background-position: right center;
+  }
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1) .guide-scene__shade,
