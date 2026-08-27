@@ -493,7 +493,7 @@ main,
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2)::before {
   background-image: url("./field-box-bg.webp");
   background-color: #000;
-  background-size: auto 100%;
+  background-size: 78% auto;
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before {
@@ -563,19 +563,6 @@ main,
     rgba(0, 0, 0, 0.24) 76%,
     rgba(0, 0, 0, 0.08) 86%,
     rgba(0, 0, 0, 0) 96%
-  );
-}
-
-#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2) .guide-scene__shade {
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.98) 0%,
-    rgba(0, 0, 0, 0.98) calc(100% - 760px),
-    rgba(0, 0, 0, 0.92) calc(100% - 700px),
-    rgba(0, 0, 0, 0.68) calc(100% - 580px),
-    rgba(0, 0, 0, 0.36) calc(100% - 470px),
-    rgba(0, 0, 0, 0.10) calc(100% - 380px),
-    rgba(0, 0, 0, 0) calc(100% - 300px)
   );
 }
 
