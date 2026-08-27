@@ -491,32 +491,10 @@ main,
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2)::before {
-  background-image:
-    linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0) 54%,
-      rgba(0, 0, 0, 0.96) 61%,
-      rgba(0, 0, 0, 0.62) 66%,
-      rgba(0, 0, 0, 0.18) 71%,
-      rgba(0, 0, 0, 0) 75%
-    ),
-    url("./field-box-bg.webp"),
-    linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 0.62) 0%,
-      rgba(0, 0, 0, 0.72) 28%,
-      rgba(0, 0, 0, 1) 38%,
-      rgba(0, 0, 0, 1) 70%,
-      rgba(0, 0, 0, 0.52) 76%,
-      rgba(0, 0, 0, 0) 82%
-    ),
-    url("./field-box-bg.webp");
+  background-image: url("./field-box-bg-v2.webp");
   background-color: #000;
-  background-size: 100% 100%, auto 100%, 100% 100%, cover;
-  background-position: center, right center, center, center 56%;
-  -webkit-mask-image: none;
-  mask-image: none;
+  background-size: cover;
+  background-position: center;
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before {
@@ -589,18 +567,6 @@ main,
   );
 }
 
-#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2) .guide-scene__shade {
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.52) 0%,
-    rgba(0, 0, 0, 0.46) 28%,
-    rgba(0, 0, 0, 0.30) 46%,
-    rgba(0, 0, 0, 0.14) 60%,
-    rgba(0, 0, 0, 0.04) 72%,
-    rgba(0, 0, 0, 0) 82%
-  );
-}
-
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1) .guide-scene__content,
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3) .guide-scene__content,
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4) .guide-scene__content,
@@ -631,21 +597,8 @@ main,
   }
 
   #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2)::before {
-    background-size: 100% 100%, contain, 100% 100%, cover;
-    background-position: center, right center, center, center;
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
-
-  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2) .guide-scene__shade {
-    background: linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 0.96) 0%,
-      rgba(0, 0, 0, 0.88) 34%,
-      rgba(0, 0, 0, 0.56) 56%,
-      rgba(0, 0, 0, 0.20) 76%,
-      rgba(0, 0, 0, 0) 100%
-    );
+    background-size: auto 100%;
+    background-position: 72% center;
   }
 
   #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before {
@@ -664,3 +617,4 @@ main,
     transform: none !important;
   }
 }
+
