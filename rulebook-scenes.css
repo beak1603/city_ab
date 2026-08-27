@@ -525,6 +525,26 @@ main,
   background-image: url("./token-generator-bg.png");
   background-size: 85% auto;
   background-position: calc(100% + 20vw) center;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 35%,
+    rgba(0, 0, 0, 0.14) 40%,
+    rgba(0, 0, 0, 0.40) 48%,
+    rgba(0, 0, 0, 0.70) 56%,
+    #000 66%,
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 35%,
+    rgba(0, 0, 0, 0.14) 40%,
+    rgba(0, 0, 0, 0.40) 48%,
+    rgba(0, 0, 0, 0.70) 56%,
+    #000 66%,
+    #000 100%
+  );
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(5)::before {
