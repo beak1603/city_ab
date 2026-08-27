@@ -544,6 +544,20 @@ main,
   );
 }
 
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4) .guide-scene__shade {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.98) 0%,
+    rgba(0, 0, 0, 0.98) 38%,
+    rgba(0, 0, 0, 0.92) 46%,
+    rgba(0, 0, 0, 0.76) 56%,
+    rgba(0, 0, 0, 0.50) 66%,
+    rgba(0, 0, 0, 0.24) 76%,
+    rgba(0, 0, 0, 0.08) 86%,
+    rgba(0, 0, 0, 0) 96%
+  );
+}
+
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1) .guide-scene__content,
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3) .guide-scene__content,
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4) .guide-scene__content,
