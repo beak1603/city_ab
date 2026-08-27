@@ -491,7 +491,7 @@ main,
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2)::before {
-  background-image: url("./field-box-bg-v3.webp");
+  background-image: url("./field-box-bg-v4.webp");
   background-color: #000;
   background-size: auto 100%;
   background-position: right center;
@@ -598,7 +598,7 @@ main,
 
   #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2)::before {
     background-size: auto 100%;
-    background-position: 97% center;
+    background-position: 96% center;
   }
 
   #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before {
