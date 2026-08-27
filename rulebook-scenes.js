@@ -418,7 +418,7 @@
   ensureGameGoal();
   keepLabelsCurrent();
   installScrollReveal();
-  openGuide("pre-game", true);
+  closeGuide();
 
   window.addEventListener(
     "load",
