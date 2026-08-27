@@ -491,10 +491,10 @@ main,
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2)::before {
-  background-image: url("./field-box-bg-v4.webp");
+  background-image: url("./field-box-bg-v5.webp");
   background-color: #000;
-  background-size: auto 100%;
-  background-position: right center;
+  background-size: cover;
+  background-position: center 62%;
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before {
@@ -597,8 +597,8 @@ main,
   }
 
   #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2)::before {
-    background-size: auto 100%;
-    background-position: 96% center;
+    background-size: cover;
+    background-position: 94% center;
   }
 
   #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before {
