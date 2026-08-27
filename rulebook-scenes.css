@@ -466,10 +466,52 @@ main,
 
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4)::before {
   background-image: url("./final-ready-bg.png");
+  background-size: 58% auto;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 38%,
+    rgba(0, 0, 0, 0.12) 44%,
+    rgba(0, 0, 0, 0.46) 54%,
+    rgba(0, 0, 0, 0.78) 66%,
+    #000 80%,
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 38%,
+    rgba(0, 0, 0, 0.12) 44%,
+    rgba(0, 0, 0, 0.46) 54%,
+    rgba(0, 0, 0, 0.78) 66%,
+    #000 80%,
+    #000 100%
+  );
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before {
   background-image: url("./token-system-bg.webp");
+  background-size: auto 100%;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 38%,
+    rgba(0, 0, 0, 0.12) 44%,
+    rgba(0, 0, 0, 0.46) 52%,
+    rgba(0, 0, 0, 0.78) 58%,
+    #000 64%,
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 38%,
+    rgba(0, 0, 0, 0.12) 44%,
+    rgba(0, 0, 0, 0.46) 52%,
+    rgba(0, 0, 0, 0.78) 58%,
+    #000 64%,
+    #000 100%
+  );
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(4)::before {
@@ -521,6 +563,18 @@ main,
     background-position: 30% center;
     -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.42) 22%, rgba(0, 0, 0, 0.78) 42%, #000 62%);
     mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.42) 22%, rgba(0, 0, 0, 0.78) 42%, #000 62%);
+  }
+
+  #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4)::before {
+    background-size: auto 92%;
+    background-position: center;
+  }
+
+  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before {
+    background-size: contain;
+    background-position: right center;
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 }
 
