@@ -495,6 +495,7 @@ main,
 
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4)::before {
   background-image: url("./final-ready-bg-v3.webp");
+  background-size: 100% auto;
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1)::before,
