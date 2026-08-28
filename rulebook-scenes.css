@@ -446,7 +446,6 @@ main,
 }
 
 /* Scene screenshots: enlarge the focal area on the right and fade it into black. */
-#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1)::before,
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3)::before,
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4)::before,
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1)::before,
@@ -485,74 +484,46 @@ main,
   );
 }
 
-#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1)::before {
-  background-image: url("./preparation-bg.png");
-}
-
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3)::before {
   background-image: url("./enchant-bg.png");
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4)::before {
   background-image: url("./final-ready-bg-v3.webp");
-  background-size: 76% auto;
+  background-position: right bottom;
+  background-size: 72% auto;
   -webkit-mask-image: linear-gradient(
     90deg,
     transparent 0%,
-    transparent 24%,
-    rgba(0, 0, 0, 0.12) 30%,
-    rgba(0, 0, 0, 0.35) 38%,
-    rgba(0, 0, 0, 0.62) 48%,
-    rgba(0, 0, 0, 0.82) 56%,
-    #000 66%,
+    transparent 28%,
+    rgba(0, 0, 0, 0.12) 34%,
+    rgba(0, 0, 0, 0.35) 42%,
+    rgba(0, 0, 0, 0.62) 52%,
+    rgba(0, 0, 0, 0.82) 60%,
+    #000 70%,
     #000 100%
   );
   mask-image: linear-gradient(
     90deg,
     transparent 0%,
-    transparent 24%,
-    rgba(0, 0, 0, 0.12) 30%,
-    rgba(0, 0, 0, 0.35) 38%,
-    rgba(0, 0, 0, 0.62) 48%,
-    rgba(0, 0, 0, 0.82) 56%,
-    #000 66%,
-    #000 100%
-  );
-}
-
-#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1)::before,
-#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2)::before {
-  background-color: #000;
-  background-size: 85% auto;
-  background-position: calc(100% + 20vw) 65%;
-  -webkit-mask-image: linear-gradient(
-    90deg,
-    transparent 0%,
-    transparent 35%,
-    rgba(0, 0, 0, 0.14) 40%,
-    rgba(0, 0, 0, 0.40) 48%,
-    rgba(0, 0, 0, 0.70) 56%,
-    #000 66%,
-    #000 100%
-  );
-  mask-image: linear-gradient(
-    90deg,
-    transparent 0%,
-    transparent 35%,
-    rgba(0, 0, 0, 0.14) 40%,
-    rgba(0, 0, 0, 0.40) 48%,
-    rgba(0, 0, 0, 0.70) 56%,
-    #000 66%,
+    transparent 28%,
+    rgba(0, 0, 0, 0.12) 34%,
+    rgba(0, 0, 0, 0.35) 42%,
+    rgba(0, 0, 0, 0.62) 52%,
+    rgba(0, 0, 0, 0.82) 60%,
+    #000 70%,
     #000 100%
   );
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1)::before {
-  background-image: url("./magnetic-field-bg.webp");
+  background-image: url("./magnetic-field-bg-v2.webp");
+  background-position: right 60%;
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2)::before {
-  background-image: url("./field-box-bg-v6.webp");
+  background-image: url("./field-box-bg-v7.webp");
+  background-position: right 72%;
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before {
@@ -582,36 +553,14 @@ main,
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(4)::before {
-  background-image: url("./token-generator-bg.png");
-  background-size: 85% auto;
-  background-position: calc(100% + 20vw) center;
-  -webkit-mask-image: linear-gradient(
-    90deg,
-    transparent 0%,
-    transparent 35%,
-    rgba(0, 0, 0, 0.14) 40%,
-    rgba(0, 0, 0, 0.40) 48%,
-    rgba(0, 0, 0, 0.70) 56%,
-    #000 66%,
-    #000 100%
-  );
-  mask-image: linear-gradient(
-    90deg,
-    transparent 0%,
-    transparent 35%,
-    rgba(0, 0, 0, 0.14) 40%,
-    rgba(0, 0, 0, 0.40) 48%,
-    rgba(0, 0, 0, 0.70) 56%,
-    #000 66%,
-    #000 100%
-  );
+  background-image: url("./token-generator-bg-v2.webp");
+  background-position: right 58%;
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(5)::before {
   background-image: url("./token-shop-bg.png");
 }
 
-#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1) .guide-scene__shade,
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3) .guide-scene__shade,
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4) .guide-scene__shade,
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1) .guide-scene__shade,
@@ -633,7 +582,6 @@ main,
   );
 }
 
-#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1) .guide-scene__content,
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3) .guide-scene__content,
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4) .guide-scene__content,
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1) .guide-scene__content,
@@ -645,7 +593,6 @@ main,
 }
 
 @media (max-width: 720px) {
-  #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1)::before,
   #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3)::before,
   #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4)::before,
   #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1)::before,
@@ -659,9 +606,17 @@ main,
     mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.42) 22%, rgba(0, 0, 0, 0.78) 42%, #000 62%);
   }
 
-  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1)::before,
+  #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4)::before {
+    background-position: right bottom;
+    background-size: auto 105%;
+  }
+
+  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1)::before {
+    background-position: 60% 60%;
+  }
+
   #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2)::before {
-    background-position: 10% center;
+    background-position: 70% 72%;
   }
 
   #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before {
@@ -672,7 +627,7 @@ main,
   }
 
   #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(4)::before {
-    background-position: 0% center;
+    background-position: 56% 58%;
   }
 }
 
