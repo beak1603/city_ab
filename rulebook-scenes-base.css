@@ -1,0 +1,646 @@
+/* Mobile width containment: keep the page inside the visual viewport even when zoomed. */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+body {
+  min-width: 0 !important;
+}
+
+main,
+.site-header,
+.hero,
+.game-goal,
+.guide,
+.abilities,
+.collection,
+.site-footer {
+  min-width: 0;
+}
+
+.game-goal {
+  width: min(calc(100% - 48px), var(--max-width));
+  margin: 0 auto;
+  padding: 96px 0 112px;
+  border-top: 1px solid var(--line);
+}
+
+.game-goal__heading {
+  margin-bottom: clamp(34px, 5vw, 58px);
+}
+
+.game-goal__heading .eyebrow {
+  margin-bottom: 12px;
+}
+
+.game-goal__heading h2 {
+  margin: 0;
+  font-size: clamp(38px, 5vw, 58px);
+  font-weight: 880;
+  line-height: 1.05;
+  letter-spacing: -0.06em;
+}
+
+.game-goal__stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: end;
+  gap: clamp(20px, 4vw, 58px);
+}
+
+.game-goal__stat {
+  display: flex;
+  min-width: 0;
+  align-items: baseline;
+  justify-content: center;
+  gap: clamp(7px, 1.2vw, 13px);
+  white-space: nowrap;
+}
+
+.game-goal__stat strong {
+  color: var(--green-soft);
+  font-size: clamp(88px, 11vw, 148px);
+  font-weight: 950;
+  line-height: 0.82;
+  letter-spacing: -0.085em;
+  text-shadow: 0 10px 38px rgba(108, 255, 90, 0.12);
+}
+
+.game-goal__stat span {
+  color: var(--text);
+  font-size: clamp(17px, 1.9vw, 24px);
+  font-weight: 620;
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+}
+
+#guide .guide-list,
+#guide .guide-detail,
+#guide .guide-detail__inner,
+#guide .guide-detail__panel--scenes,
+#guide .guide-scene {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+/*
+  Keep the detail layer visually present while its grid row opens/closes.
+  The previous whole-panel opacity + child opacity animations stacked together
+  and caused a brief flash whenever a tab was selected.
+*/
+#guide .guide-detail {
+  display: grid !important;
+  grid-template-rows: 0fr;
+  width: 100vw;
+  max-width: 100vw;
+  max-height: none !important;
+  margin-top: 0 !important;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  overflow: hidden;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-6px);
+  transition:
+    grid-template-rows 560ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 560ms cubic-bezier(0.22, 1, 0.36, 1),
+    margin-top 560ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 560ms;
+}
+
+#guide .guide-detail.is-open {
+  grid-template-rows: 1fr;
+  margin-top: clamp(24px, 4vw, 48px) !important;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+
+#guide .guide-detail__inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+#guide .guide-detail__panel--scenes {
+  overflow: hidden;
+  padding: 0;
+  border-top: 1px solid rgba(210, 255, 195, 0.2);
+  border-bottom: 1px solid rgba(210, 255, 195, 0.2);
+  border-left: 0;
+  border-right: 0;
+  border-radius: 0;
+  background: #07130b;
+  box-shadow: none;
+}
+
+#guide .guide-scene {
+  position: relative;
+  min-height: clamp(300px, 42vw, 420px);
+  overflow: hidden;
+  isolation: isolate;
+  border-bottom: 1px solid rgba(210, 255, 195, 0.16);
+  background: #07130b;
+}
+
+#guide .guide-scene:last-child {
+  border-bottom: 0;
+}
+
+#guide .guide-scene__image,
+#guide .guide-scene__shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* If an image is added again later, show the whole image without cutting either side. */
+#guide .guide-scene__image {
+  z-index: -3;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  filter: saturate(0.82) contrast(1.04);
+  transform-origin: center;
+  animation: guide-image-enter 620ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+#guide .guide-scene__shade {
+  z-index: -2;
+  background:
+    linear-gradient(90deg, rgba(3, 12, 7, 0.97) 0%, rgba(3, 12, 7, 0.86) 30%, rgba(3, 12, 7, 0.34) 64%, rgba(3, 12, 7, 0.08) 100%),
+    linear-gradient(0deg, rgba(3, 12, 7, 0.42) 0%, transparent 38%, rgba(3, 12, 7, 0.08) 100%);
+}
+
+#guide .guide-scene:not(:has(.guide-scene__image)) .guide-scene__shade {
+  background: linear-gradient(90deg, rgba(3, 12, 7, 0.55), rgba(7, 19, 11, 0.12));
+}
+
+#guide .guide-scene__content {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  width: min(calc(100% - 48px), var(--max-width));
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding: clamp(28px, 5vw, 64px);
+  transform: translateY(-54%);
+  animation: guide-scene-enter 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+#guide .guide-scene h3 {
+  max-width: 13ch;
+  margin: 0;
+  color: #f4fff0;
+  font-size: clamp(42px, 7vw, 78px);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.055em;
+  text-align: left;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+  text-shadow: 0 3px 22px rgba(0, 0, 0, 0.5);
+}
+
+#guide .guide-scene__description {
+  max-width: 720px;
+  margin: 18px 0 0;
+  color: rgba(244, 255, 240, 0.76);
+  font-size: clamp(14px, 1.6vw, 18px);
+  font-weight: 500;
+  line-height: 1.75;
+  letter-spacing: -0.02em;
+  white-space: pre-line;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
+}
+
+@keyframes guide-image-enter {
+  from {
+    opacity: 0.72;
+    transform: scale(1.018);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes guide-scene-enter {
+  from {
+    opacity: 0.55;
+    transform: translateY(calc(-54% + 14px));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-54%);
+  }
+}
+
+/* Ability introduction: remove the scanner/detection object and let the carousel use the space. */
+#abilities .ability-scanner {
+  display: none !important;
+}
+
+#abilities .ability-showcase {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+
+#abilities .ability-control {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+/* Keep both neighboring ability icons fully inside the slider viewport. */
+#abilities .ability-card[data-position="side"][style*="--ability-x: -"] {
+  --ability-x: -100% !important;
+  --ability-x-mobile: -68% !important;
+}
+
+#abilities .ability-card[data-position="side"]:not([style*="--ability-x: -"]) {
+  --ability-x: 100% !important;
+  --ability-x-mobile: 68% !important;
+}
+
+#abilities .ability-card h3 {
+  display: none !important;
+}
+
+/* Join the sticky navigation directly to the hero artwork. */
+.site-header {
+  border-bottom: 0;
+}
+
+@media (max-width: 720px) {
+  html,
+  body,
+  main {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .site-header,
+  .hero,
+  .game-goal,
+  .guide,
+  .abilities,
+  .collection,
+  .site-footer {
+    max-width: calc(100% - 28px);
+  }
+
+  .game-goal {
+    padding: 72px 0 84px;
+  }
+
+  .game-goal__heading {
+    margin-bottom: 30px;
+  }
+
+  .game-goal__stats {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .game-goal__stat {
+    justify-content: flex-start;
+    gap: 13px;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(225, 255, 199, 0.13);
+  }
+
+  .game-goal__stat:last-child {
+    border-bottom: 0;
+  }
+
+  .game-goal__stat strong {
+    min-width: 1.7ch;
+    font-size: clamp(74px, 23vw, 100px);
+  }
+
+  .game-goal__stat span {
+    font-size: clamp(17px, 5vw, 21px);
+  }
+
+  .site-header {
+    gap: 10px;
+  }
+
+  .top-nav {
+    min-width: 0;
+    gap: 0;
+  }
+
+  .top-nav a {
+    padding-inline: clamp(5px, 2vw, 10px);
+  }
+
+  #guide .guide-tabs {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    gap: clamp(8px, 2.3vw, 16px);
+  }
+
+  #guide .guide-tab {
+    min-width: 0;
+    font-size: clamp(16px, 5vw, 22px);
+  }
+
+  #guide .guide-detail.is-open {
+    margin-top: 22px !important;
+  }
+
+  #guide .guide-scene {
+    min-height: 300px;
+  }
+
+  #guide .guide-scene__content {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 22px;
+    transform: translateY(-58%);
+  }
+
+  #guide .guide-scene h3 {
+    max-width: 12ch;
+    font-size: clamp(36px, 11vw, 50px);
+  }
+
+  #guide .guide-scene__description {
+    max-width: min(88vw, 560px);
+    margin-top: 14px;
+    font-size: clamp(13px, 3.7vw, 16px);
+    line-height: 1.65;
+  }
+
+  @keyframes guide-scene-enter {
+    from {
+      opacity: 0.55;
+      transform: translateY(calc(-58% + 14px));
+    }
+    to {
+      opacity: 1;
+      transform: translateY(-58%);
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .site-header,
+  .hero,
+  .game-goal,
+  .guide,
+  .abilities,
+  .collection,
+  .site-footer {
+    max-width: calc(100% - 20px);
+  }
+
+  .brand__text strong {
+    font-size: 15px;
+  }
+
+  .brand__text small {
+    display: none;
+  }
+
+  .top-nav a {
+    padding-inline: 5px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero h1 {
+    font-size: clamp(38px, 11.2vw, 46px);
+    white-space: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #guide .guide-detail,
+  #guide .guide-scene__image,
+  #guide .guide-scene__content {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* Keep the original hover lift after the collection wave reveal finishes. */
+@media (hover: hover) and (pointer: fine) {
+  #collection .collection-grid.city-scroll-rise.is-risen .collection-card:hover {
+    transform: translate3d(0, -8px, 0) scale(1) !important;
+    transition-delay: 0ms !important;
+  }
+}
+
+/* Scene screenshots: enlarge the focal area on the right and fade it into black. */
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3)::before,
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4)::before,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1)::before,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2)::before,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(4)::before,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(5)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 76% auto;
+  filter: brightness(0.94) saturate(1.02) contrast(1.03);
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 34%,
+    rgba(0, 0, 0, 0.08) 40%,
+    rgba(0, 0, 0, 0.28) 48%,
+    rgba(0, 0, 0, 0.55) 56%,
+    rgba(0, 0, 0, 0.8) 62%,
+    #000 72%,
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 34%,
+    rgba(0, 0, 0, 0.08) 40%,
+    rgba(0, 0, 0, 0.28) 48%,
+    rgba(0, 0, 0, 0.55) 56%,
+    rgba(0, 0, 0, 0.8) 62%,
+    #000 72%,
+    #000 100%
+  );
+}
+
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3)::before {
+  background-image: url("./enchant-bg.png");
+}
+
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4)::before {
+  background-image: url("./final-ready-bg-v3.webp");
+  background-position: right bottom;
+  background-size: 72% auto;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 34%,
+    rgba(0, 0, 0, 0.08) 40%,
+    rgba(0, 0, 0, 0.28) 48%,
+    rgba(0, 0, 0, 0.55) 56%,
+    rgba(0, 0, 0, 0.8) 62%,
+    #000 72%,
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 34%,
+    rgba(0, 0, 0, 0.08) 40%,
+    rgba(0, 0, 0, 0.28) 48%,
+    rgba(0, 0, 0, 0.55) 56%,
+    rgba(0, 0, 0, 0.8) 62%,
+    #000 72%,
+    #000 100%
+  );
+}
+
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1)::before {
+  background-image: url("./magnetic-field-bg-v2.webp");
+  background-position: right 60%;
+}
+
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2)::before {
+  background-image: url("./field-box-bg-v7.webp");
+  background-position: right 72%;
+}
+
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before {
+  background-image: url("./token-system-bg.webp");
+  background-color: #000;
+  background-size: auto 100%;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 34%,
+    rgba(0, 0, 0, 0.08) 40%,
+    rgba(0, 0, 0, 0.28) 48%,
+    rgba(0, 0, 0, 0.55) 56%,
+    rgba(0, 0, 0, 0.8) 62%,
+    #000 72%,
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 34%,
+    rgba(0, 0, 0, 0.08) 40%,
+    rgba(0, 0, 0, 0.28) 48%,
+    rgba(0, 0, 0, 0.55) 56%,
+    rgba(0, 0, 0, 0.8) 62%,
+    #000 72%,
+    #000 100%
+  );
+}
+
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(4)::before {
+  background-image: url("./token-generator-bg-v2.webp");
+  background-position: right 58%;
+}
+
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(5)::before {
+  background-image: url("./token-shop-bg.png");
+}
+
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3) .guide-scene__shade,
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4) .guide-scene__shade,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1) .guide-scene__shade,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2) .guide-scene__shade,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3) .guide-scene__shade,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(4) .guide-scene__shade,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(5) .guide-scene__shade {
+  z-index: 1;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.76) 0%,
+    rgba(0, 0, 0, 0.66) 20%,
+    rgba(0, 0, 0, 0.48) 34%,
+    rgba(0, 0, 0, 0.30) 46%,
+    rgba(0, 0, 0, 0.13) 58%,
+    rgba(0, 0, 0, 0.04) 68%,
+    rgba(0, 0, 0, 0) 78%,
+    rgba(0, 0, 0, 0) 90%
+  );
+}
+
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3) .guide-scene__content,
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4) .guide-scene__content,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1) .guide-scene__content,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2) .guide-scene__content,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3) .guide-scene__content,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(4) .guide-scene__content,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(5) .guide-scene__content {
+  z-index: 2;
+}
+
+@media (max-width: 720px) {
+  #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3)::before,
+  #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4)::before,
+  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1)::before,
+  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2)::before,
+  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before,
+  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(4)::before,
+  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(5)::before {
+    background-size: auto 115%;
+    background-position: 30% center;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.42) 22%, rgba(0, 0, 0, 0.78) 42%, #000 62%);
+    mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.42) 22%, rgba(0, 0, 0, 0.78) 42%, #000 62%);
+  }
+
+  #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4)::before {
+    background-position: right bottom;
+    background-size: auto 105%;
+  }
+
+  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1)::before {
+    background-position: 60% 60%;
+  }
+
+  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2)::before {
+    background-position: 70% 72%;
+  }
+
+  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before {
+    background-size: contain;
+    background-position: right center;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(4)::before {
+    background-position: 56% 58%;
+  }
+}
+
+@media print {
+  .city-scroll-rise,
+  #collection .collection-grid.city-scroll-rise .collection-card {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+}
+
