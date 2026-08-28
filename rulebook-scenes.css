@@ -620,13 +620,13 @@ main,
   z-index: 1;
   background: linear-gradient(
     90deg,
-    rgba(0, 0, 0, 0.88) 0%,
-    rgba(0, 0, 0, 0.80) 20%,
-    rgba(0, 0, 0, 0.64) 34%,
-    rgba(0, 0, 0, 0.44) 46%,
-    rgba(0, 0, 0, 0.24) 58%,
-    rgba(0, 0, 0, 0.10) 68%,
-    rgba(0, 0, 0, 0.03) 78%,
+    rgba(0, 0, 0, 0.76) 0%,
+    rgba(0, 0, 0, 0.66) 20%,
+    rgba(0, 0, 0, 0.48) 34%,
+    rgba(0, 0, 0, 0.30) 46%,
+    rgba(0, 0, 0, 0.13) 58%,
+    rgba(0, 0, 0, 0.04) 68%,
+    rgba(0, 0, 0, 0) 78%,
     rgba(0, 0, 0, 0) 90%
   );
 }
@@ -634,13 +634,13 @@ main,
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4) .guide-scene__shade {
   background: linear-gradient(
     90deg,
-    rgba(0, 0, 0, 0.98) 0%,
-    rgba(0, 0, 0, 0.98) 38%,
-    rgba(0, 0, 0, 0.92) 46%,
-    rgba(0, 0, 0, 0.76) 56%,
-    rgba(0, 0, 0, 0.50) 66%,
-    rgba(0, 0, 0, 0.24) 76%,
-    rgba(0, 0, 0, 0.08) 86%,
+    rgba(0, 0, 0, 0.94) 0%,
+    rgba(0, 0, 0, 0.90) 38%,
+    rgba(0, 0, 0, 0.78) 46%,
+    rgba(0, 0, 0, 0.56) 56%,
+    rgba(0, 0, 0, 0.32) 66%,
+    rgba(0, 0, 0, 0.12) 76%,
+    rgba(0, 0, 0, 0.03) 86%,
     rgba(0, 0, 0, 0) 96%
   );
 }
