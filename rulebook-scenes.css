@@ -39,3 +39,78 @@
     background-size: auto 92% !important;
   }
 }
+
+/* Keep every supplied scene image intact, pull its icon away from the right edge,
+   and blend both image boundaries into the black scene background. */
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1)::before,
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(2)::before,
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3)::before,
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4)::before,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1)::before,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2)::before,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before {
+  --scene-image-offset: clamp(96px, 12vw, 240px);
+  inset: 0 var(--scene-image-offset) 0 auto !important;
+  width: auto !important;
+  height: auto !important;
+  aspect-ratio: 1672 / 941;
+  background-position: center !important;
+  background-size: 100% 100% !important;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.08) 10%,
+    rgba(0, 0, 0, 0.34) 20%,
+    rgba(0, 0, 0, 0.72) 32%,
+    #000 44%,
+    #000 88%,
+    rgba(0, 0, 0, 0.72) 92%,
+    rgba(0, 0, 0, 0.24) 97%,
+    transparent 100%
+  ) !important;
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.08) 10%,
+    rgba(0, 0, 0, 0.34) 20%,
+    rgba(0, 0, 0, 0.72) 32%,
+    #000 44%,
+    #000 88%,
+    rgba(0, 0, 0, 0.72) 92%,
+    rgba(0, 0, 0, 0.24) 97%,
+    transparent 100%
+  ) !important;
+}
+
+@media (max-width: 720px) {
+  #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1)::before,
+  #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(2)::before,
+  #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3)::before,
+  #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4)::before,
+  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1)::before,
+  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2)::before,
+  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before {
+    inset: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    aspect-ratio: auto;
+    background-position: center !important;
+    background-size: 100% auto !important;
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.22) 14%,
+      rgba(0, 0, 0, 0.68) 30%,
+      #000 48%,
+      #000 100%
+    ) !important;
+    mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.22) 14%,
+      rgba(0, 0, 0, 0.68) 30%,
+      #000 48%,
+      #000 100%
+    ) !important;
+  }
+}
