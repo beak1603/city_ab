@@ -1,4 +1,4 @@
-@import url("./rulebook-scenes-base.css?v=41");
+@import url("./rulebook-scenes-base.css?v=42");
 
 /* Final preparation scene: use the supplied wide background at its native composition. */
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4) {
@@ -11,9 +11,9 @@
   position: absolute !important;
   inset: 0 !important;
   z-index: 0 !important;
-  background-image: url("./final-ready-bg-v4.webp") !important;
-  background-position: center center !important;
-  background-size: cover !important;
+  background-image: url("./scene-final-ready-v5.webp") !important;
+  background-position: right center !important;
+  background-size: 58% auto !important;
   background-repeat: no-repeat !important;
   -webkit-mask-image: none !important;
   mask-image: none !important;
@@ -35,7 +35,7 @@
   }
 
   #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4)::before {
-    background-position: 65% center !important;
-    background-size: cover !important;
+    background-position: right center !important;
+    background-size: auto 92% !important;
   }
 }
