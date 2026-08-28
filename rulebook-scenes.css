@@ -465,21 +465,23 @@ main,
   -webkit-mask-image: linear-gradient(
     90deg,
     transparent 0%,
-    transparent 18%,
-    rgba(0, 0, 0, 0.18) 26%,
-    rgba(0, 0, 0, 0.48) 38%,
-    rgba(0, 0, 0, 0.78) 50%,
-    #000 64%,
+    transparent 34%,
+    rgba(0, 0, 0, 0.08) 40%,
+    rgba(0, 0, 0, 0.28) 48%,
+    rgba(0, 0, 0, 0.55) 56%,
+    rgba(0, 0, 0, 0.8) 62%,
+    #000 72%,
     #000 100%
   );
   mask-image: linear-gradient(
     90deg,
     transparent 0%,
-    transparent 18%,
-    rgba(0, 0, 0, 0.18) 26%,
-    rgba(0, 0, 0, 0.48) 38%,
-    rgba(0, 0, 0, 0.78) 50%,
-    #000 64%,
+    transparent 34%,
+    rgba(0, 0, 0, 0.08) 40%,
+    rgba(0, 0, 0, 0.28) 48%,
+    rgba(0, 0, 0, 0.55) 56%,
+    rgba(0, 0, 0, 0.8) 62%,
+    #000 72%,
     #000 100%
   );
 }
@@ -495,23 +497,23 @@ main,
   -webkit-mask-image: linear-gradient(
     90deg,
     transparent 0%,
-    transparent 28%,
-    rgba(0, 0, 0, 0.12) 34%,
-    rgba(0, 0, 0, 0.35) 42%,
-    rgba(0, 0, 0, 0.62) 52%,
-    rgba(0, 0, 0, 0.82) 60%,
-    #000 70%,
+    transparent 34%,
+    rgba(0, 0, 0, 0.08) 40%,
+    rgba(0, 0, 0, 0.28) 48%,
+    rgba(0, 0, 0, 0.55) 56%,
+    rgba(0, 0, 0, 0.8) 62%,
+    #000 72%,
     #000 100%
   );
   mask-image: linear-gradient(
     90deg,
     transparent 0%,
-    transparent 28%,
-    rgba(0, 0, 0, 0.12) 34%,
-    rgba(0, 0, 0, 0.35) 42%,
-    rgba(0, 0, 0, 0.62) 52%,
-    rgba(0, 0, 0, 0.82) 60%,
-    #000 70%,
+    transparent 34%,
+    rgba(0, 0, 0, 0.08) 40%,
+    rgba(0, 0, 0, 0.28) 48%,
+    rgba(0, 0, 0, 0.55) 56%,
+    rgba(0, 0, 0, 0.8) 62%,
+    #000 72%,
     #000 100%
   );
 }
@@ -533,21 +535,23 @@ main,
   -webkit-mask-image: linear-gradient(
     90deg,
     transparent 0%,
-    transparent 18%,
-    rgba(0, 0, 0, 0.18) 26%,
-    rgba(0, 0, 0, 0.48) 38%,
-    rgba(0, 0, 0, 0.78) 50%,
-    #000 64%,
+    transparent 34%,
+    rgba(0, 0, 0, 0.08) 40%,
+    rgba(0, 0, 0, 0.28) 48%,
+    rgba(0, 0, 0, 0.55) 56%,
+    rgba(0, 0, 0, 0.8) 62%,
+    #000 72%,
     #000 100%
   );
   mask-image: linear-gradient(
     90deg,
     transparent 0%,
-    transparent 18%,
-    rgba(0, 0, 0, 0.18) 26%,
-    rgba(0, 0, 0, 0.48) 38%,
-    rgba(0, 0, 0, 0.78) 50%,
-    #000 64%,
+    transparent 34%,
+    rgba(0, 0, 0, 0.08) 40%,
+    rgba(0, 0, 0, 0.28) 48%,
+    rgba(0, 0, 0, 0.55) 56%,
+    rgba(0, 0, 0, 0.8) 62%,
+    #000 72%,
     #000 100%
   );
 }
