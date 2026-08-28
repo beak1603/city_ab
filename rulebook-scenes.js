@@ -1,7 +1,24 @@
 (function () {
   "use strict";
 
+  function apply2026Branding() {
+    document.title = "2026 도시능력자";
+
+    const brand = document.querySelector(".brand__text strong");
+    if (brand) brand.textContent = "2026 도시능력자";
+
+    const brandLink = document.querySelector(".brand");
+    if (brandLink) brandLink.setAttribute("aria-label", "2026 도시능력자 홈");
+
+    const heroTitle = document.getElementById("hero-title");
+    if (heroTitle) heroTitle.textContent = "2026 도시능력자";
+
+    const footerTitle = document.querySelector(".site-footer > p");
+    if (footerTitle) footerTitle.textContent = "2026 도시능력자";
+  }
+
   function initializeRulebook() {
+  apply2026Branding();
 
   const GUIDE_ID = "guide-detail";
   const TOP_NAV_GUIDE_IDS = ["pre-game", "game-start", "other-systems"];
@@ -227,11 +244,11 @@
 
     const stats = document.createElement("div");
     stats.className = "game-goal__stats";
-    stats.setAttribute("aria-label", "60개의 능력, 20분의 시간, 1명의 생존자");
+    stats.setAttribute("aria-label", "60개의 능력 20분의 시간 1명의 생존자");
 
     [
-      { number: "60", label: "개의 능력," },
-      { number: "20", label: "분의 시간," },
+      { number: "60", label: "개의 능력" },
+      { number: "20", label: "분의 시간" },
       { number: "1", label: "명의 생존자" },
     ].forEach(function (item) {
       const stat = document.createElement("div");
@@ -475,3 +492,4 @@
     }, 2500);
   }
 })();
+

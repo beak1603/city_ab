@@ -259,6 +259,26 @@ main,
   margin: 0 auto;
 }
 
+/* Keep both neighboring ability icons fully inside the slider viewport. */
+#abilities .ability-card[data-position="side"][style*="--ability-x: -"] {
+  --ability-x: -100% !important;
+  --ability-x-mobile: -68% !important;
+}
+
+#abilities .ability-card[data-position="side"]:not([style*="--ability-x: -"]) {
+  --ability-x: 100% !important;
+  --ability-x-mobile: 68% !important;
+}
+
+#abilities .ability-card h3 {
+  display: none !important;
+}
+
+/* Join the sticky navigation directly to the hero artwork. */
+.site-header {
+  border-bottom: 0;
+}
+
 @media (max-width: 720px) {
   html,
   body,
@@ -398,6 +418,13 @@ main,
   .top-nav a {
     padding-inline: 5px;
     font-size: 11px;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero h1 {
+    font-size: clamp(38px, 11.2vw, 46px);
+    white-space: nowrap;
   }
 }
 
