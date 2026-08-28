@@ -447,6 +447,7 @@ main,
 
 /* Scene screenshots: enlarge the focal area on the right and fade it into black. */
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1)::before,
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(2)::before,
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3)::before,
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4)::before,
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1)::before,
@@ -489,6 +490,10 @@ main,
 
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1)::before {
   background-image: url("./preparation-bg.png");
+}
+
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(2)::before {
+  background-image: url("./ability-draw-bg.webp");
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3)::before {
@@ -571,6 +576,7 @@ main,
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1) .guide-scene__shade,
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(2) .guide-scene__shade,
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3) .guide-scene__shade,
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4) .guide-scene__shade,
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1) .guide-scene__shade,
@@ -593,6 +599,7 @@ main,
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1) .guide-scene__content,
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(2) .guide-scene__content,
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3) .guide-scene__content,
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4) .guide-scene__content,
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1) .guide-scene__content,
@@ -605,6 +612,7 @@ main,
 
 @media (max-width: 720px) {
   #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1)::before,
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(2)::before,
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3)::before,
   #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4)::before,
   #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1)::before,

@@ -1,4 +1,4 @@
-@import url("./rulebook-scenes-base.css?v=39");
+@import url("./rulebook-scenes-base.css?v=40");
 
 /* Final preparation scene: use the supplied wide background at its native composition. */
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4) {
