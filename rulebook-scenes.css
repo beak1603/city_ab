@@ -80,20 +80,19 @@
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3) {
   background:
     conic-gradient(
-      from 202deg at 116% -16%,
+      from 208deg at 118% -20%,
       transparent 0deg,
-      rgba(232, 230, 220, 0.045) 10deg,
-      rgba(221, 219, 208, 0.12) 27deg,
-      rgba(160, 162, 154, 0.07) 44deg,
-      transparent 62deg
+      rgba(234, 232, 221, 0.045) 7deg,
+      rgba(226, 224, 213, 0.15) 18deg,
+      rgba(176, 177, 168, 0.075) 30deg,
+      transparent 43deg
     ),
     radial-gradient(
-      ellipse 74% 158% at 116% -18%,
-      rgba(238, 236, 225, 0.17) 0%,
-      rgba(177, 178, 169, 0.115) 34%,
-      rgba(108, 111, 105, 0.068) 58%,
-      rgba(55, 58, 55, 0.038) 78%,
-      rgba(0, 0, 0, 0) 100%
+      ellipse 52% 104% at 114% -14%,
+      rgba(238, 236, 225, 0.14) 0%,
+      rgba(177, 178, 169, 0.065) 36%,
+      rgba(88, 91, 86, 0.025) 60%,
+      rgba(0, 0, 0, 0) 82%
     ),
     #000 !important;
 }
@@ -146,32 +145,32 @@
   pointer-events: none;
   background:
     conic-gradient(
-      from 200deg at 118% -18%,
+      from 207deg at 120% -22%,
       transparent 0deg,
-      rgba(233, 231, 221, 0.035) 8deg,
-      rgba(224, 222, 211, 0.11) 26deg,
-      rgba(166, 168, 159, 0.07) 44deg,
-      transparent 64deg
+      rgba(235, 233, 222, 0.035) 6deg,
+      rgba(226, 224, 213, 0.12) 18deg,
+      rgba(166, 168, 159, 0.055) 30deg,
+      transparent 43deg
     ),
     radial-gradient(
-      ellipse 136% 166% at 116% -16%,
-      rgba(231, 229, 219, 0.14) 0%,
-      rgba(177, 178, 169, 0.095) 36%,
-      rgba(103, 106, 101, 0.055) 64%,
-      rgba(0, 0, 0, 0) 100%
+      ellipse 72% 112% at 116% -16%,
+      rgba(231, 229, 219, 0.09) 0%,
+      rgba(177, 178, 169, 0.045) 36%,
+      rgba(92, 95, 90, 0.018) 60%,
+      rgba(0, 0, 0, 0) 82%
     ),
     radial-gradient(
-      ellipse 126% 54% at 20% 104%,
-      rgba(96, 99, 91, 0.07) 0%,
-      rgba(60, 63, 59, 0.04) 52%,
-      rgba(0, 0, 0, 0) 100%
+      ellipse 86% 34% at 24% 102%,
+      rgba(96, 99, 91, 0.035) 0%,
+      rgba(60, 63, 59, 0.018) 48%,
+      rgba(0, 0, 0, 0) 82%
     ),
     repeating-linear-gradient(
       112deg,
-      rgba(255, 255, 255, 0.01) 0,
-      rgba(255, 255, 255, 0.01) 1px,
-      rgba(0, 0, 0, 0.012) 1px,
-      rgba(0, 0, 0, 0.012) 3px
+      rgba(255, 255, 255, 0.004) 0,
+      rgba(255, 255, 255, 0.004) 1px,
+      rgba(0, 0, 0, 0.005) 1px,
+      rgba(0, 0, 0, 0.005) 3px
     );
   -webkit-mask-image: linear-gradient(
     90deg,
