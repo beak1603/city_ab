@@ -501,9 +501,11 @@ main,
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3)::before {
-  background-image: url("./scene-enchant-v3.webp");
+  background-image: url("./scene-enchant-v4.png");
   background-size: auto 100%;
   background-position: right center;
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4)::before {
