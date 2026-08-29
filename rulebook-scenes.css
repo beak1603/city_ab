@@ -1,43 +1,36 @@
 @import url("./rulebook-scenes-base.css?v=43");
 
-/* Final preparation scene: use the supplied wide background at its native composition. */
-#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4) {
+/* Give every remaining scene the same frame and overlay as Final preparation. */
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1),
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(2),
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3),
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4),
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1),
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2),
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3) {
   min-height: clamp(300px, 42vw, 420px) !important;
   background: #000 !important;
 }
 
-#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4)::before {
-  content: "" !important;
-  position: absolute !important;
-  inset: 0 !important;
-  z-index: 0 !important;
-  background-image: url("./scene-final-ready-v5.webp") !important;
-  background-position: right center !important;
-  background-size: auto 100% !important;
-  background-repeat: no-repeat !important;
-  -webkit-mask-image: none !important;
-  mask-image: none !important;
-  filter: brightness(0.96) saturate(1.02) contrast(1.02) !important;
-}
-
-#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4) .guide-scene__shade {
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1) .guide-scene__shade,
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(2) .guide-scene__shade,
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3) .guide-scene__shade,
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4) .guide-scene__shade,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1) .guide-scene__shade,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2) .guide-scene__shade,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3) .guide-scene__shade {
   z-index: 1 !important;
   background: linear-gradient(90deg, rgba(0,0,0,.84) 0%, rgba(0,0,0,.72) 22%, rgba(0,0,0,.48) 36%, rgba(0,0,0,.18) 52%, rgba(0,0,0,.04) 68%, rgba(0,0,0,0) 80%) !important;
 }
 
-#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4) .guide-scene__content {
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1) .guide-scene__content,
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(2) .guide-scene__content,
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3) .guide-scene__content,
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4) .guide-scene__content,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1) .guide-scene__content,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2) .guide-scene__content,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3) .guide-scene__content {
   z-index: 2 !important;
-}
-
-@media (max-width: 720px) {
-  #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4) {
-    min-height: 300px !important;
-  }
-
-  #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4)::before {
-    background-position: right center !important;
-    background-size: auto 92% !important;
-  }
 }
 
 /* Keep every supplied scene image intact, pull its icon away from the right edge,
@@ -56,6 +49,7 @@
   aspect-ratio: 1672 / 941;
   background-position: center !important;
   background-size: 100% 100% !important;
+  filter: brightness(0.96) saturate(1.02) contrast(1.02) !important;
   -webkit-mask-image: linear-gradient(
     90deg,
     transparent 0%,
@@ -83,6 +77,16 @@
 }
 
 @media (max-width: 720px) {
+  #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1),
+  #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(2),
+  #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3),
+  #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4),
+  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1),
+  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2),
+  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3) {
+    min-height: 300px !important;
+  }
+
   #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1)::before,
   #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(2)::before,
   #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3)::before,
@@ -114,3 +118,4 @@
     ) !important;
   }
 }
+
