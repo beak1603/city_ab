@@ -76,6 +76,51 @@
   ) !important;
 }
 
+/* Continue only the token-system spotlight across the reserved right-hand gap. */
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: calc(clamp(96px, 12vw, 240px) + clamp(120px, 10vw, 180px));
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 98% 138% at 32% -6%,
+      rgba(255, 253, 242, 0.24) 0%,
+      rgba(224, 222, 210, 0.16) 24%,
+      rgba(156, 156, 148, 0.08) 46%,
+      rgba(76, 78, 74, 0.035) 62%,
+      rgba(0, 0, 0, 0) 82%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(17, 17, 16, 0) 0%,
+      rgba(17, 17, 16, 0.65) 28%,
+      rgba(15, 15, 14, 0.95) 46%,
+      rgba(9, 9, 9, 0.96) 74%,
+      #000 100%
+    );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.12) 12%,
+    rgba(0, 0, 0, 0.48) 26%,
+    #000 42%,
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.12) 12%,
+    rgba(0, 0, 0, 0.48) 26%,
+    #000 42%,
+    #000 100%
+  );
+}
+
 @media (max-width: 720px) {
   #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1),
   #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(2),
@@ -116,6 +161,10 @@
       #000 48%,
       #000 100%
     ) !important;
+  }
+
+  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::after {
+    display: none;
   }
 }
 
