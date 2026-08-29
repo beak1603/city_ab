@@ -78,22 +78,15 @@
 
 /* Match the token image's final pixels under the empty right-hand gap. */
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3) {
-  background:
-    radial-gradient(
-      ellipse 36% 112% at 88% -8%,
-      rgba(238, 236, 225, 0.14) 0%,
-      rgba(177, 178, 169, 0.075) 34%,
-      rgba(74, 77, 73, 0.03) 58%,
-      rgba(0, 0, 0, 0) 78%
+  background: radial-gradient(
+      ellipse 46% 128% at 86% -8%,
+      rgba(238, 236, 225, 0.15) 0%,
+      rgba(177, 178, 169, 0.11) 38%,
+      rgba(108, 111, 105, 0.065) 62%,
+      rgba(55, 58, 55, 0.035) 80%,
+      rgba(0, 0, 0, 0) 100%
     ),
-    linear-gradient(
-      90deg,
-      #000 0%,
-      #000 76%,
-      #111110 87%,
-      #090909 95%,
-      #000 100%
-    ) !important;
+    #000 !important;
 }
 
 /* Reuse the aligned edge texture, blur it through the join, then fade it out. */
@@ -110,15 +103,15 @@
   background-repeat: no-repeat;
   background-position: right clamp(96px, 12vw, 240px) center;
   background-size: auto 100%;
-  filter: blur(24px) brightness(0.82) saturate(0.82);
+  filter: blur(32px) brightness(0.84) saturate(0.82);
   -webkit-mask-image: linear-gradient(
     90deg,
     transparent 0%,
     rgba(0, 0, 0, 0.18) 20%,
     rgba(0, 0, 0, 0.72) 38%,
     #000 50%,
-    #000 64%,
-    rgba(0, 0, 0, 0.38) 80%,
+    #000 72%,
+    rgba(0, 0, 0, 0.7) 84%,
     transparent 100%
   );
   mask-image: linear-gradient(
@@ -127,8 +120,60 @@
     rgba(0, 0, 0, 0.18) 20%,
     rgba(0, 0, 0, 0.72) 38%,
     #000 50%,
-    #000 64%,
-    rgba(0, 0, 0, 0.38) 80%,
+    #000 72%,
+    rgba(0, 0, 0, 0.7) 84%,
+    transparent 100%
+  );
+}
+
+/* Preserve the source fog and floor texture for 300–400px before the final fade. */
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3) .guide-scene__shade::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: calc(clamp(96px, 12vw, 240px) + clamp(200px, 16vw, 320px));
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 118% 148% at 22% -10%,
+      rgba(231, 229, 219, 0.13) 0%,
+      rgba(177, 178, 169, 0.09) 38%,
+      rgba(103, 106, 101, 0.052) 64%,
+      rgba(0, 0, 0, 0) 100%
+    ),
+    radial-gradient(
+      ellipse 126% 54% at 20% 104%,
+      rgba(96, 99, 91, 0.07) 0%,
+      rgba(60, 63, 59, 0.04) 52%,
+      rgba(0, 0, 0, 0) 100%
+    ),
+    repeating-linear-gradient(
+      112deg,
+      rgba(255, 255, 255, 0.01) 0,
+      rgba(255, 255, 255, 0.01) 1px,
+      rgba(0, 0, 0, 0.012) 1px,
+      rgba(0, 0, 0, 0.012) 3px
+    );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.18) 12%,
+    rgba(0, 0, 0, 0.72) 28%,
+    #000 42%,
+    #000 72%,
+    rgba(0, 0, 0, 0.62) 86%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.18) 12%,
+    rgba(0, 0, 0, 0.72) 28%,
+    #000 42%,
+    #000 72%,
+    rgba(0, 0, 0, 0.62) 86%,
     transparent 100%
   );
 }
@@ -176,6 +221,10 @@
   }
 
   #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::after {
+    display: none;
+  }
+
+  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3) .guide-scene__shade::after {
     display: none;
   }
 }
