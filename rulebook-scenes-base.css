@@ -547,32 +547,12 @@ main,
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before {
-  background-image: url("./scene-token-system-v8.webp");
+  background-image: url("./scene-token-system-v9.png");
   background-position: right center;
   background-color: #000;
   background-size: auto 100%;
-  -webkit-mask-image: linear-gradient(
-    90deg,
-    transparent 0%,
-    transparent 34%,
-    rgba(0, 0, 0, 0.08) 40%,
-    rgba(0, 0, 0, 0.28) 48%,
-    rgba(0, 0, 0, 0.55) 56%,
-    rgba(0, 0, 0, 0.8) 62%,
-    #000 72%,
-    #000 100%
-  );
-  mask-image: linear-gradient(
-    90deg,
-    transparent 0%,
-    transparent 34%,
-    rgba(0, 0, 0, 0.08) 40%,
-    rgba(0, 0, 0, 0.28) 48%,
-    rgba(0, 0, 0, 0.55) 56%,
-    rgba(0, 0, 0, 0.8) 62%,
-    #000 72%,
-    #000 100%
-  );
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(4)::before {
