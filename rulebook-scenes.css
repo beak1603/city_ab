@@ -1,4 +1,4 @@
-@import url("./rulebook-scenes-base.css?v=43");
+@import url("./rulebook-scenes-base.css?v=46");
 
 /* Give every remaining scene the same frame and overlay as Final preparation. */
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1),
@@ -46,7 +46,7 @@
   inset: 0 var(--scene-image-offset) 0 auto !important;
   width: auto !important;
   height: auto !important;
-  aspect-ratio: 1672 / 941;
+  aspect-ratio: 1916 / 821;
   background-position: center !important;
   background-size: 100% 100% !important;
   filter: brightness(0.96) saturate(1.02) contrast(1.02) !important;

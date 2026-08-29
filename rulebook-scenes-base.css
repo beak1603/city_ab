@@ -489,25 +489,25 @@ main,
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1)::before {
-  background-image: url("./scene-preparation-v2.webp");
+  background-image: url("./scene-preparation-v3.webp");
   background-size: auto 100%;
   background-position: right center;
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(2)::before {
-  background-image: url("./scene-ability-draw-v2.webp");
+  background-image: url("./scene-ability-draw-v3.webp");
   background-position: right center;
   background-size: auto 100%;
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3)::before {
-  background-image: url("./scene-enchant-v2.webp");
+  background-image: url("./scene-enchant-v3.webp");
   background-size: auto 100%;
   background-position: right center;
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4)::before {
-  background-image: url("./scene-final-ready-v5.webp");
+  background-image: url("./scene-final-ready-v6.webp");
   background-position: right center;
   background-size: auto 100%;
   -webkit-mask-image: linear-gradient(
@@ -535,19 +535,19 @@ main,
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1)::before {
-  background-image: url("./scene-magnetic-v3.webp");
+  background-image: url("./scene-magnetic-v4.webp");
   background-size: auto 100%;
   background-position: right center;
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2)::before {
-  background-image: url("./scene-field-box-v8.webp");
+  background-image: url("./scene-field-box-v9.webp");
   background-size: auto 100%;
   background-position: right center;
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before {
-  background-image: url("./scene-token-system-v2.webp");
+  background-image: url("./scene-token-system-v3.webp");
   background-position: right center;
   background-color: #000;
   background-size: auto 100%;
@@ -686,4 +686,5 @@ main,
     transform: none !important;
   }
 }
+
 
