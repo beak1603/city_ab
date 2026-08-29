@@ -547,7 +547,7 @@ main,
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before {
-  background-image: url("./scene-token-system-v7.webp");
+  background-image: url("./scene-token-system-v8.webp");
   background-position: right center;
   background-color: #000;
   background-size: auto 100%;
