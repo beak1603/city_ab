@@ -1,4 +1,4 @@
-@import url("./rulebook-scenes-base.css?v=48");
+@import url("./rulebook-scenes-base.css?v=49");
 
 /* Give every remaining scene the same frame and overlay as Final preparation. */
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1),
@@ -76,21 +76,13 @@
   ) !important;
 }
 
-/* Keep the supplied enchant image unchanged, full-height, and right-aligned. */
-#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3)::before {
-  inset: 0 !important;
-  width: auto !important;
-  height: auto !important;
-  aspect-ratio: auto;
-  transform: none;
-  background-position: right center !important;
-  background-size: auto 100% !important;
-  filter: none !important;
-  -webkit-mask-image: none !important;
-  mask-image: none !important;
-}
-
-/* Keep the supplied token-system image unchanged, full-height, and right-aligned. */
+/* Keep every supplied full-canvas scene unchanged, full-height, and right-aligned. */
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1)::before,
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(2)::before,
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3)::before,
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4)::before,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1)::before,
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2)::before,
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before {
   inset: 0 !important;
   width: auto !important;
@@ -146,16 +138,13 @@
     ) !important;
   }
 
+  #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1)::before,
+  #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(2)::before,
+  #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3)::before,
+  #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4)::before,
+  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(1)::before,
+  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(2)::before,
   #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3)::before {
-    transform: none;
-    background-position: right center !important;
-    background-size: auto 100% !important;
-    filter: none !important;
-    -webkit-mask-image: none !important;
-    mask-image: none !important;
-  }
-
-  #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3)::before {
     transform: none;
     background-position: right center !important;
     background-size: auto 100% !important;
