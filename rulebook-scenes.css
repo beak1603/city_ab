@@ -78,12 +78,21 @@
 
 /* Match the token image's final pixels under the empty right-hand gap. */
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene:nth-child(3) {
-  background: radial-gradient(
-      ellipse 46% 128% at 86% -8%,
-      rgba(238, 236, 225, 0.15) 0%,
-      rgba(177, 178, 169, 0.11) 38%,
-      rgba(108, 111, 105, 0.065) 62%,
-      rgba(55, 58, 55, 0.035) 80%,
+  background:
+    conic-gradient(
+      from 202deg at 116% -16%,
+      transparent 0deg,
+      rgba(232, 230, 220, 0.045) 10deg,
+      rgba(221, 219, 208, 0.12) 27deg,
+      rgba(160, 162, 154, 0.07) 44deg,
+      transparent 62deg
+    ),
+    radial-gradient(
+      ellipse 74% 158% at 116% -18%,
+      rgba(238, 236, 225, 0.17) 0%,
+      rgba(177, 178, 169, 0.115) 34%,
+      rgba(108, 111, 105, 0.068) 58%,
+      rgba(55, 58, 55, 0.038) 78%,
       rgba(0, 0, 0, 0) 100%
     ),
     #000 !important;
@@ -136,11 +145,19 @@
   width: calc(clamp(96px, 12vw, 240px) + clamp(200px, 16vw, 320px));
   pointer-events: none;
   background:
+    conic-gradient(
+      from 200deg at 118% -18%,
+      transparent 0deg,
+      rgba(233, 231, 221, 0.035) 8deg,
+      rgba(224, 222, 211, 0.11) 26deg,
+      rgba(166, 168, 159, 0.07) 44deg,
+      transparent 64deg
+    ),
     radial-gradient(
-      ellipse 118% 148% at 22% -10%,
-      rgba(231, 229, 219, 0.13) 0%,
-      rgba(177, 178, 169, 0.09) 38%,
-      rgba(103, 106, 101, 0.052) 64%,
+      ellipse 136% 166% at 116% -16%,
+      rgba(231, 229, 219, 0.14) 0%,
+      rgba(177, 178, 169, 0.095) 36%,
+      rgba(103, 106, 101, 0.055) 64%,
       rgba(0, 0, 0, 0) 100%
     ),
     radial-gradient(
@@ -162,9 +179,7 @@
     rgba(0, 0, 0, 0.18) 12%,
     rgba(0, 0, 0, 0.72) 28%,
     #000 42%,
-    #000 72%,
-    rgba(0, 0, 0, 0.62) 86%,
-    transparent 100%
+    #000 100%
   );
   mask-image: linear-gradient(
     90deg,
@@ -172,9 +187,7 @@
     rgba(0, 0, 0, 0.18) 12%,
     rgba(0, 0, 0, 0.72) 28%,
     #000 42%,
-    #000 72%,
-    rgba(0, 0, 0, 0.62) 86%,
-    transparent 100%
+    #000 100%
   );
 }
 
