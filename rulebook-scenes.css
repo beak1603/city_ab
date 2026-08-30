@@ -1,4 +1,4 @@
-@import url("./rulebook-scenes-base.css?v=49");
+@import url("./rulebook-scenes-base.css?v=50");
 
 /* Give every remaining scene the same frame and overlay as Final preparation. */
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1),
