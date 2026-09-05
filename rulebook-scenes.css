@@ -754,3 +754,60 @@
 #guide .guide-scene__isolated-icon {
   z-index: 2;
 }
+
+
+/* Token shop: retain the shared scene layout and supplied transparent artwork. */
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] > .guide-scene--token-shop::before {
+  content: none !important;
+  display: none !important;
+}
+
+#guide .guide-scene--token-shop .guide-scene__shade {
+  z-index: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,.84) 0%, rgba(0,0,0,.72) 22%, rgba(0,0,0,.48) 36%, rgba(0,0,0,.18) 52%, rgba(0,0,0,.04) 68%, rgba(0,0,0,0) 80%) !important;
+}
+
+#guide .guide-scene--token-shop .guide-scene__content {
+  z-index: 2;
+  pointer-events: none;
+}
+
+#guide .token-shop__villager {
+  position: absolute;
+  z-index: 2;
+  right: clamp(16px, 3vw, 64px);
+  bottom: 0;
+  display: block;
+  height: 92%;
+  width: auto;
+  max-width: 48%;
+  object-fit: contain;
+  object-position: right bottom;
+  opacity: 1;
+  filter: none;
+  mix-blend-mode: normal;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+@media (max-width: 720px) {
+  #guide .guide-detail__panel--scenes[data-guide-id="game-start"] > .guide-scene--token-shop {
+    min-height: 420px;
+  }
+
+  #guide .guide-scene--token-shop .guide-scene__content {
+    position: relative;
+    top: auto;
+    padding: 30px 22px 0;
+    transform: none;
+    animation: none;
+  }
+
+  #guide .guide-scene--token-shop .token-shop__villager {
+    right: 12px;
+    height: 300px;
+    max-width: 85%;
+  }
+}

@@ -66,6 +66,10 @@
           description: "- 토큰생성소는 총 8개입니다\n- 토큰생성소에 일정 시간 머무르면 자동으로 점령되며 충전된 토큰이 지급됩니다\n- 토큰생성소 점령 도중 다른 플레이어가 들어올 경우 점령은 취소됩니다\n- 토큰생성소에 토큰은 최대 5개까지 충전됩니다\n- 2개밖에 충전되지 않은 토큰생성소를 점령시 토큰 2개만 획득할 수 있습니다\n- 게임시작시 8개 중 2개만 활성화되며, 누군가 토큰 생성소 점령 완료 했을 경우 다른 토큰생성소가 활성화 됩니다\n- 일정시간 이후에는 모든 토큰생성소가 활성화됩니다",
           diagram: "token-stations",
         },
+        {
+          title: "3-2. 토큰상점",
+          villager: "./token-shop-librarian-v1.png",
+        },
       ],
     },
     "other-systems": {
@@ -332,6 +336,18 @@
 
     const content = document.createElement("div");
     content.className = "guide-scene__content";
+
+    if (scene.villager) {
+      section.classList.add("guide-scene--token-shop");
+      const villager = document.createElement("img");
+      villager.className = "token-shop__villager";
+      villager.src = scene.villager;
+      villager.alt = "토큰상점 사서 주민";
+      villager.width = 1373;
+      villager.height = 1146;
+      villager.decoding = "async";
+      section.appendChild(villager);
+    }
 
     if (scene.abilities && scene.abilities.length) {
       section.classList.add("guide-scene--support-abilities");
