@@ -1136,10 +1136,10 @@
 
 /* Enlarge only the magnetic-field artwork while retaining its measured center. */
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] > .guide-scene:first-child .guide-scene__balanced-art {
-  height: min(calc(var(--art-panel-height) * 1.15), calc(var(--art-width-cap) * 1.15));
+  height: min(calc(var(--art-panel-height) * 1.3225), calc(var(--art-width-cap) * 1.3225));
 }
 @media (max-width: 720px) {
   #guide .guide-detail__panel--scenes[data-guide-id="game-start"] > .guide-scene:first-child .guide-scene__balanced-art {
-    height: min(calc(var(--art-mobile-height) * 1.15), calc(var(--art-mobile-cap) * 1.15));
+    height: min(calc(var(--art-mobile-height) * 1.3225), calc(var(--art-mobile-cap) * 1.3225));
   }
 }
