@@ -705,10 +705,10 @@
         currentAbility = nextAbility;
         renderAbility();
 
-        // Icons, names and descriptions share one exit/entry timeline.
+        // Move both slides continuously on one clock, with no wait between exit and entry.
         const options = {
-          duration: 460,
-          easing: "linear",
+          duration: 360,
+          easing: "cubic-bezier(0.2, 0.72, 0.28, 1)",
           fill: "both",
         };
         const animations = [];
@@ -728,8 +728,7 @@
           const animatePair = function (oldElement, newElement, exitTransform, enterTransform, restingTransform) {
             animations.push(oldElement.animate(
               [
-                { opacity: 1, transform: restingTransform, offset: 0, easing: "cubic-bezier(0.4, 0, 1, 1)" },
-                { opacity: 0, transform: exitTransform, offset: 0.4 },
+                { opacity: 1, transform: restingTransform, offset: 0 },
                 { opacity: 0, transform: exitTransform, offset: 1 },
               ],
               options
@@ -737,7 +736,6 @@
             animations.push(newElement.animate(
               [
                 { opacity: 0, transform: enterTransform, offset: 0 },
-                { opacity: 0, transform: enterTransform, offset: 0.44, easing: "cubic-bezier(0.16, 1, 0.3, 1)" },
                 { opacity: 1, transform: restingTransform, offset: 1 },
               ],
               options
@@ -745,15 +743,15 @@
           };
           animatePair(
             outgoing, incoming,
-            "translate3d(" + (-direction * 35) + "%, 0, 0)",
-            "translate3d(" + (direction * 35) + "%, 0, 0)",
+            "translate3d(" + (-direction * 100) + "%, 0, 0)",
+            "translate3d(" + (direction * 100) + "%, 0, 0)",
             "translate3d(0, 0, 0)"
           );
           [ [outgoingText, incomingText], [outgoingName, incomingName] ].forEach(function (pair) {
             animatePair(
               pair[0], pair[1],
-              "translate3d(" + (-direction * 16) + "px, 0, 0)",
-              "translate3d(" + (direction * 16) + "px, 0, 0)",
+              "translate3d(" + (-direction * 100) + "%, 0, 0)",
+              "translate3d(" + (direction * 100) + "%, 0, 0)",
               "translate3d(0, 0, 0)"
             );
           });

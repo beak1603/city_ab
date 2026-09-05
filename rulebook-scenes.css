@@ -1078,3 +1078,10 @@
     width: min(64vw, 280px);
   }
 }
+
+/* Clip synchronized full-width copy slides at their own text frames. */
+#guide .support-ability__featured-name,
+#guide .support-ability__description {
+  overflow: hidden;
+  overflow: clip;
+}
