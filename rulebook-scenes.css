@@ -644,21 +644,21 @@
   background-size: 100% 100% !important;
   background-repeat: no-repeat !important;
   mix-blend-mode: screen;
-  filter: none !important;
+  filter: contrast(3.8) brightness(0.9) saturate(1.25) !important;
   -webkit-mask-image: radial-gradient(
-    ellipse 12% 29% at 67.4% 58%,
+    ellipse 10.5% 25.5% at 67.4% 58%,
     #000 0%,
-    #000 50%,
-    rgba(0, 0, 0, 0.78) 66%,
-    rgba(0, 0, 0, 0.3) 83%,
+    #000 55%,
+    rgba(0, 0, 0, 0.7) 70%,
+    rgba(0, 0, 0, 0.15) 86%,
     transparent 100%
   ) !important;
   mask-image: radial-gradient(
-    ellipse 12% 29% at 67.4% 58%,
+    ellipse 10.5% 25.5% at 67.4% 58%,
     #000 0%,
-    #000 50%,
-    rgba(0, 0, 0, 0.78) 66%,
-    rgba(0, 0, 0, 0.3) 83%,
+    #000 55%,
+    rgba(0, 0, 0, 0.7) 70%,
+    rgba(0, 0, 0, 0.15) 86%,
     transparent 100%
   ) !important;
 }
