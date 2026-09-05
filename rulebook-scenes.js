@@ -745,9 +745,9 @@
           };
           animatePair(
             outgoing, incoming,
-            "translate3d(" + (-direction * 18) + "%, 0, 0) scale(0.58)",
-            "translate3d(" + (direction * 18) + "%, 0, 0) scale(0.78)",
-            "translate3d(0, 0, 0) scale(1)"
+            "translate3d(" + (-direction * 35) + "%, 0, 0)",
+            "translate3d(" + (direction * 35) + "%, 0, 0)",
+            "translate3d(0, 0, 0)"
           );
           [ [outgoingText, incomingText], [outgoingName, incomingName] ].forEach(function (pair) {
             animatePair(
