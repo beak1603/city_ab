@@ -1065,17 +1065,17 @@
 
 /* Leave room around the station orbit for the animated capture label. */
 #guide .guide-scene--token-station .token-station__diagram {
-  width: clamp(240px, 15.2vw, 416px);
+  width: clamp(264px, 16.72vw, 458px);
   scale: 1;
 }
 @media (min-width: 721px) and (max-width: 1500px) {
   #guide .guide-scene--token-station .token-station__diagram {
-    width: clamp(208px, 15.2vw, 240px);
+    width: clamp(229px, 16.72vw, 264px);
   }
 }
 @media (max-width: 720px) {
   #guide .guide-scene--token-station .token-station__diagram {
-    width: min(64vw, 280px);
+    width: min(70.4vw, 308px);
   }
 }
 
