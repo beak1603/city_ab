@@ -368,6 +368,18 @@
   background: #000 !important;
 }
 
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene.guide-scene--token-station::before {
+  display: none !important;
+  content: none !important;
+  opacity: 0 !important;
+  background: none !important;
+  background-image: none !important;
+}
+
+#guide .guide-scene--token-station .guide-scene__image {
+  display: none !important;
+}
+
 #guide .guide-scene--token-station .guide-scene__shade {
   z-index: 0;
   background: linear-gradient(90deg, rgba(0, 0, 0, 0.48), rgba(3, 11, 7, 0.08)) !important;
@@ -389,8 +401,9 @@
 }
 
 #guide .token-station__copy {
-  width: min(58vw, 820px);
+  width: min(40vw, 720px);
   min-width: 0;
+  margin-left: clamp(180px, 30vw, 620px);
 }
 
 #guide .token-station__description {
@@ -407,7 +420,7 @@
 #guide .token-station__diagram {
   position: absolute;
   top: 50%;
-  right: 12vw;
+  right: 5vw;
   width: clamp(390px, 26vw, 480px);
   background: transparent;
   box-shadow: none;
@@ -433,7 +446,7 @@
 #guide .token-station__node {
   fill: #ffffff;
   stroke: #ffffff;
-  stroke-width: 4;
+  stroke-width: 3;
   filter: url("#token-station-glow");
 }
 
@@ -462,6 +475,7 @@
 
   #guide .token-station__copy {
     width: 100%;
+    margin-left: 0;
   }
 
   #guide .token-station__diagram {
