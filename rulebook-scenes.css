@@ -232,14 +232,14 @@
 #guide .support-ability__stage {
   display: flex !important;
   width: 100%;
-  max-width: 760px;
+  max-width: 680px;
   min-width: 0;
   margin-left: auto;
   flex-direction: row !important;
   align-items: center !important;
   justify-content: space-between;
   gap: clamp(24px, 4vw, 72px);
-  transform: translateX(clamp(24px, 4vw, 72px));
+  transform: none;
 }
 
 #guide .support-ability__arrow {
