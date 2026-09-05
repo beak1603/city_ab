@@ -276,12 +276,13 @@
   flex-direction: row !important;
   align-items: center !important;
   justify-content: space-between;
-  gap: clamp(24px, 4vw, 72px);
+  gap: clamp(12px, 2vw, 28px);
   transform: translateX(-48px);
 }
 
 #guide .support-ability__arrow {
   display: inline-flex;
+  flex: 0 0 48px;
   width: 58px;
   height: 96px;
   padding: 0;
@@ -317,15 +318,17 @@
 
 #guide .support-ability__card {
   display: grid;
-  width: min(100%, 230px);
+  flex: 1 1 280px;
+  min-width: 0;
+  width: min(100%, 280px);
   place-items: center;
-  gap: 20px;
+  gap: 10px;
   margin: 0;
 }
 
 #guide .support-ability__icon {
   display: grid;
-  width: clamp(132px, 14vw, 176px);
+  width: min(100%, 280px);
   aspect-ratio: 1;
   place-items: center;
   border: 0;
@@ -344,6 +347,22 @@
   font-size: 13px;
   font-weight: 750;
   letter-spacing: 0.14em;
+}
+
+#guide .support-ability__name {
+  width: 100%;
+  margin: 0;
+  color: #e5ffd8;
+  font-size: clamp(20px, 2vw, 26px);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.035em;
+  text-align: center;
+  word-break: keep-all;
+}
+
+#guide .support-ability__description[hidden] {
+  display: none;
 }
 
 @media (max-width: 720px) {
@@ -372,11 +391,12 @@
     max-width: 100%;
     margin: 0 auto;
     justify-content: center;
-    gap: clamp(18px, 7vw, 34px);
+    gap: 12px;
     transform: none;
   }
 
   #guide .support-ability__arrow {
+    flex-basis: 36px;
     width: 44px;
     height: 72px;
     font-size: 38px;
@@ -388,7 +408,7 @@
   }
 
   #guide .support-ability__icon {
-    width: min(100%, 126px);
+    width: min(100%, 200px);
     font-size: 72px;
   }
 

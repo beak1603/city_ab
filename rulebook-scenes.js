@@ -384,9 +384,9 @@
       const description = document.createElement("p");
       description.className = "support-ability__description";
 
-      const abilityName = document.createElement("strong");
+      const abilityName = document.createElement("h4");
+      abilityName.className = "support-ability__name";
       const abilityText = document.createElement("span");
-      description.appendChild(abilityName);
       description.appendChild(abilityText);
 
       copy.appendChild(heading);
@@ -423,6 +423,7 @@
       count.setAttribute("aria-hidden", "true");
 
       card.appendChild(icon);
+      card.appendChild(abilityName);
       card.appendChild(count);
       stage.appendChild(previous);
       stage.appendChild(card);
@@ -435,6 +436,7 @@
         const ability = scene.abilities[currentAbility];
         abilityName.textContent = ability.name;
         abilityText.textContent = ability.description || "";
+        description.hidden = !ability.description;
         icon.replaceChildren(abilityImages[currentAbility]);
         count.textContent =
           String(currentAbility + 1).padStart(2, "0") +
