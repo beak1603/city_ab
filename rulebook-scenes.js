@@ -541,45 +541,6 @@
       steve.height = 1374;
       steve.decoding = "async";
       section.appendChild(steve);
-      const aura = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-      aura.classList.add("final-ready__ribbon-aura");
-      aura.setAttribute("viewBox", "0 0 1145 1374");
-      aura.setAttribute("preserveAspectRatio", "xMidYMax meet");
-      aura.setAttribute("aria-hidden", "true");
-      aura.innerHTML = `
-        <defs>
-          <linearGradient id="steve-ribbon-color" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#c4ff9b"/>
-            <stop offset=".48" stop-color="#65f4d7"/>
-            <stop offset="1" stop-color="#9bddff"/>
-          </linearGradient>
-          <filter id="steve-ribbon-glow" x="-60%" y="-100%" width="220%" height="300%">
-            <feGaussianBlur stdDeviation="9"/>
-          </filter>
-        </defs>
-      `;
-      const ribbons = [
-        "M430 305 C310 277 196 306 239 355 C260 382 299 394 335 397",
-        "M682 655 C734 709 778 702 818 660 C851 625 906 617 961 663",
-        "M193 731 C138 752 139 789 204 807 C262 824 325 826 374 803",
-        "M563 1010 C498 1067 390 1052 269 1091 C133 1135 117 1233 226 1305",
-        "M934 1170 C872 1153 857 1196 868 1232 C877 1262 904 1286 932 1300",
-      ];
-      ribbons.forEach(function (d, index) {
-        const group = document.createElementNS(aura.namespaceURI, "g");
-        group.style.setProperty("--ribbon-delay", (-index * .79) + "s");
-        group.style.setProperty("--ribbon-duration", (3.8 + index * .28) + "s");
-        ["glow", "core"].forEach(function (layer) {
-          const path = document.createElementNS(aura.namespaceURI, "path");
-          path.setAttribute("d", d);
-          path.setAttribute("pathLength", "100");
-          path.setAttribute("class", "final-ready__ribbon final-ready__ribbon--" + layer);
-          group.appendChild(path);
-        });
-        aura.appendChild(group);
-      });
-      section.appendChild(aura);
-
     }
 
     if (scene.image) {
