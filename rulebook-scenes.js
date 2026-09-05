@@ -707,7 +707,7 @@
 
         // Icons, names and descriptions share one exit/entry timeline.
         const options = {
-          duration: 620,
+          duration: 460,
           easing: "linear",
           fill: "both",
         };
