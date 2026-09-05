@@ -1257,3 +1257,32 @@
   background: url("./city-ability-main-logo-v1.png") center / contain no-repeat;
   translate: -18% 0;
 }
+
+/* Match the navigation branding to the supplied main logo. */
+.site-header .brand {
+  min-width: 0;
+  flex: 0 0 auto;
+}
+.site-header .brand__text {
+  display: block;
+}
+.site-header .brand__text strong {
+  display: block;
+  width: clamp(144px, 18vw, 216px);
+  height: auto;
+  aspect-ratio: 2048 / 682;
+  padding: 0;
+  font-size: 0;
+  line-height: 0;
+  white-space: nowrap;
+  text-indent: -9999px;
+  overflow: hidden;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+  background: url("./city-ability-main-logo-v1.png") center / contain no-repeat;
+}
+.site-header .brand__text small {
+  display: none;
+}
