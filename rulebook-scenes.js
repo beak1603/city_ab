@@ -595,6 +595,93 @@
         "</svg>",
       ].join("");
 
+      const captureLabel = document.createElement("span");
+      captureLabel.className = "token-station__capture";
+      captureLabel.textContent = "점령!";
+      diagram.appendChild(captureLabel);
+
+      const stationNodes = Array.from(
+        diagram.querySelectorAll(".token-station__node")
+      );
+      const setActiveStations = function (activeIndexes) {
+        stationNodes.forEach(function (node, nodeIndex) {
+          node.classList.toggle(
+            "token-station__node--active",
+            activeIndexes.indexOf(nodeIndex) !== -1
+          );
+        });
+      };
+      const showCaptureLabel = function (sourceIndex) {
+        const source = stationNodes[sourceIndex];
+        if (!source || typeof captureLabel.animate !== "function") return;
+
+        captureLabel.getAnimations().forEach(function (animation) {
+          animation.cancel();
+        });
+        captureLabel.style.left =
+          (Number(source.getAttribute("cx")) / 6).toFixed(3) + "%";
+        captureLabel.style.top =
+          (Number(source.getAttribute("cy")) / 6).toFixed(3) + "%";
+        captureLabel.animate(
+          [
+            {
+              opacity: 0,
+              transform: "translate3d(-50%, -105%, 0) scale(0.92)",
+            },
+            {
+              opacity: 1,
+              transform: "translate3d(-50%, -155%, 0) scale(1)",
+              offset: 0.28,
+            },
+            {
+              opacity: 1,
+              transform: "translate3d(-50%, -165%, 0) scale(1)",
+              offset: 0.68,
+            },
+            {
+              opacity: 0,
+              transform: "translate3d(-50%, -195%, 0) scale(0.96)",
+            },
+          ],
+          {
+            duration: 1250,
+            easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+            fill: "both",
+          }
+        );
+      };
+
+      const reduceTokenMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+      if (!reduceTokenMotion) {
+        const animationSteps = [
+          { delay: 3000, source: 0, active: [6, 3] },
+          { delay: 2000, source: 3, active: [6, 5] },
+          { delay: 2000, source: 6, active: [1, 5] },
+          { delay: 2000, source: 5, active: [1, 7] },
+          { delay: 2000, active: [0, 1, 2, 3, 4, 5, 6, 7] },
+          { delay: 2500, active: [0, 3] },
+        ];
+        let animationStep = 0;
+
+        const queueTokenStep = function () {
+          const step = animationSteps[animationStep];
+          window.setTimeout(function () {
+            if (!section.isConnected) return;
+
+            if (typeof step.source === "number") {
+              showCaptureLabel(step.source);
+            }
+            setActiveStations(step.active);
+            animationStep = (animationStep + 1) % animationSteps.length;
+            queueTokenStep();
+          }, step.delay);
+        };
+
+        queueTokenStep();
+      }
+
       copy.appendChild(title);
       copy.appendChild(description);
       content.appendChild(copy);
