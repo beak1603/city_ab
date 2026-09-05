@@ -256,7 +256,7 @@
   box-shadow: none !important;
   appearance: none;
   font-size: 48px;
-  font-weight: 300;
+  font-weight: 700;
   line-height: 1;
   cursor: pointer;
   transition:
@@ -441,7 +441,7 @@
   z-index: 3;
   opacity: 0;
   color: #ffffff;
-  font-size: clamp(14px, 1.1vw, 18px);
+  font-size: clamp(10px, 0.7vw, 12px);
   font-weight: 300;
   line-height: 1;
   letter-spacing: -0.01em;
