@@ -771,33 +771,39 @@
     const isolatedSceneIcons = {
       "1. 준비": {
         src: "./scene-preparation-v4.png",
-        bounds: [0.6, 0.84, 0.3, 0.9],
-        brightnessFloor: 122,
+        bounds: [0.57, 0.86, 0.22, 0.985],
+        brightnessFloor: 112,
+        contrastFloor: 8,
       },
       "2. 능력 추첨": {
         src: "./scene-ability-draw-v4.png",
-        bounds: [0.6, 0.82, 0.25, 0.9],
-        brightnessFloor: 118,
+        bounds: [0.57, 0.85, 0.18, 0.985],
+        brightnessFloor: 108,
+        contrastFloor: 8,
       },
       "3. 인첸트": {
         src: "./scene-enchant-v4.png",
-        bounds: [0.54, 0.76, 0.25, 0.93],
-        brightnessFloor: 110,
+        bounds: [0.5, 0.81, 0.16, 0.99],
+        brightnessFloor: 98,
+        contrastFloor: 7,
       },
       "4. 최종 준비": {
         src: "./scene-final-ready-v7.png",
-        bounds: [0.6, 0.82, 0.24, 0.92],
-        brightnessFloor: 112,
+        bounds: [0.55, 0.86, 0.15, 0.995],
+        brightnessFloor: 98,
+        contrastFloor: 6,
       },
       "1. 자기장": {
         src: "./scene-magnetic-v5.png",
-        bounds: [0.53, 0.79, 0.24, 0.93],
-        brightnessFloor: 112,
+        bounds: [0.48, 0.83, 0.14, 0.99],
+        brightnessFloor: 98,
+        contrastFloor: 7,
       },
       "2. 필드상자": {
         src: "./scene-field-box-v10.png",
-        bounds: [0.6, 0.9, 0.28, 0.94],
-        brightnessFloor: 108,
+        bounds: [0.55, 0.9, 0.18, 0.995],
+        brightnessFloor: 96,
+        contrastFloor: 6,
       },
     };
     const isolatedIcon = isolatedSceneIcons[scene.title];
@@ -823,9 +829,28 @@
         iconCanvas.height = height;
         context.drawImage(iconSource, 0, 0);
 
+        const softenedCanvas = document.createElement("canvas");
+        softenedCanvas.width = width;
+        softenedCanvas.height = height;
+        const softenedContext = softenedCanvas.getContext("2d", {
+          willReadFrequently: true,
+        });
+        if (!softenedContext) return;
+
+        softenedContext.filter = "blur(18px)";
+        softenedContext.drawImage(iconSource, 0, 0);
+        const softenedPixels = softenedContext.getImageData(
+          0,
+          0,
+          width,
+          height
+        ).data;
+
         const imageData = context.getImageData(0, 0, width, height);
         const pixels = imageData.data;
         const bounds = isolatedIcon.bounds;
+        const featherX = 0.022;
+        const featherY = 0.045;
 
         for (let offset = 0; offset < pixels.length; offset += 4) {
           const red = pixels[offset];
@@ -849,21 +874,46 @@
           const lowest = Math.min(red, green, blue);
           const chroma = highest - lowest;
           const brightness = (red + green + blue) / 3;
+          const localContrast =
+            (Math.abs(red - softenedPixels[offset]) +
+              Math.abs(green - softenedPixels[offset + 1]) +
+              Math.abs(blue - softenedPixels[offset + 2])) /
+            3;
           const colorAlpha = Math.max(
             0,
-            Math.min(255, (chroma - 5) * 12)
+            Math.min(255, (chroma - 2) * 14)
           );
           const brightAlpha = Math.max(
             0,
             Math.min(
               255,
-              (brightness - isolatedIcon.brightnessFloor) * 7
+              (brightness - isolatedIcon.brightnessFloor) * 5.5
+            )
+          );
+          const contrastAlpha = Math.max(
+            0,
+            Math.min(
+              255,
+              (localContrast - isolatedIcon.contrastFloor) * 16
+            )
+          );
+          const edgeFeather = Math.max(
+            0,
+            Math.min(
+              1,
+              (xRatio - bounds[0]) / featherX,
+              (bounds[1] - xRatio) / featherX,
+              (yRatio - bounds[2]) / featherY,
+              (bounds[3] - yRatio) / featherY
             )
           );
 
           pixels[offset + 3] = Math.min(
             pixels[offset + 3],
-            Math.round(Math.max(colorAlpha, brightAlpha))
+            Math.round(
+              Math.max(colorAlpha, brightAlpha, contrastAlpha) *
+                edgeFeather
+            )
           );
         }
 
