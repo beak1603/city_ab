@@ -568,7 +568,7 @@
       diagram.className = "token-station__diagram";
       diagram.setAttribute("aria-hidden", "true");
       diagram.innerHTML = [
-        "<img class='token-station__art' src='./token-stations-orbit.png?v=1' alt='' loading='lazy' decoding='async'/>",
+        "<img class='token-station__art' src='./token-stations-orbit-transparent.png?v=1' alt='' loading='lazy' decoding='async'/>",
         "<svg class='token-station__overlay' viewBox='0 0 1448 1080' preserveAspectRatio='xMidYMid slice' role='presentation' focusable='false'>",
         "<defs>",
         "<filter id='token-station-mask-soften' x='-35%' y='-35%' width='170%' height='170%'>",
@@ -588,7 +588,7 @@
         "</g>",
         "</mask>",
         "</defs>",
-        "<image class='token-station__active-art' href='./token-stations-orbit.png?v=1' x='0' y='0' width='1448' height='1080' preserveAspectRatio='xMidYMid meet' mask='url(#token-station-diamond-mask)'/>",
+        "<image class='token-station__active-art' href='./token-stations-orbit-transparent.png?v=1' x='0' y='0' width='1448' height='1080' preserveAspectRatio='xMidYMid meet' mask='url(#token-station-diamond-mask)'/>",
         "</svg>",
       ].join("");
 
