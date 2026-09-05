@@ -403,8 +403,20 @@
 #guide .guide-detail__panel--scenes[data-guide-id] > .guide-scene:nth-child(n) {
   isolation: isolate;
   background:
-    radial-gradient(ellipse 54% 112% at 100% 0%, rgba(142, 136, 129, 0.72) 0%, rgba(83, 80, 76, 0.48) 28%, rgba(38, 40, 38, 0.24) 56%, transparent 78%),
-    linear-gradient(90deg, #000000 0%, #030403 42%, #0b0e0c 70%, #191c1a 100%) !important;
+    radial-gradient(
+      ellipse 62% 118% at 100% 18%,
+      rgba(38, 123, 60, 0.3) 0%,
+      rgba(20, 78, 39, 0.22) 34%,
+      rgba(8, 38, 20, 0.14) 58%,
+      transparent 80%
+    ),
+    linear-gradient(
+      90deg,
+      #000000 0%,
+      #010603 38%,
+      #041108 66%,
+      #0a2111 100%
+    ) !important;
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id] > .guide-scene:not(.guide-scene--token-station)::before {
@@ -416,8 +428,20 @@
   min-height: clamp(460px, 50vw, 560px) !important;
   overflow: hidden;
   background:
-    radial-gradient(ellipse 54% 112% at 100% 0%, rgba(142, 136, 129, 0.72) 0%, rgba(83, 80, 76, 0.48) 28%, rgba(38, 40, 38, 0.24) 56%, transparent 78%),
-    linear-gradient(90deg, #000000 0%, #030403 42%, #0b0e0c 70%, #191c1a 100%) !important;
+    radial-gradient(
+      ellipse 62% 118% at 100% 18%,
+      rgba(38, 123, 60, 0.3) 0%,
+      rgba(20, 78, 39, 0.22) 34%,
+      rgba(8, 38, 20, 0.14) 58%,
+      transparent 80%
+    ),
+    linear-gradient(
+      90deg,
+      #000000 0%,
+      #010603 38%,
+      #041108 66%,
+      #0a2111 100%
+    ) !important;
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene.guide-scene--token-station::before {
