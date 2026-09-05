@@ -630,13 +630,13 @@
             },
             {
               opacity: 1,
-              transform: "translate3d(-50%, -155%, 0) scale(1)",
-              offset: 0.28,
+              transform: "translate3d(-50%, -150%, 0) scale(1)",
+              offset: 0.22,
             },
             {
               opacity: 1,
               transform: "translate3d(-50%, -165%, 0) scale(1)",
-              offset: 0.68,
+              offset: 0.76,
             },
             {
               opacity: 0,
@@ -644,7 +644,7 @@
             },
           ],
           {
-            duration: 1250,
+            duration: 2400,
             easing: "cubic-bezier(0.22, 1, 0.36, 1)",
             fill: "both",
           }
@@ -656,12 +656,12 @@
       ).matches;
       if (!reduceTokenMotion) {
         const animationSteps = [
-          { delay: 3000, source: 0, active: [6, 3] },
-          { delay: 2000, source: 3, active: [6, 5] },
-          { delay: 2000, source: 6, active: [1, 5] },
-          { delay: 2000, source: 5, active: [1, 7] },
-          { delay: 2000, active: [0, 1, 2, 3, 4, 5, 6, 7] },
-          { delay: 2500, active: [0, 3] },
+          { delay: 4500, source: 0, active: [6, 3] },
+          { delay: 3400, source: 3, active: [6, 5] },
+          { delay: 3400, source: 6, active: [1, 5] },
+          { delay: 3400, source: 5, active: [1, 7] },
+          { delay: 3400, active: [0, 1, 2, 3, 4, 5, 6, 7] },
+          { delay: 4500, active: [0, 3] },
         ];
         let animationStep = 0;
 
