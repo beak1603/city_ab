@@ -644,7 +644,7 @@
   background-size: 100% 100% !important;
   background-repeat: no-repeat !important;
   mix-blend-mode: screen;
-  filter: contrast(3.8) brightness(0.9) saturate(1.25) !important;
+  filter: none !important;
   -webkit-mask-image: radial-gradient(
     ellipse 10.5% 25.5% at 67.4% 58%,
     #000 0%,
