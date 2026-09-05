@@ -796,32 +796,32 @@
         alphaFloor: 26,
       },
       "3. 인첸트": {
-        src: "./scene-enchant-v4.png",
+        src: "./scene-enchant-transparent-v1.png",
         bounds: [0.5, 0.81, 0.16, 0.99],
         focus: [0.65, 0.67, 0.17, 0.44],
+        precut: true,
         anchorX: 0.65,
         colorFloor: 10,
-        colorSolid: 16,
+        colorSolid: 22,
         brightnessFloor: 125,
-        brightnessSolid: 140,
+        brightnessSolid: 155,
         contrastFloor: 7,
         contrastWeight: 0,
         alphaFloor: 26,
-        opaqueBodyY: 0.76,
       },
       "4. 최종 준비": {
-        src: "./scene-final-ready-v7.png",
+        src: "./scene-final-ready-transparent-v1.png",
         bounds: [0.55, 0.86, 0.15, 0.995],
         focus: [0.69, 0.69, 0.14, 0.44],
+        precut: true,
         anchorX: 0.69,
         colorFloor: 10,
-        colorSolid: 16,
+        colorSolid: 24,
         brightnessFloor: 110,
-        brightnessSolid: 120,
+        brightnessSolid: 135,
         contrastFloor: 7,
         contrastWeight: 0,
         alphaFloor: 30,
-        opaqueBodyY: 0.82,
       },
       "1. 자기장": {
         src: "./scene-magnetic-v5.png",
@@ -876,6 +876,7 @@
         iconCanvas.width = width;
         iconCanvas.height = height;
         context.drawImage(iconSource, 0, 0);
+        if (isolatedIcon.precut) return;
 
         const softenedCanvas = document.createElement("canvas");
         softenedCanvas.width = width;
@@ -969,17 +970,12 @@
           const solidPixel =
             chroma >= isolatedIcon.colorSolid ||
             brightness >= isolatedIcon.brightnessSolid;
-          const opaqueBodyPixel =
-            typeof isolatedIcon.opaqueBodyY === "number" &&
-            yRatio <= isolatedIcon.opaqueBodyY &&
-            solidPixel;
-          const rawAlpha = opaqueBodyPixel
-            ? 255
-            : (solidPixel
-                ? 255
-                : Math.max(colorAlpha, brightAlpha, contrastAlpha)) *
-              edgeFeather *
-              focusFeather;
+          const rawAlpha =
+            (solidPixel
+              ? 255
+              : Math.max(colorAlpha, brightAlpha, contrastAlpha)) *
+            edgeFeather *
+            focusFeather;
           const cleanedAlpha =
             isolatedIcon.alphaFloor > 0
               ? Math.max(
