@@ -1268,7 +1268,7 @@
 }
 .site-header .brand__text strong {
   display: block;
-  width: clamp(144px, 18vw, 216px);
+  width: clamp(120px, 15vw, 180px);
   height: auto;
   aspect-ratio: 2048 / 682;
   padding: 0;
