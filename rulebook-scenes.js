@@ -876,7 +876,7 @@
         alphaFloor: 26,
       },
       "4. 최종 준비": {
-        src: "./scene-final-ready-transparent-v2.png",
+        src: "./scene-final-ready-3d-v1.png",
         bounds: [0.55, 0.86, 0.15, 0.995],
         focus: [0.69, 0.69, 0.14, 0.44],
         precut: true,
