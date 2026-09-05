@@ -154,13 +154,9 @@
   }
 }
 
-/* Visually align the focal icons without changing their scale or scene composition. */
-#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1)::before,
-#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3)::before {
-  background-position: calc(100% - clamp(13px, 1.9vw, 20px)) center !important;
-}
-
-#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(2)::before,
-#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(4)::before {
-  background-position: calc(100% + clamp(13px, 1.9vw, 20px)) center !important;
+/* Align the visible pre-game item artwork to one shared vertical axis. */
+@media (min-width: 721px) {
+  #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3)::before {
+    background-position: calc(100% + 50px) center !important;
+  }
 }
