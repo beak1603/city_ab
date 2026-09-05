@@ -154,3 +154,9 @@
   }
 }
 
+/* Align the visible pre-game item artwork to one shared vertical axis. */
+@media (min-width: 721px) {
+  #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(3)::before {
+    background-position: calc(100% + 50px) center !important;
+  }
+}
