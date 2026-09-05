@@ -230,15 +230,16 @@
 }
 
 #guide .support-ability__stage {
-  display: grid;
+  display: flex !important;
   width: 100%;
-  max-width: 680px;
+  max-width: 760px;
   min-width: 0;
   margin-left: auto;
-  grid-template-columns: 58px minmax(150px, 230px) 58px;
-  align-items: center;
+  flex-direction: row !important;
+  align-items: center !important;
   justify-content: space-between;
   gap: clamp(24px, 4vw, 72px);
+  transform: translateX(clamp(24px, 4vw, 72px));
 }
 
 #guide .support-ability__arrow {
@@ -248,10 +249,12 @@
   padding: 0;
   align-items: center;
   justify-content: center;
-  border: 0;
-  border-radius: 0;
+  border: 0 !important;
+  border-radius: 0 !important;
   color: rgba(225, 255, 204, 0.78);
-  background: transparent;
+  background: transparent !important;
+  box-shadow: none !important;
+  appearance: none;
   font-size: 48px;
   font-weight: 300;
   line-height: 1;
@@ -330,9 +333,9 @@
   #guide .support-ability__stage {
     max-width: 100%;
     margin: 0 auto;
-    grid-template-columns: 44px minmax(112px, 150px) 44px;
     justify-content: center;
     gap: clamp(18px, 7vw, 34px);
+    transform: none;
   }
 
   #guide .support-ability__arrow {
