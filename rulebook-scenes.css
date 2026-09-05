@@ -662,3 +662,25 @@
     transparent 100%
   ) !important;
 }
+
+
+/* Render the token-system icon with source RGB intact and alpha-only background removal. */
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] > .guide-scene.guide-scene--token-system::before {
+  display: none !important;
+  content: none !important;
+}
+
+#guide .token-system__icon-layer {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  display: block;
+  width: auto;
+  height: 100%;
+  pointer-events: none;
+  background: transparent;
+  border: 0;
+  filter: none;
+  mix-blend-mode: normal;
+}
