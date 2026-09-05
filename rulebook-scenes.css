@@ -1224,3 +1224,14 @@
   letter-spacing: .02em;
   -webkit-text-stroke-width: .02em;
 }
+
+/* Keep each revival rule on one line on desktop, matching the token-shop details. */
+#guide .guide-scene--revival .guide-scene__description {
+  max-width: 100%;
+}
+@media (min-width: 1101px) {
+  #guide .guide-scene--revival .guide-scene__description {
+    white-space: pre;
+    overflow-wrap: normal;
+  }
+}
