@@ -768,6 +768,111 @@
       section.appendChild(iconCanvas);
     }
 
+    const isolatedSceneIcons = {
+      "1. 준비": {
+        src: "./scene-preparation-v4.png",
+        bounds: [0.6, 0.84, 0.3, 0.9],
+        brightnessFloor: 122,
+      },
+      "2. 능력 추첨": {
+        src: "./scene-ability-draw-v4.png",
+        bounds: [0.6, 0.82, 0.25, 0.9],
+        brightnessFloor: 118,
+      },
+      "3. 인첸트": {
+        src: "./scene-enchant-v4.png",
+        bounds: [0.54, 0.76, 0.25, 0.93],
+        brightnessFloor: 110,
+      },
+      "4. 최종 준비": {
+        src: "./scene-final-ready-v7.png",
+        bounds: [0.6, 0.82, 0.24, 0.92],
+        brightnessFloor: 112,
+      },
+      "1. 자기장": {
+        src: "./scene-magnetic-v5.png",
+        bounds: [0.53, 0.79, 0.24, 0.93],
+        brightnessFloor: 112,
+      },
+      "2. 필드상자": {
+        src: "./scene-field-box-v10.png",
+        bounds: [0.6, 0.9, 0.28, 0.94],
+        brightnessFloor: 108,
+      },
+    };
+    const isolatedIcon = isolatedSceneIcons[scene.title];
+
+    if (isolatedIcon) {
+      section.classList.add("guide-scene--isolated-icon");
+
+      const iconCanvas = document.createElement("canvas");
+      iconCanvas.className = "guide-scene__isolated-icon";
+      iconCanvas.setAttribute("aria-hidden", "true");
+
+      const iconSource = new Image();
+      iconSource.decoding = "async";
+      iconSource.onload = function () {
+        const width = iconSource.naturalWidth;
+        const height = iconSource.naturalHeight;
+        const context = iconCanvas.getContext("2d", {
+          willReadFrequently: true,
+        });
+        if (!context || !width || !height) return;
+
+        iconCanvas.width = width;
+        iconCanvas.height = height;
+        context.drawImage(iconSource, 0, 0);
+
+        const imageData = context.getImageData(0, 0, width, height);
+        const pixels = imageData.data;
+        const bounds = isolatedIcon.bounds;
+
+        for (let offset = 0; offset < pixels.length; offset += 4) {
+          const red = pixels[offset];
+          const green = pixels[offset + 1];
+          const blue = pixels[offset + 2];
+          const pixelIndex = offset / 4;
+          const xRatio = (pixelIndex % width) / width;
+          const yRatio = Math.floor(pixelIndex / width) / height;
+          const insideBounds =
+            xRatio > bounds[0] &&
+            xRatio < bounds[1] &&
+            yRatio > bounds[2] &&
+            yRatio < bounds[3];
+
+          if (!insideBounds) {
+            pixels[offset + 3] = 0;
+            continue;
+          }
+
+          const highest = Math.max(red, green, blue);
+          const lowest = Math.min(red, green, blue);
+          const chroma = highest - lowest;
+          const brightness = (red + green + blue) / 3;
+          const colorAlpha = Math.max(
+            0,
+            Math.min(255, (chroma - 5) * 12)
+          );
+          const brightAlpha = Math.max(
+            0,
+            Math.min(
+              255,
+              (brightness - isolatedIcon.brightnessFloor) * 7
+            )
+          );
+
+          pixels[offset + 3] = Math.min(
+            pixels[offset + 3],
+            Math.round(Math.max(colorAlpha, brightAlpha))
+          );
+        }
+
+        context.putImageData(imageData, 0, 0);
+      };
+      iconSource.src = isolatedIcon.src;
+      section.appendChild(iconCanvas);
+    }
+
     const title = document.createElement("h3");
     title.textContent = scene.title;
     content.appendChild(title);
