@@ -1128,3 +1128,8 @@
     max-width: 90%;
   }
 }
+
+/* Center the emerald slightly lower without changing other scene artwork. */
+#guide .guide-scene--token-system .token-system__icon-layer {
+  margin-top: 10px;
+}

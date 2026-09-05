@@ -1050,8 +1050,27 @@
           );
         }
 
+// Measure the existing artwork first so softer floor edges do not resize the emerald.
         context.putImageData(imageData, 0, 0);
         balanceSceneArtwork(iconCanvas, iconCanvas);
+        const smoothstep = function (from, to, value) {
+          const t = Math.max(0, Math.min(1, (value - from) / (to - from)));
+          return t * t * (3 - 2 * t);
+        };
+        for (let offset = 0; offset < pixels.length; offset += 4) {
+          const x = ((offset / 4) % width) / width;
+          const y = Math.floor(offset / 4 / width) / height;
+          // Keep every emerald pixel intact; fade only the surrounding floor.
+          const belowIcon = smoothstep(0.795, 0.815, y);
+          const outsideIcon = smoothstep(0.047, 0.08, Math.abs(x - 0.704));
+          const floorOnly = Math.max(belowIcon, outsideIcon * smoothstep(0.73, 0.79, y));
+          const sideFade = 1 - smoothstep(0.033, 0.091, Math.abs(x - 0.704));
+          const endFade = 1 - smoothstep(0.82, 0.995, y);
+          const floorOpacity = sideFade * endFade * 0.78;
+          pixels[offset + 3] = Math.round(pixels[offset + 3] * (1 - floorOnly + floorOnly * floorOpacity));
+        }
+        context.putImageData(imageData, 0, 0);
+
       };
       iconSource.src = "./scene-token-system-v10.png";
       section.appendChild(iconCanvas);
