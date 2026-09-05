@@ -406,6 +406,72 @@
     }
   }
 
+
+  // Keep the source cubes intact and rebuild only their floor treatment.
+  // Coordinates refer to the original 2048 x 768 field-box artwork.
+  function drawGroundedFieldBoxes(context, source, width, height) {
+    const boxes = [
+      { outline: [[1298,414],[1398,395],[1463,419],[1463,535],[1357,562],[1299,533]],
+        base: [[1299,532],[1357,562],[1463,535],[1403,508]], floor: 562 },
+      { outline: [[1554,418],[1620,395],[1718,414],[1715,541],[1655,564],[1554,536]],
+        base: [[1554,535],[1655,564],[1715,541],[1620,514]], floor: 564 },
+      { outline: [[1411,486],[1494,455],[1594,478],[1592,611],[1521,645],[1413,618]],
+        base: [[1413,617],[1521,645],[1592,611],[1494,582]], floor: 645 },
+    ];
+    const scaleX = width / 2048;
+    const scaleY = height / 768;
+    const trace = function (target, points) {
+      target.beginPath();
+      points.forEach(function (point, index) {
+        if (index === 0) target.moveTo(point[0] * scaleX, point[1] * scaleY);
+        else target.lineTo(point[0] * scaleX, point[1] * scaleY);
+      });
+      target.closePath();
+    };
+    const cutouts = boxes.map(function (box) {
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      const target = canvas.getContext("2d");
+      if (!target) return null;
+      target.save();
+      trace(target, box.outline);
+      target.clip();
+      target.drawImage(source, 0, 0, width, height);
+      target.restore();
+      return canvas;
+    });
+
+    // A small amount of reflected color hugs each base without a mirrored streak.
+    const bounceColors = ["rgba(215,225,232,0.09)", "rgba(148,34,221,0.13)", "rgba(0,143,201,0.13)"];
+    boxes.forEach(function (box, index) {
+      context.save();
+      context.filter = "blur(" + (4 * scaleX) + "px)";
+      context.strokeStyle = bounceColors[index];
+      context.lineWidth = 7 * scaleX;
+      trace(context, box.base);
+      context.stroke();
+      context.restore();
+    });
+
+    // Contact shadows follow the actual base perspective, not a floating oval.
+    boxes.forEach(function (box) {
+      context.save();
+      context.filter = "blur(" + (7 * scaleX) + "px)";
+      context.fillStyle = "rgba(0,0,0,0.46)";
+      trace(context, box.base);
+      context.fill();
+      context.filter = "blur(" + (2 * scaleX) + "px)";
+      context.fillStyle = "rgba(0,0,0,0.62)";
+      trace(context, box.base);
+      context.fill();
+      context.restore();
+    });
+    cutouts.forEach(function (canvas) {
+      if (canvas) context.drawImage(canvas, 0, 0);
+    });
+  }
+
   function createScene(scene, index) {
     const section = document.createElement("section");
     section.className = "guide-scene";
@@ -1007,6 +1073,7 @@
       },
       "2. 필드상자": {
         src: "./scene-field-box-v10.png",
+        groundedFieldBoxes: true,
         bounds: [0.55, 0.9, 0.18, 0.995],
         focus: [0.74, 0.7, 0.18, 0.42],
         anchorX: 0.74,
@@ -1060,6 +1127,11 @@
 
         iconCanvas.width = width;
         iconCanvas.height = height;
+        if (isolatedIcon.groundedFieldBoxes) {
+          drawGroundedFieldBoxes(context, iconSource, width, height);
+          balanceSceneArtwork(iconCanvas, iconCanvas);
+          return;
+        }
         if (isolatedIcon.groundedSword) {
           drawGroundedSword(context, iconSource, width, height);
           balanceSceneArtwork(iconCanvas, iconCanvas);
