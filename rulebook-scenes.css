@@ -222,6 +222,7 @@
   min-height: clamp(300px, 42vw, 420px);
   margin-right: calc(50% - 50vw);
   margin-left: calc(50% - 50vw);
+  padding-block: clamp(28px, 5vw, 64px);
   padding-right: clamp(34px, 5vw, 96px);
   padding-left: max(24px, calc((100vw - var(--max-width)) / 2 + 64px));
   grid-template-columns: minmax(0, 0.86fr) minmax(420px, 1.14fr);
@@ -233,7 +234,7 @@
 
 #guide .support-ability__copy {
   min-width: 0;
-  align-self: start;
+  align-self: center;
 }
 
 #guide .support-ability__heading {
@@ -275,11 +276,17 @@
   display: block;
   grid-area: 1 / 1;
   min-width: 0;
+  opacity: 0;
   visibility: hidden;
 }
 
-#guide .support-ability__description span[data-active="true"] {
+#guide .support-ability__description span[data-active="true"],
+#guide .support-ability__description span[data-leaving="true"] {
   visibility: visible;
+}
+
+#guide .support-ability__description span[data-active="true"] {
+  opacity: 1;
 }
 
 #guide .support-ability__stage {
@@ -419,7 +426,7 @@
   #guide .guide-scene--support-abilities .guide-scene__content {
     width: 100%;
     margin: 0;
-    padding: 20px 22px 28px;
+    padding: 28px 22px;
     grid-template-columns: minmax(0, 1fr);
     align-content: center;
     gap: 26px;

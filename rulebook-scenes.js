@@ -592,6 +592,8 @@
           scene.abilities.length;
         const outgoing = cards[currentAbility];
         const incoming = cards[nextAbility];
+        const outgoingText = abilityTexts[currentAbility];
+        const incomingText = abilityTexts[nextAbility];
         const reduceMotion = window.matchMedia(
           "(prefers-reduced-motion: reduce)"
         ).matches;
@@ -604,8 +606,11 @@
 
         isAnimatingAbility = true;
         outgoing.setAttribute("data-leaving", "true");
+        outgoingText.setAttribute("data-leaving", "true");
         outgoing.style.willChange = "transform, opacity";
         incoming.style.willChange = "transform, opacity";
+        outgoingText.style.willChange = "transform, opacity";
+        incomingText.style.willChange = "transform, opacity";
         currentAbility = nextAbility;
         renderAbility();
 
@@ -619,8 +624,9 @@
         const animations = [];
         const finishTransition = function () {
           outgoing.removeAttribute("data-leaving");
+          outgoingText.removeAttribute("data-leaving");
           animations.forEach(function (animation) { animation.cancel(); });
-          [outgoing, incoming].forEach(function (card) {
+          [outgoing, incoming, outgoingText, incomingText].forEach(function (card) {
             card.style.removeProperty("will-change");
           });
           isAnimatingAbility = false;
@@ -639,6 +645,22 @@
             [
               { opacity: 0, transform: "translate3d(" + (direction * 65) + "%, 0, 0) scale(0.92)" },
               { opacity: 1, transform: "translate3d(0, 0, 0) scale(1)" },
+            ],
+            options
+          ));
+          // Crossfade the descriptions on the same timeline as the icons,
+          // using a smaller distance to keep the text easy to follow.
+          animations.push(outgoingText.animate(
+            [
+              { opacity: 1, transform: "translate3d(0, 0, 0)" },
+              { opacity: 0, transform: "translate3d(" + (-direction * 24) + "px, 0, 0)" },
+            ],
+            options
+          ));
+          animations.push(incomingText.animate(
+            [
+              { opacity: 0, transform: "translate3d(" + (direction * 24) + "px, 0, 0)" },
+              { opacity: 1, transform: "translate3d(0, 0, 0)" },
             ],
             options
           ));
