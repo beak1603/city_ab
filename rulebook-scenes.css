@@ -441,8 +441,8 @@
   z-index: 3;
   opacity: 0;
   color: #ffffff;
-  font-size: clamp(10px, 0.7vw, 12px);
-  font-weight: 300;
+  font-size: 16px;
+  font-weight: 700;
   line-height: 1;
   letter-spacing: -0.01em;
   white-space: nowrap;
@@ -464,13 +464,27 @@
   stroke-width: 3;
   filter: url("#token-station-glow");
   transition:
-    fill 1600ms cubic-bezier(0.22, 1, 0.36, 1),
-    stroke 1600ms cubic-bezier(0.22, 1, 0.36, 1);
+    fill 900ms cubic-bezier(0.22, 1, 0.36, 1),
+    stroke 900ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 #guide .token-station__node--active {
   fill: #ffe11a;
   stroke: #ffe11a;
+}
+
+#guide .token-station__traveler {
+  opacity: 0;
+  fill: #ffe11a;
+  stroke: #ffe11a;
+  stroke-width: 3;
+  filter: url("#token-station-glow");
+  pointer-events: none;
+  transition: opacity 260ms ease;
+}
+
+#guide .token-station__traveler.is-moving {
+  opacity: 1;
 }
 
 @media (max-width: 720px) {
