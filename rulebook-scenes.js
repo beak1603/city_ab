@@ -902,7 +902,7 @@
         alphaFloor: 26,
       },
       "3. 인첸트": {
-        src: "./scene-enchant-supplied-shadow-v3.png",
+        src: "./scene-enchant-supplied-shadow-v4.png",
         directImage: true,
         bounds: [0.5, 0.81, 0.16, 0.99],
         focus: [0.65, 0.67, 0.17, 0.44],
