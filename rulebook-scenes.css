@@ -233,6 +233,7 @@
 
 #guide .support-ability__copy {
   min-width: 0;
+  align-self: start;
 }
 
 #guide .support-ability__heading {
@@ -254,15 +255,12 @@
 }
 
 #guide .support-ability__description {
-  display: flex;
-  max-width: 660px;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 4px 7px;
-  margin: 18px 0 0;
-  color: rgba(244, 255, 240, 0.72);
-  font-size: clamp(14px, 1.35vw, 17px);
-  line-height: 1.65;
+  display: grid;
+  max-width: 580px;
+  margin: 24px 0 0;
+  color: rgba(244, 255, 240, 0.82);
+  font-size: clamp(16px, 1.4vw, 18px);
+  line-height: 1.7;
   letter-spacing: -0.02em;
   word-break: keep-all;
 }
@@ -274,7 +272,14 @@
 }
 
 #guide .support-ability__description span {
-  display: inline;
+  display: block;
+  grid-area: 1 / 1;
+  min-width: 0;
+  visibility: hidden;
+}
+
+#guide .support-ability__description span[data-active="true"] {
+  visibility: visible;
 }
 
 #guide .support-ability__stage {
@@ -414,7 +419,7 @@
   #guide .guide-scene--support-abilities .guide-scene__content {
     width: 100%;
     margin: 0;
-    padding: 28px 22px;
+    padding: 20px 22px 28px;
     grid-template-columns: minmax(0, 1fr);
     align-content: center;
     gap: 26px;
@@ -422,9 +427,9 @@
 
   #guide .support-ability__description {
     max-width: 100%;
-    margin-top: 13px;
-    font-size: 13px;
-    line-height: 1.55;
+    margin-top: 18px;
+    font-size: 16px;
+    line-height: 1.7;
   }
 
   #guide .support-ability__stage {

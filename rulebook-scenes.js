@@ -78,16 +78,16 @@
         {
           title: "보조 능력 소개",
           abilities: [
-            { name: "고속추출기", image: "./support-high-speed-extractor.webp" },
-            { name: "광역탐색기", image: "./support-wide-area-scanner.webp" },
-            { name: "돌풍질주", image: "./support-gust-dash.webp" },
-            { name: "비상가속", image: "./support-emergency-boost.webp" },
-            { name: "상승기류", image: "./support-updraft.webp" },
-            { name: "생명포식", image: "./support-life-devour.webp" },
-            { name: "생체분석기", image: "./support-bio-analyzer.webp" },
-            { name: "위치투영기", image: "./support-position-projector.webp" },
-            { name: "정화장막", image: "./support-purifying-barrier.webp" },
-            { name: "현상금증폭기", image: "./support-bounty-amplifier.webp" },
+            { name: "고속 추출기", image: "./support-high-speed-extractor.webp", description: "토큰 생성소 점령시간이 절반으로 줄어듭니다." },
+            { name: "광역 탐색기", image: "./support-wide-area-scanner.webp", description: "필드상자 감지 범위를 2배 증가시킵니다." },
+            { name: "돌풍 질주", image: "./support-gust-dash.webp", description: "바라보는 수평 방향으로 빠르게 돌진합니다." },
+            { name: "비상 가속", image: "./support-emergency-boost.webp", description: "피해를 받고 체력이 일정 체력 이하가 되면 일정 시간 동안 빠른 이동 속도를 얻습니다." },
+            { name: "상승기류", image: "./support-updraft.webp", description: "사용 시 높게 뛰어오르며 그 순간만 낙하 피해를 무효화합니다." },
+            { name: "생명 포식", image: "./support-life-devour.webp", description: "다른 플레이어를 처치하면 일시적으로 재생효과를 얻습니다." },
+            { name: "생체 분석기", image: "./support-bio-analyzer.webp", description: "다른 플레이어들의 남은 체력을 확인할 수 있습니다." },
+            { name: "위치 투영기", image: "./support-position-projector.webp", description: "사용 시 주변 플레이어 위치에 잔상을 남깁니다." },
+            { name: "정화 장막", image: "./support-purifying-barrier.webp", description: "사용 시 본인에게 적용되는 해로운 효과들을 일시적으로 막습니다." },
+            { name: "현상금 증폭기", image: "./support-bounty-amplifier.webp", description: "플레이어 처치 보상이 토큰 2개에서 3개로 증가합니다." },
           ],
         },
       ],
@@ -437,8 +437,14 @@
       const description = document.createElement("p");
       description.className = "support-ability__description";
 
-      const abilityText = document.createElement("span");
-      description.appendChild(abilityText);
+      // Overlap the descriptions in one grid cell so the longest text reserves
+      // enough space at every viewport width without moving the title or icons.
+      const abilityTexts = scene.abilities.map(function (ability) {
+        const text = document.createElement("span");
+        text.textContent = ability.description || "";
+        description.appendChild(text);
+        return text;
+      });
 
       copy.appendChild(heading);
       copy.appendChild(description);
@@ -502,7 +508,11 @@
       const renderAbility = function () {
         const ability = scene.abilities[currentAbility];
         featuredName.textContent = ability.name;
-        abilityText.textContent = ability.description || "";
+        abilityTexts.forEach(function (text, textIndex) {
+          const active = textIndex === currentAbility;
+          text.setAttribute("data-active", String(active));
+          text.setAttribute("aria-hidden", String(!active));
+        });
         description.hidden = !ability.description;
         cards.forEach(function (card, cardIndex) {
           const active = cardIndex === currentAbility;
