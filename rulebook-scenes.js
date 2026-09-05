@@ -78,16 +78,16 @@
         {
           title: "보조 능력 소개",
           abilities: [
-            {
-              name: "보조 능력 01",
-              description: "보조 능력에 대한 설명이 이곳에 표시됩니다.",
-              icon: "?",
-            },
-            {
-              name: "보조 능력 02",
-              description: "두 번째 보조 능력에 대한 임시 설명입니다.",
-              icon: "!",
-            },
+            { name: "고속추출기", image: "./support-high-speed-extractor.webp" },
+            { name: "광역탐색기", image: "./support-wide-area-scanner.webp" },
+            { name: "돌풍질주", image: "./support-gust-dash.webp" },
+            { name: "비상가속", image: "./support-emergency-boost.webp" },
+            { name: "상승기류", image: "./support-updraft.webp" },
+            { name: "생명포식", image: "./support-life-devour.webp" },
+            { name: "생체분석기", image: "./support-bio-analyzer.webp" },
+            { name: "위치투영기", image: "./support-position-projector.webp" },
+            { name: "정화장막", image: "./support-purifying-barrier.webp" },
+            { name: "현상금증폭기", image: "./support-bounty-amplifier.webp" },
           ],
         },
       ],
@@ -395,6 +395,9 @@
       const stage = document.createElement("div");
       stage.className = "support-ability__stage";
       stage.setAttribute("aria-live", "polite");
+      stage.tabIndex = 0;
+      stage.setAttribute("role", "region");
+      stage.setAttribute("aria-roledescription", "carousel");
 
       const card = document.createElement("article");
       card.className = "support-ability__card";
@@ -402,6 +405,18 @@
       const icon = document.createElement("span");
       icon.className = "support-ability__icon";
       icon.setAttribute("aria-hidden", "true");
+
+      const abilityImages = scene.abilities.map(function (ability) {
+        const image = document.createElement("img");
+        image.className = "support-ability__image";
+        image.src = ability.image;
+        image.alt = "";
+        image.draggable = false;
+        image.decoding = "async";
+        image.width = 900;
+        image.height = 900;
+        return image;
+      });
 
       const count = document.createElement("span");
       count.className = "support-ability__count";
@@ -419,13 +434,13 @@
       const renderAbility = function () {
         const ability = scene.abilities[currentAbility];
         abilityName.textContent = ability.name;
-        abilityText.textContent = ability.description;
-        icon.textContent = ability.icon || "?";
+        abilityText.textContent = ability.description || "";
+        icon.replaceChildren(abilityImages[currentAbility]);
         count.textContent =
           String(currentAbility + 1).padStart(2, "0") +
           " / " +
           String(scene.abilities.length).padStart(2, "0");
-        stage.setAttribute("aria-label", ability.name + ": " + ability.description);
+        stage.setAttribute("aria-label", ability.name + ", " + (currentAbility + 1) + " / " + scene.abilities.length);
         const controlsDisabled =
           scene.abilities.length <= 1 || isAnimatingAbility;
         previous.disabled = controlsDisabled;
@@ -558,6 +573,29 @@
       next.addEventListener("click", function () {
         moveAbility(1);
       });
+
+      stage.addEventListener("keydown", function (event) {
+        if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+        event.preventDefault();
+        moveAbility(event.key === "ArrowLeft" ? -1 : 1);
+      });
+
+      let swipeStart = null;
+      stage.addEventListener("touchstart", function (event) {
+        swipeStart = event.touches.length === 1
+          ? { x: event.touches[0].clientX, y: event.touches[0].clientY }
+          : null;
+      }, { passive: true });
+      stage.addEventListener("touchend", function (event) {
+        if (!swipeStart || !event.changedTouches.length) return;
+        const deltaX = event.changedTouches[0].clientX - swipeStart.x;
+        const deltaY = event.changedTouches[0].clientY - swipeStart.y;
+        swipeStart = null;
+        if (Math.abs(deltaX) >= 40 && Math.abs(deltaX) > Math.abs(deltaY) * 1.3) {
+          moveAbility(deltaX < 0 ? 1 : -1);
+        }
+      }, { passive: true });
+      stage.addEventListener("touchcancel", function () { swipeStart = null; }, { passive: true });
 
       renderAbility();
       content.appendChild(copy);
