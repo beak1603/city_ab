@@ -393,6 +393,8 @@
       stage.appendChild(next);
 
       let currentAbility = 0;
+      let isAnimatingAbility = false;
+
       const renderAbility = function () {
         const ability = scene.abilities[currentAbility];
         abilityName.textContent = ability.name;
@@ -403,20 +405,89 @@
           " / " +
           String(scene.abilities.length).padStart(2, "0");
         stage.setAttribute("aria-label", ability.name + ": " + ability.description);
-        const hasMultiple = scene.abilities.length > 1;
-        previous.disabled = !hasMultiple;
-        next.disabled = !hasMultiple;
+        const controlsDisabled =
+          scene.abilities.length <= 1 || isAnimatingAbility;
+        previous.disabled = controlsDisabled;
+        next.disabled = controlsDisabled;
+      };
+
+      const moveAbility = function (direction) {
+        if (isAnimatingAbility || scene.abilities.length <= 1) return;
+
+        const nextAbility =
+          (currentAbility + direction + scene.abilities.length) %
+          scene.abilities.length;
+        const reduceMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+        if (reduceMotion || typeof card.animate !== "function") {
+          currentAbility = nextAbility;
+          renderAbility();
+          return;
+        }
+
+        isAnimatingAbility = true;
+        renderAbility();
+
+        const exitDistance = direction > 0 ? -62 : 62;
+        const enterDistance = -exitDistance;
+        const exitAnimation = card.animate(
+          [
+            { opacity: 1, transform: "translateX(0) scale(1)" },
+            {
+              opacity: 0,
+              transform: "translateX(" + exitDistance + "px) scale(0.92)",
+            },
+          ],
+          {
+            duration: 170,
+            easing: "cubic-bezier(0.4, 0, 1, 1)",
+            fill: "forwards",
+          }
+        );
+
+        exitAnimation.finished
+          .then(function () {
+            exitAnimation.cancel();
+            currentAbility = nextAbility;
+            renderAbility();
+
+            const enterAnimation = card.animate(
+              [
+                {
+                  opacity: 0,
+                  transform: "translateX(" + enterDistance + "px) scale(0.92)",
+                },
+                { opacity: 1, transform: "translateX(0) scale(1)" },
+              ],
+              {
+                duration: 280,
+                easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+                fill: "forwards",
+              }
+            );
+
+            return enterAnimation.finished.then(function () {
+              enterAnimation.cancel();
+            });
+          })
+          .then(function () {
+            isAnimatingAbility = false;
+            renderAbility();
+          })
+          .catch(function () {
+            isAnimatingAbility = false;
+            renderAbility();
+          });
       };
 
       previous.addEventListener("click", function () {
-        currentAbility =
-          (currentAbility - 1 + scene.abilities.length) % scene.abilities.length;
-        renderAbility();
+        moveAbility(-1);
       });
 
       next.addEventListener("click", function () {
-        currentAbility = (currentAbility + 1) % scene.abilities.length;
-        renderAbility();
+        moveAbility(1);
       });
 
       renderAbility();
