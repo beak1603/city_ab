@@ -300,6 +300,24 @@
   }
 
   function keepLabelsCurrent() {
+    // Keep the launcher action present after React replaces the initial HTML.
+    const heroActions = document.querySelector(".hero__actions");
+    if (heroActions && !heroActions.querySelector(".launcher-download")) {
+      const download = document.createElement("a");
+      download.className = "primary-button launcher-download";
+      download.href = "https://drive.google.com/file/d/1X9WeHQPAHwNyIzLri-WAyy2JafIur5Op/view?usp=drivesdk";
+      const label = document.createElement("span");
+      label.textContent = "런쳐 다운로드";
+      const icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      icon.setAttribute("viewBox", "0 0 20 20");
+      icon.setAttribute("aria-hidden", "true");
+      const path = document.createElementNS(icon.namespaceURI, "path");
+      path.setAttribute("d", "M10 3v10M6 9l4 4 4-4M4 14v3h12v-3");
+      icon.appendChild(path);
+      download.append(label, icon);
+      heroActions.appendChild(download);
+    }
+
     getTabs().forEach(function (tab) {
       const config = guides[tab.id];
       if (config && tab.textContent.trim() !== config.label) {
