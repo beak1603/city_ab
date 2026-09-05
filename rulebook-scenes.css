@@ -15,7 +15,37 @@
 }
 
 #guide .guide-scene--revival .guide-scene__description {
-  max-width: 100%;
+  max-width: 60%;
+}
+
+#guide .revival__art {
+  position: absolute;
+  right: calc(clamp(16px, 3vw, 64px) + var(--guide-art-left-shift));
+  bottom: 0;
+  z-index: 2;
+  display: block;
+  width: auto;
+  height: 90%;
+  max-width: 36%;
+  object-fit: contain;
+  object-position: right bottom;
+  pointer-events: none;
+}
+
+@media (max-width: 720px) {
+  #guide .guide-scene--revival .guide-scene__content {
+    padding-bottom: 322px;
+  }
+
+  #guide .guide-scene--revival .guide-scene__description {
+    max-width: 100%;
+  }
+
+  #guide .revival__art {
+    right: 20px;
+    height: 300px;
+    max-width: calc(100% - 40px);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -74,7 +74,7 @@
         {
           title: "4. 부활시스템",
           description: "- 게임 시작 후 일정시간 동안은 처치당해도 부활이 가능합니다\n- 처치 당했을시 주능력, 기본템 및 보유하고 있던 토큰을 제외하고 모두 시체상자에 드랍합니다\n- 일정시간 이후 부활이 불가능하며 이때 처치당할 시 탈락 처리됩니다",
-          revival: true,
+          revival: "./revival-gravestone.png",
         },
       ],
     },
@@ -377,7 +377,17 @@
     section.className = "guide-scene";
     section.style.setProperty("--scene-index", String(index));
 
-    if (scene.revival) section.classList.add("guide-scene--revival");
+    if (scene.revival) {
+      section.classList.add("guide-scene--revival");
+      const artwork = document.createElement("img");
+      artwork.className = "revival__art";
+      artwork.src = scene.revival;
+      artwork.alt = "묘비 앞 땅에서 솟아오르는 플레이어의 손";
+      artwork.width = 1265;
+      artwork.height = 1244;
+      artwork.decoding = "async";
+      section.appendChild(artwork);
+    }
 
     if (scene.image) {
       const image = document.createElement("div");
