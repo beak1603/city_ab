@@ -96,6 +96,33 @@
   mask-image: none !important;
 }
 
+@media (min-width: 721px) and (max-width: 1800px) {
+  #guide .token-station__description {
+    font-size: 14px;
+  }
+
+  #guide .token-station__diagram {
+    right: clamp(24px, 3vw, 54px);
+    width: clamp(320px, 22vw, 380px);
+  }
+}
+
+@media (min-width: 721px) and (max-width: 1500px) {
+  #guide .token-station__copy {
+    width: min(46vw, 650px);
+  }
+
+  #guide .token-station__description {
+    max-width: 100%;
+    white-space: pre-line;
+  }
+
+  #guide .token-station__diagram {
+    right: clamp(20px, 2vw, 36px);
+    width: clamp(280px, 22vw, 330px);
+  }
+}
+
 @media (max-width: 720px) {
   #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1),
   #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(2),
