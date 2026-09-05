@@ -436,6 +436,23 @@
   background: transparent;
 }
 
+#guide .token-station__capture {
+  position: absolute;
+  z-index: 3;
+  opacity: 0;
+  color: #fff36a;
+  font-size: clamp(20px, 1.8vw, 30px);
+  font-weight: 850;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+  pointer-events: none;
+  text-shadow:
+    0 0 8px rgba(255, 224, 26, 0.92),
+    0 0 22px rgba(255, 215, 0, 0.56);
+  transform: translate3d(-50%, -155%, 0);
+}
+
 #guide .token-station__ring {
   fill: none;
   stroke: rgba(239, 250, 255, 0.94);
@@ -448,6 +465,9 @@
   stroke: #ffffff;
   stroke-width: 3;
   filter: url("#token-station-glow");
+  transition:
+    fill 620ms cubic-bezier(0.22, 1, 0.36, 1),
+    stroke 620ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 #guide .token-station__node--active {
