@@ -1199,10 +1199,28 @@
   font-weight: 400;
   font-display: swap;
 }
+/* Heavy stone-gray pixel letters with a crisp dark edge and block depth. */
 .site-header .brand__text strong,
 .hero #hero-title {
   font-family: "City Pixel", monospace;
-  font-weight: 400;
-  font-synthesis: none;
-  letter-spacing: 0;
+  font-weight: 900;
+  font-synthesis: weight;
+  letter-spacing: .035em;
+  color: #d9ddd4;
+  -webkit-text-fill-color: #d9ddd4;
+  -webkit-text-stroke: .025em #d9ddd4;
+  paint-order: stroke fill;
+  text-shadow:
+    -.045em -.045em 0 #171d15,
+     .045em -.045em 0 #171d15,
+    -.045em  .045em 0 #171d15,
+     .045em  .045em 0 #171d15,
+     .025em  .065em 0 #596052,
+     .045em  .09em 0 #454c3f,
+     .065em  .115em 0 #30382c,
+     .085em  .14em 0 #11170e;
+}
+.site-header .brand__text strong {
+  letter-spacing: .02em;
+  -webkit-text-stroke-width: .02em;
 }
