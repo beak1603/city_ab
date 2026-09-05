@@ -773,49 +773,61 @@
         src: "./scene-preparation-v4.png",
         bounds: [0.57, 0.86, 0.22, 0.985],
         focus: [0.71, 0.67, 0.15, 0.42],
-        brightnessFloor: 120,
+        colorFloor: 10,
+        brightnessFloor: 130,
         contrastFloor: 8,
         contrastWeight: 0,
+        alphaFloor: 26,
       },
       "2. 능력 추첨": {
         src: "./scene-ability-draw-v4.png",
         bounds: [0.57, 0.85, 0.18, 0.985],
         focus: [0.72, 0.67, 0.145, 0.42],
-        brightnessFloor: 116,
+        colorFloor: 10,
+        brightnessFloor: 130,
         contrastFloor: 8,
         contrastWeight: 0,
+        alphaFloor: 26,
       },
       "3. 인첸트": {
         src: "./scene-enchant-v4.png",
         bounds: [0.5, 0.81, 0.16, 0.99],
         focus: [0.65, 0.67, 0.17, 0.44],
-        brightnessFloor: 108,
+        colorFloor: 10,
+        brightnessFloor: 125,
         contrastFloor: 7,
         contrastWeight: 0,
+        alphaFloor: 26,
       },
       "4. 최종 준비": {
         src: "./scene-final-ready-v7.png",
         bounds: [0.55, 0.86, 0.15, 0.995],
-        focus: [0.71, 0.68, 0.17, 0.45],
-        brightnessFloor: 106,
+        focus: [0.69, 0.69, 0.14, 0.44],
+        colorFloor: 10,
+        brightnessFloor: 110,
         contrastFloor: 7,
-        contrastWeight: 1,
+        contrastWeight: 0,
+        alphaFloor: 30,
       },
       "1. 자기장": {
         src: "./scene-magnetic-v5.png",
         bounds: [0.48, 0.83, 0.14, 0.99],
         focus: [0.65, 0.67, 0.2, 0.43],
+        colorFloor: 2,
         brightnessFloor: 108,
         contrastFloor: 7,
         contrastWeight: 0,
+        alphaFloor: 0,
       },
       "2. 필드상자": {
         src: "./scene-field-box-v10.png",
         bounds: [0.55, 0.9, 0.18, 0.995],
-        focus: [0.74, 0.68, 0.2, 0.44],
-        brightnessFloor: 104,
+        focus: [0.74, 0.7, 0.18, 0.42],
+        colorFloor: 10,
+        brightnessFloor: 110,
         contrastFloor: 7,
-        contrastWeight: 0.65,
+        contrastWeight: 0,
+        alphaFloor: 30,
       },
     };
     const isolatedIcon = isolatedSceneIcons[scene.title];
@@ -893,7 +905,7 @@
             3;
           const colorAlpha = Math.max(
             0,
-            Math.min(255, (chroma - 2) * 14)
+            Math.min(255, (chroma - isolatedIcon.colorFloor) * 14)
           );
           const brightAlpha = Math.max(
             0,
@@ -930,13 +942,25 @@
             )
           );
 
+          const rawAlpha =
+            Math.max(colorAlpha, brightAlpha, contrastAlpha) *
+            edgeFeather *
+            focusFeather;
+          const cleanedAlpha =
+            isolatedIcon.alphaFloor > 0
+              ? Math.max(
+                  0,
+                  Math.min(
+                    255,
+                    (rawAlpha - isolatedIcon.alphaFloor) *
+                      (255 / (255 - isolatedIcon.alphaFloor))
+                  )
+                )
+              : rawAlpha;
+
           pixels[offset + 3] = Math.min(
             pixels[offset + 3],
-            Math.round(
-              Math.max(colorAlpha, brightAlpha, contrastAlpha) *
-                edgeFeather *
-                focusFeather
-            )
+            Math.round(cleanedAlpha)
           );
         }
 
