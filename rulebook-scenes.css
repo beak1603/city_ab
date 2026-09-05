@@ -365,9 +365,7 @@
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene--token-station {
   min-height: clamp(460px, 50vw, 560px) !important;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 76% 50%, rgba(58, 130, 86, 0.12), transparent 34%),
-    #030806 !important;
+  background: #000 !important;
 }
 
 #guide .guide-scene--token-station .guide-scene__shade {
@@ -379,20 +377,19 @@
   position: relative;
   top: auto;
   z-index: 2;
-  display: grid;
-  width: 100%;
-  max-width: var(--max-width);
+  display: block;
+  width: 100vw;
+  max-width: none;
   min-height: clamp(460px, 50vw, 560px);
-  margin: 0 auto;
-  padding: clamp(42px, 5vw, 72px) max(24px, 4vw);
-  grid-template-columns: minmax(0, 1.25fr) minmax(310px, 0.75fr);
-  align-items: center;
-  gap: clamp(36px, 6vw, 96px);
+  margin-right: calc(50% - 50vw);
+  margin-left: calc(50% - 50vw);
+  padding: clamp(42px, 5vw, 72px) clamp(48px, 3.2vw, 72px);
   transform: none;
   animation: none;
 }
 
 #guide .token-station__copy {
+  width: min(58vw, 820px);
   min-width: 0;
 }
 
@@ -408,9 +405,14 @@
 }
 
 #guide .token-station__diagram {
-  width: min(100%, 420px);
-  justify-self: end;
-  filter: drop-shadow(0 0 28px rgba(154, 255, 185, 0.08));
+  position: absolute;
+  top: 50%;
+  right: 12vw;
+  width: clamp(390px, 26vw, 480px);
+  background: transparent;
+  box-shadow: none;
+  filter: none;
+  transform: translateY(-50%);
 }
 
 #guide .token-station__diagram svg {
@@ -418,6 +420,7 @@
   width: 100%;
   height: auto;
   overflow: visible;
+  background: transparent;
 }
 
 #guide .token-station__ring {
@@ -428,15 +431,15 @@
 }
 
 #guide .token-station__node {
-  fill: url("#token-station-white");
+  fill: #ffffff;
   stroke: #ffffff;
-  stroke-width: 5;
+  stroke-width: 4;
   filter: url("#token-station-glow");
 }
 
 #guide .token-station__node--active {
-  fill: url("#token-station-yellow");
-  stroke: #fff15a;
+  fill: #ffe11a;
+  stroke: #ffe11a;
 }
 
 @media (max-width: 720px) {
@@ -446,9 +449,9 @@
   }
 
   #guide .guide-scene--token-station .guide-scene__content {
+    width: 100%;
+    margin: 0;
     padding: 34px 22px 42px;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 24px;
   }
 
   #guide .token-station__description {
@@ -457,8 +460,16 @@
     line-height: 1.7;
   }
 
+  #guide .token-station__copy {
+    width: 100%;
+  }
+
   #guide .token-station__diagram {
-    width: min(82vw, 330px);
-    justify-self: center;
+    position: relative;
+    top: auto;
+    right: auto;
+    width: min(86vw, 360px);
+    margin: 24px auto 0;
+    transform: none;
   }
 }
