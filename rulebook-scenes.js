@@ -571,17 +571,23 @@
         "<img class='token-station__art' src='./token-stations-orbit.png?v=1' alt='' loading='lazy' decoding='async'/>",
         "<svg class='token-station__overlay' viewBox='0 0 1448 1080' preserveAspectRatio='xMidYMid slice' role='presentation' focusable='false'>",
         "<defs>",
+        "<radialGradient id='token-station-soft-mask' cx='50%' cy='50%' r='50%'>",
+        "<stop offset='0%' stop-color='#fff'/>",
+        "<stop offset='52%' stop-color='#fff'/>",
+        "<stop offset='74%' stop-color='#fff' stop-opacity='0.82'/>",
+        "<stop offset='100%' stop-color='#000' stop-opacity='0'/>",
+        "</radialGradient>",
         "<mask id='token-station-active-mask' maskUnits='userSpaceOnUse' x='0' y='0' width='1448' height='1080'>",
         "<rect x='0' y='0' width='1448' height='1080' fill='#000'/>",
         "<g class='token-station__nodes'>",
-        "<circle class='token-station__node token-station__node--active' cx='724' cy='116' r='82' fill='#fff'/>",
-        "<circle class='token-station__node' cx='1028' cy='244' r='82' fill='#fff'/>",
-        "<circle class='token-station__node' cx='1144' cy='522' r='82' fill='#fff'/>",
-        "<circle class='token-station__node token-station__node--active' cx='1028' cy='792' r='82' fill='#fff'/>",
-        "<circle class='token-station__node' cx='724' cy='912' r='82' fill='#fff'/>",
-        "<circle class='token-station__node' cx='419' cy='792' r='82' fill='#fff'/>",
-        "<circle class='token-station__node' cx='303' cy='522' r='82' fill='#fff'/>",
-        "<circle class='token-station__node' cx='419' cy='244' r='82' fill='#fff'/>",
+        "<circle class='token-station__node token-station__node--active' cx='724' cy='116' r='128' fill='url(#token-station-soft-mask)'/>",
+        "<circle class='token-station__node' cx='1028' cy='244' r='128' fill='url(#token-station-soft-mask)'/>",
+        "<circle class='token-station__node' cx='1144' cy='522' r='128' fill='url(#token-station-soft-mask)'/>",
+        "<circle class='token-station__node token-station__node--active' cx='1028' cy='792' r='128' fill='url(#token-station-soft-mask)'/>",
+        "<circle class='token-station__node' cx='724' cy='912' r='128' fill='url(#token-station-soft-mask)'/>",
+        "<circle class='token-station__node' cx='419' cy='792' r='128' fill='url(#token-station-soft-mask)'/>",
+        "<circle class='token-station__node' cx='303' cy='522' r='128' fill='url(#token-station-soft-mask)'/>",
+        "<circle class='token-station__node' cx='419' cy='244' r='128' fill='url(#token-station-soft-mask)'/>",
         "</g>",
         "</mask>",
         "</defs>",
@@ -619,24 +625,24 @@
         captureLabel.style.top = (sourceY / 10.8).toFixed(3) + "%";
 
         let startTransform =
-          "translate3d(-50%, -190%, 0) scale(0.94)";
+          "translate3d(-50%, -270%, 0) scale(0.94)";
         let visibleTransform =
-          "translate3d(-50%, -250%, 0) scale(1)";
+          "translate3d(-50%, -330%, 0) scale(1)";
         let holdTransform =
-          "translate3d(-50%, -260%, 0) scale(1)";
+          "translate3d(-50%, -340%, 0) scale(1)";
         let exitTransform =
-          "translate3d(-50%, -290%, 0) scale(0.97)";
+          "translate3d(-50%, -390%, 0) scale(0.97)";
 
         if (sourceX > 724) {
-          startTransform = "translate3d(85%, -10%, 0) scale(0.96)";
-          visibleTransform = "translate3d(85%, -50%, 0) scale(1)";
-          holdTransform = "translate3d(85%, -50%, 0) scale(1)";
-          exitTransform = "translate3d(85%, -90%, 0) scale(0.98)";
+          startTransform = "translate3d(165%, -10%, 0) scale(0.96)";
+          visibleTransform = "translate3d(165%, -50%, 0) scale(1)";
+          holdTransform = "translate3d(165%, -50%, 0) scale(1)";
+          exitTransform = "translate3d(165%, -90%, 0) scale(0.98)";
         } else if (sourceX < 724) {
-          startTransform = "translate3d(-185%, -10%, 0) scale(0.96)";
-          visibleTransform = "translate3d(-185%, -50%, 0) scale(1)";
-          holdTransform = "translate3d(-185%, -50%, 0) scale(1)";
-          exitTransform = "translate3d(-185%, -90%, 0) scale(0.98)";
+          startTransform = "translate3d(-265%, -10%, 0) scale(0.96)";
+          visibleTransform = "translate3d(-265%, -50%, 0) scale(1)";
+          holdTransform = "translate3d(-265%, -50%, 0) scale(1)";
+          exitTransform = "translate3d(-265%, -90%, 0) scale(0.98)";
         }
 
         captureLabel.animate(
