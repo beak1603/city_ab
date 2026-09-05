@@ -618,33 +618,49 @@
         captureLabel.getAnimations().forEach(function (animation) {
           animation.cancel();
         });
-        captureLabel.style.left =
-          (Number(source.getAttribute("cx")) / 6).toFixed(3) + "%";
-        captureLabel.style.top =
-          (Number(source.getAttribute("cy")) / 6).toFixed(3) + "%";
+        const sourceX = Number(source.getAttribute("cx"));
+        const sourceY = Number(source.getAttribute("cy"));
+        captureLabel.style.left = (sourceX / 6).toFixed(3) + "%";
+        captureLabel.style.top = (sourceY / 6).toFixed(3) + "%";
+
+        let startTransform =
+          "translate3d(-50%, -110%, 0) scale(0.94)";
+        let visibleTransform =
+          "translate3d(-50%, -170%, 0) scale(1)";
+        let holdTransform =
+          "translate3d(-50%, -178%, 0) scale(1)";
+        let exitTransform =
+          "translate3d(-50%, -205%, 0) scale(0.97)";
+
+        if (sourceX > 300) {
+          startTransform = "translate3d(-105%, -50%, 0) scale(0.94)";
+          visibleTransform = "translate3d(-150%, -50%, 0) scale(1)";
+          holdTransform = "translate3d(-158%, -50%, 0) scale(1)";
+          exitTransform = "translate3d(-180%, -50%, 0) scale(0.97)";
+        } else if (sourceX < 300) {
+          startTransform = "translate3d(5%, -50%, 0) scale(0.94)";
+          visibleTransform = "translate3d(48%, -50%, 0) scale(1)";
+          holdTransform = "translate3d(56%, -50%, 0) scale(1)";
+          exitTransform = "translate3d(78%, -50%, 0) scale(0.97)";
+        }
+
         captureLabel.animate(
           [
+            { opacity: 0, transform: startTransform },
             {
-              opacity: 0,
-              transform: "translate3d(-50%, -105%, 0) scale(0.92)",
+              opacity: 1,
+              transform: visibleTransform,
+              offset: 0.2,
             },
             {
               opacity: 1,
-              transform: "translate3d(-50%, -150%, 0) scale(1)",
-              offset: 0.22,
+              transform: holdTransform,
+              offset: 0.8,
             },
-            {
-              opacity: 1,
-              transform: "translate3d(-50%, -165%, 0) scale(1)",
-              offset: 0.76,
-            },
-            {
-              opacity: 0,
-              transform: "translate3d(-50%, -195%, 0) scale(0.96)",
-            },
+            { opacity: 0, transform: exitTransform },
           ],
           {
-            duration: 2400,
+            duration: 3400,
             easing: "cubic-bezier(0.22, 1, 0.36, 1)",
             fill: "both",
           }
@@ -656,12 +672,12 @@
       ).matches;
       if (!reduceTokenMotion) {
         const animationSteps = [
-          { delay: 4500, source: 0, active: [6, 3] },
-          { delay: 3400, source: 3, active: [6, 5] },
-          { delay: 3400, source: 6, active: [1, 5] },
-          { delay: 3400, source: 5, active: [1, 7] },
-          { delay: 3400, active: [0, 1, 2, 3, 4, 5, 6, 7] },
-          { delay: 4500, active: [0, 3] },
+          { delay: 6000, source: 0, active: [6, 3] },
+          { delay: 5000, source: 3, active: [6, 5] },
+          { delay: 5000, source: 6, active: [1, 5] },
+          { delay: 5000, source: 5, active: [1, 7] },
+          { delay: 5000, active: [0, 1, 2, 3, 4, 5, 6, 7] },
+          { delay: 6000, active: [0, 3] },
         ];
         let animationStep = 0;
 
