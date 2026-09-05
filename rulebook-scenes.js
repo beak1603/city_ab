@@ -1107,7 +1107,9 @@
 
     const isolatedSceneIcons = {
       "1. 준비": {
-        src: "./scene-preparation-check-v2.svg",
+        src: "./scene-preparation-check-supplied-v1.png",
+        width: 1254,
+        height: 1254,
         directImage: true,
         alt: "마인크래프트 스타일 픽셀 체크표시",
         anchorX: 0.673,
@@ -1119,7 +1121,9 @@
         anchorX: 0.673,
       },
       "3. 인첸트": {
-        src: "./scene-enchant-supplied-shadow-v4.png",
+        src: "./scene-enchant-supplied-v5.png",
+        width: 1402,
+        height: 1122,
         directImage: true,
         bounds: [0.5, 0.81, 0.16, 0.99],
         focus: [0.65, 0.67, 0.17, 0.44],
@@ -1170,8 +1174,8 @@
       suppliedImage.onload = function () { balanceSceneArtwork(suppliedImage); };
       suppliedImage.src = isolatedIcon.src;
       suppliedImage.alt = isolatedIcon.alt || "첨부한 인첸트 테이블 이미지";
-      suppliedImage.width = 2172;
-      suppliedImage.height = 724;
+      suppliedImage.width = isolatedIcon.width || 2172;
+      suppliedImage.height = isolatedIcon.height || 724;
       suppliedImage.decoding = "async";
       suppliedImage.style.maxWidth = "none";
       suppliedImage.style.opacity = "1";
