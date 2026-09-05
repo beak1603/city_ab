@@ -381,6 +381,10 @@
       controls.appendChild(next);
       heading.appendChild(title);
 
+      const featuredName = document.createElement("p");
+      featuredName.className = "support-ability__featured-name";
+      heading.appendChild(featuredName);
+
       const description = document.createElement("p");
       description.className = "support-ability__description";
 
@@ -399,8 +403,12 @@
       stage.setAttribute("role", "region");
       stage.setAttribute("aria-roledescription", "carousel");
 
-      const card = document.createElement("article");
-      card.className = "support-ability__card";
+      const cardFrame = document.createElement("article");
+      cardFrame.className = "support-ability__card";
+
+      // Only the icon and its label slide; the counter stays in the fixed frame.
+      const card = document.createElement("div");
+      card.className = "support-ability__slide";
 
       const icon = document.createElement("span");
       icon.className = "support-ability__icon";
@@ -424,9 +432,10 @@
 
       card.appendChild(icon);
       card.appendChild(abilityName);
-      card.appendChild(count);
+      cardFrame.appendChild(card);
+      cardFrame.appendChild(count);
       stage.appendChild(previous);
-      stage.appendChild(card);
+      stage.appendChild(cardFrame);
       stage.appendChild(next);
 
       let currentAbility = 0;
@@ -435,6 +444,7 @@
       const renderAbility = function () {
         const ability = scene.abilities[currentAbility];
         abilityName.textContent = ability.name;
+        featuredName.textContent = ability.name;
         abilityText.textContent = ability.description || "";
         description.hidden = !ability.description;
         icon.replaceChildren(abilityImages[currentAbility]);
