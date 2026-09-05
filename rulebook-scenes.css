@@ -422,18 +422,41 @@
   top: 50%;
   right: 5vw;
   width: clamp(390px, 26vw, 480px);
+  aspect-ratio: 1;
+  overflow: visible;
   background: transparent;
   box-shadow: none;
   filter: none;
   transform: translateY(-50%);
 }
 
-#guide .token-station__diagram svg {
+#guide .token-station__art,
+#guide .token-station__overlay {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
   overflow: visible;
   background: transparent;
+}
+
+#guide .token-station__art {
+  object-fit: cover;
+  filter: grayscale(1) saturate(0) brightness(1.08) contrast(1.04);
+}
+
+#guide .token-station__overlay {
+  pointer-events: none;
+}
+
+#guide .token-station__active-art {
+  filter:
+    sepia(1)
+    saturate(7)
+    hue-rotate(355deg)
+    brightness(1.12)
+    contrast(1.05);
 }
 
 #guide .token-station__capture {
@@ -451,26 +474,15 @@
   transform: translate3d(-50%, -250%, 0);
 }
 
-#guide .token-station__ring {
-  fill: none;
-  stroke: rgba(239, 250, 255, 0.94);
-  stroke-width: 6;
-  filter: url("#token-station-glow");
-}
-
 #guide .token-station__node {
+  opacity: 0;
   fill: #ffffff;
-  stroke: #ffffff;
-  stroke-width: 3;
-  filter: url("#token-station-glow");
-  transition:
-    fill 1600ms cubic-bezier(0.22, 1, 0.36, 1),
-    stroke 1600ms cubic-bezier(0.22, 1, 0.36, 1);
+  stroke: none;
+  transition: opacity 1600ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 #guide .token-station__node--active {
-  fill: #ffe11a;
-  stroke: #ffe11a;
+  opacity: 1;
 }
 
 
