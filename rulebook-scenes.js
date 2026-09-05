@@ -627,11 +627,10 @@
         currentAbility = nextAbility;
         renderAbility();
 
-        // Start both slides together, matching the main ability carousel's
-        // 680ms ease-out instead of waiting for an exit before entering.
+        // Icons, names and descriptions share one exit/entry timeline.
         const options = {
-          duration: 680,
-          easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+          duration: 620,
+          easing: "linear",
           fill: "both",
         };
         const animations = [];
@@ -648,45 +647,43 @@
         };
 
         try {
-          animations.push(outgoing.animate(
-            [
-              { opacity: 1, transform: "translate3d(0, 0, 0) scale(1)" },
-              { opacity: 0, transform: "translate3d(" + (-direction * 65) + "%, 0, 0) scale(0.92)" },
-            ],
-            options
-          ));
-          animations.push(incoming.animate(
-            [
-              { opacity: 0, transform: "translate3d(" + (direction * 65) + "%, 0, 0) scale(0.92)" },
-              { opacity: 1, transform: "translate3d(0, 0, 0) scale(1)" },
-            ],
-            options
-          ));
-          // The old copy is fully gone at 26%; the new copy starts at 32%.
-          // Both phases share the icon timeline, without overlapping letters.
-          const animateCopy = function (oldCopy, newCopy) {
-            const exitTransform = "translate3d(" + (-direction * 16) + "px, 0, 0)";
-            const enterTransform = "translate3d(" + (direction * 16) + "px, 0, 0)";
-            const copyOptions = { duration: options.duration, easing: "linear", fill: "both" };
-            animations.push(oldCopy.animate(
+          const animatePair = function (oldElement, newElement, exitTransform, enterTransform, restingTransform) {
+            animations.push(oldElement.animate(
               [
-                { opacity: 1, transform: "translate3d(0, 0, 0)", offset: 0, easing: "ease-in" },
-                { opacity: 0, transform: exitTransform, offset: 0.26 },
+                { opacity: 1, transform: restingTransform, offset: 0, easing: "cubic-bezier(0.4, 0, 1, 1)" },
+                { opacity: 0, transform: exitTransform, offset: 0.4 },
                 { opacity: 0, transform: exitTransform, offset: 1 },
               ],
-              copyOptions
+              options
             ));
-            animations.push(newCopy.animate(
+            animations.push(newElement.animate(
               [
                 { opacity: 0, transform: enterTransform, offset: 0 },
-                { opacity: 0, transform: enterTransform, offset: 0.32, easing: options.easing },
-                { opacity: 1, transform: "translate3d(0, 0, 0)", offset: 1 },
+                { opacity: 0, transform: enterTransform, offset: 0.44, easing: "cubic-bezier(0.16, 1, 0.3, 1)" },
+                { opacity: 1, transform: restingTransform, offset: 1 },
               ],
-              copyOptions
+              options
             ));
           };
-          animateCopy(outgoingText, incomingText);
-          animateCopy(outgoingName, incomingName);
+          animatePair(
+            outgoing, incoming,
+            "translate3d(" + (-direction * 18) + "%, 0, 0) scale(0.58)",
+            "translate3d(" + (direction * 18) + "%, 0, 0) scale(0.78)",
+            "translate3d(0, 0, 0) scale(1)"
+          );
+          [ [outgoingText, incomingText], [outgoingName, incomingName] ].forEach(function (pair) {
+            animatePair(
+              pair[0], pair[1],
+              "translate3d(" + (-direction * 16) + "px, 0, 0)",
+              "translate3d(" + (direction * 16) + "px, 0, 0)",
+              "translate3d(0, 0, 0)"
+            );
+          });
+          // Set one clock origin explicitly, even if frame creation spans a paint.
+          const sharedStart = document.timeline && document.timeline.currentTime;
+          if (typeof sharedStart === "number") {
+            animations.forEach(function (animation) { animation.startTime = sharedStart; });
+          }
           Promise.all(animations.map(function (animation) {
             return animation.finished;
           })).then(finishTransition, finishTransition);
