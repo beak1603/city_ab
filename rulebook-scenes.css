@@ -1190,3 +1190,19 @@
 #guide .support-ability__description * {
   color: #fff;
 }
+
+/* Korean pixel lettering for the site name and main title. */
+@font-face {
+  font-family: "City Pixel";
+  src: url("https://cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@e0a715695c457d3f8ccd071f88cd71b376a5a23e/neodgm/neodgm.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+.site-header .brand__text strong,
+.hero #hero-title {
+  font-family: "City Pixel", monospace;
+  font-weight: 400;
+  font-synthesis: none;
+  letter-spacing: 0;
+}
