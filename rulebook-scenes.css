@@ -1191,7 +1191,7 @@
   color: #fff;
 }
 
-/* Korean pixel lettering for the site name and main title. */
+/* Korean pixel lettering retained for the navigation site name. */
 @font-face {
   font-family: "City Pixel";
   src: url("https://cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@e0a715695c457d3f8ccd071f88cd71b376a5a23e/neodgm/neodgm.woff2") format("woff2");
@@ -1202,7 +1202,6 @@
 /* Heavy stone-gray pixel letters with a crisp dark edge and block depth. */
 .site-header .brand__text strong,
 .hero #hero-title {
-  font-family: "City Pixel", monospace;
   font-weight: 900;
   font-synthesis: weight;
   letter-spacing: .035em;
@@ -1221,6 +1220,7 @@
      .085em  .14em 0 #11170e;
 }
 .site-header .brand__text strong {
+  font-family: "City Pixel", monospace;
   letter-spacing: .02em;
   -webkit-text-stroke-width: .02em;
 }
