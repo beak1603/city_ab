@@ -937,7 +937,13 @@
   transform: none !important;
 }
 #guide .guide-scene--token-shop .guide-scene__description {
-  max-width: min(720px, 60%);
+  max-width: 100%;
+}
+@media (min-width: 1101px) {
+  #guide .guide-scene--token-shop .guide-scene__description {
+    white-space: pre;
+    overflow-wrap: normal;
+  }
 }
 @media (max-width: 720px) {
   #guide .guide-scene--token-shop .guide-scene__content {
