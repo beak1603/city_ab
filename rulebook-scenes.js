@@ -300,6 +300,11 @@
   }
 
   function keepLabelsCurrent() {
+    const collectionNotice = document.querySelector(".collection__heading > p");
+    if (collectionNotice && collectionNotice.textContent !== "추가 예정") {
+      collectionNotice.textContent = "추가 예정";
+    }
+
     // Keep the launcher action present after React replaces the initial HTML.
     const heroActions = document.querySelector(".hero__actions");
     if (heroActions && !heroActions.querySelector(".launcher-download")) {
