@@ -1007,3 +1007,49 @@
     max-width: 100%;
   }
 }
+
+/* Size the visible artwork, including its shadow, instead of the transparent file. */
+#guide .guide-scene__balanced-art {
+  top: 50%;
+  left: 81.5%;
+  right: auto;
+  width: auto;
+  max-width: none;
+  height: min(var(--art-panel-height), var(--art-width-cap));
+  transform: translate(calc(-1 * var(--art-center-x)), calc(-1 * var(--art-center-y)));
+}
+#guide .support-ability__icon {
+  width: min(100%, 320px);
+}
+#guide .support-ability__card {
+  flex-basis: 320px;
+}
+@media (min-width: 721px) {
+  #guide .token-station__diagram {
+    scale: 1.08;
+    transform-origin: center;
+  }
+}
+@media (max-width: 720px) {
+  #guide .guide-scene--isolated-icon,
+  #guide .guide-scene--token-system {
+    display: flex;
+    flex-direction: column;
+  }
+  #guide .guide-scene--isolated-icon .guide-scene__content,
+  #guide .guide-scene--token-system .guide-scene__content {
+    position: relative;
+    top: auto;
+    transform: none;
+    animation-name: support-scene-enter;
+    padding: 28px 22px 318px;
+  }
+  #guide .guide-scene__balanced-art {
+    top: calc(100% - 159px);
+    left: 50%;
+    height: min(var(--art-mobile-height), var(--art-mobile-cap));
+  }
+  #guide .support-ability__icon {
+    width: min(100%, 224px);
+  }
+}

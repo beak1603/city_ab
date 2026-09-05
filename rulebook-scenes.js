@@ -372,6 +372,40 @@
     context.drawImage(source, ...sourceBounds, ...targetBounds);
   }
 
+  // Measure transparency only: keep every source color and effect unchanged.
+  function balanceSceneArtwork(element, canvas) {
+    try {
+      if (!canvas) {
+        canvas = document.createElement("canvas");
+        canvas.width = element.naturalWidth;
+        canvas.height = element.naturalHeight;
+        canvas.getContext("2d").drawImage(element, 0, 0);
+      }
+      const width = canvas.width, height = canvas.height;
+      const pixels = canvas.getContext("2d").getImageData(0, 0, width, height).data;
+      let left = width, top = height, right = -1, bottom = -1;
+      for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+          if (pixels[(y * width + x) * 4 + 3] < 20) continue;
+          left = Math.min(left, x); right = Math.max(right, x);
+          top = Math.min(top, y); bottom = Math.max(bottom, y);
+        }
+      }
+      if (right < left) return;
+      const visibleWidth = right - left + 1;
+      const visibleHeight = bottom - top + 1;
+      element.style.setProperty("--art-center-x", ((left + right + 1) / 2 / width * 100) + "%");
+      element.style.setProperty("--art-center-y", ((top + bottom + 1) / 2 / height * 100) + "%");
+      element.style.setProperty("--art-panel-height", (62 * height / visibleHeight) + "%");
+      element.style.setProperty("--art-width-cap", (27 * height / visibleWidth) + "vw");
+      element.style.setProperty("--art-mobile-height", (220 * height / visibleHeight) + "px");
+      element.style.setProperty("--art-mobile-cap", (78 * height / visibleWidth) + "vw");
+      element.classList.add("guide-scene__balanced-art");
+    } catch (error) {
+      // Retain the existing layout if a source cannot be measured.
+    }
+  }
+
   function createScene(scene, index) {
     const section = document.createElement("section");
     section.className = "guide-scene";
@@ -912,6 +946,7 @@
         }
 
         context.putImageData(imageData, 0, 0);
+        balanceSceneArtwork(iconCanvas, iconCanvas);
       };
       iconSource.src = "./scene-token-system-v10.png";
       section.appendChild(iconCanvas);
@@ -919,13 +954,13 @@
 
     const isolatedSceneIcons = {
       "1. 준비": {
-        src: "./scene-preparation-check-v1.svg",
+        src: "./scene-preparation-check-v2.svg",
         directImage: true,
         alt: "마인크래프트 스타일 픽셀 체크표시",
         anchorX: 0.673,
       },
       "2. 능력 추첨": {
-        src: "./scene-ability-question-v2.svg",
+        src: "./scene-ability-question-v3.svg",
         directImage: true,
         alt: "마인크래프트 스타일 입체 픽셀 물음표",
         anchorX: 0.673,
@@ -993,6 +1028,7 @@
       section.classList.add("guide-scene--isolated-icon");
       const suppliedImage = document.createElement("img");
       suppliedImage.className = "guide-scene__isolated-icon";
+      suppliedImage.onload = function () { balanceSceneArtwork(suppliedImage); };
       suppliedImage.src = isolatedIcon.src;
       suppliedImage.alt = isolatedIcon.alt || "첨부한 인첸트 테이블 이미지";
       suppliedImage.width = 2172;
@@ -1029,10 +1065,14 @@
         iconCanvas.height = height;
         if (isolatedIcon.groundedSword) {
           drawGroundedSword(context, iconSource, width, height);
+          balanceSceneArtwork(iconCanvas, iconCanvas);
           return;
         }
         context.drawImage(iconSource, 0, 0);
-        if (isolatedIcon.precut) return;
+        if (isolatedIcon.precut) {
+          balanceSceneArtwork(iconCanvas, iconCanvas);
+          return;
+        }
 
         const softenedCanvas = document.createElement("canvas");
         softenedCanvas.width = width;
@@ -1151,6 +1191,7 @@
         }
 
         context.putImageData(imageData, 0, 0);
+        balanceSceneArtwork(iconCanvas, iconCanvas);
       };
       iconSource.src = isolatedIcon.src;
       section.appendChild(iconCanvas);
