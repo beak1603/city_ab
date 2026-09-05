@@ -96,9 +96,20 @@
   mask-image: none !important;
 }
 
+@media (min-width: 1501px) and (max-width: 1900px) {
+  #guide .token-station__copy {
+    margin-left: 18.5vw;
+  }
+
+  #guide .token-station__diagram {
+    right: 10vw;
+  }
+}
+
 @media (min-width: 721px) and (max-width: 1500px) {
   #guide .token-station__copy {
     width: min(46vw, 650px);
+    margin-left: 18.5vw;
   }
 
   #guide .token-station__description {
@@ -107,7 +118,7 @@
   }
 
   #guide .token-station__diagram {
-    right: 2vw;
+    right: 10vw;
     width: clamp(260px, 19vw, 300px);
   }
 }
