@@ -631,15 +631,15 @@
           "translate3d(-50%, -390%, 0) scale(0.97)";
 
         if (sourceX > 724) {
-          startTransform = "translate3d(165%, -10%, 0) scale(0.96)";
-          visibleTransform = "translate3d(165%, -50%, 0) scale(1)";
-          holdTransform = "translate3d(165%, -50%, 0) scale(1)";
-          exitTransform = "translate3d(165%, -90%, 0) scale(0.98)";
+          startTransform = "translate3d(40%, -10%, 0) scale(0.96)";
+          visibleTransform = "translate3d(40%, -50%, 0) scale(1)";
+          holdTransform = "translate3d(40%, -50%, 0) scale(1)";
+          exitTransform = "translate3d(40%, -90%, 0) scale(0.98)";
         } else if (sourceX < 724) {
-          startTransform = "translate3d(-265%, -10%, 0) scale(0.96)";
-          visibleTransform = "translate3d(-265%, -50%, 0) scale(1)";
-          holdTransform = "translate3d(-265%, -50%, 0) scale(1)";
-          exitTransform = "translate3d(-265%, -90%, 0) scale(0.98)";
+          startTransform = "translate3d(-140%, -10%, 0) scale(0.96)";
+          visibleTransform = "translate3d(-140%, -50%, 0) scale(1)";
+          holdTransform = "translate3d(-140%, -50%, 0) scale(1)";
+          exitTransform = "translate3d(-140%, -90%, 0) scale(0.98)";
         }
 
         captureLabel.animate(
