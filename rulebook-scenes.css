@@ -925,3 +925,25 @@
   outline-offset: 6px;
 }
 
+
+/* Let the token-shop details determine the scene height as text wraps. */
+#guide .guide-scene--token-shop {
+  display: grid;
+  align-items: center;
+}
+#guide .guide-scene--token-shop .guide-scene__content {
+  position: relative;
+  top: auto;
+  transform: none !important;
+}
+#guide .guide-scene--token-shop .guide-scene__description {
+  max-width: min(720px, 60%);
+}
+@media (max-width: 720px) {
+  #guide .guide-scene--token-shop .guide-scene__content {
+    padding-bottom: 324px;
+  }
+  #guide .guide-scene--token-shop .guide-scene__description {
+    max-width: 100%;
+  }
+}
