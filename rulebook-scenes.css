@@ -1106,7 +1106,9 @@
   object-position: center bottom;
   transform: translateX(-50%);
   opacity: 1;
-  filter: drop-shadow(0 0 5px rgba(125, 221, 255, 0.28));
+  filter: drop-shadow(0 0 3px rgba(164, 255, 112, 0.58))
+    drop-shadow(0 0 12px rgba(84, 231, 96, 0.38))
+    drop-shadow(0 0 26px rgba(55, 203, 109, 0.22));
   mix-blend-mode: normal;
   background: transparent;
   border: 0;
@@ -1141,64 +1143,6 @@
 @media (max-width: 720px) {
   #guide .guide-detail__panel--scenes[data-guide-id="game-start"] > .guide-scene:first-child .guide-scene__balanced-art {
     height: min(calc(var(--art-mobile-height) * 1.3225), calc(var(--art-mobile-cap) * 1.3225));
-  }
-}
-
-/* Slow, staggered colored wisps rise from the floor behind Steve. */
-#guide .final-ready__aura {
-  position: absolute;
-  z-index: 2;
-  left: 81.5%;
-  bottom: 0;
-  width: min(42%, 520px);
-  height: 100%;
-  transform: translateX(-50%);
-  pointer-events: none;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(to top, #000 0%, #000 72%, transparent 100%);
-  mask-image: linear-gradient(to top, #000 0%, #000 72%, transparent 100%);
-}
-#guide .final-ready__aura::before {
-  content: "";
-  position: absolute;
-  bottom: -5%;
-  left: 10%;
-  width: 80%;
-  height: 24%;
-  background: radial-gradient(ellipse, rgba(120, 114, 255, .42), rgba(57, 232, 196, .2) 45%, transparent 72%);
-  filter: blur(10px);
-}
-#guide .final-ready__aura-wisp {
-  position: absolute;
-  left: var(--aura-left);
-  bottom: -22%;
-  width: 12%;
-  height: 42%;
-  border-radius: 60% 40% 55% 45%;
-  background: radial-gradient(ellipse at 50% 65%, rgba(var(--aura-color), .85) 0%, rgba(var(--aura-color), .4) 32%, rgba(var(--aura-color), 0) 72%);
-  filter: blur(7px);
-  opacity: 0;
-  animation: final-ready-aura-rise var(--aura-duration) linear var(--aura-delay) infinite;
-}
-@keyframes final-ready-aura-rise {
-  0% { opacity: 0; transform: translate3d(-50%, 0, 0) scale(.7, .8); }
-  18% { opacity: .85; }
-  45% { opacity: .7; transform: translate3d(calc(-50% + var(--aura-drift)), -125%, 0) scale(1.1, 1.2); }
-  75% { opacity: .4; }
-  100% { opacity: 0; transform: translate3d(calc(-50% - var(--aura-drift)), -290%, 0) scale(1.4, .9); }
-}
-@media (max-width: 720px) {
-  #guide .final-ready__aura {
-    left: 50%;
-    width: min(100%, 420px);
-    height: 330px;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  #guide .final-ready__aura-wisp {
-    animation: none;
-    bottom: 0;
-    opacity: .3;
   }
 }
 
