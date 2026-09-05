@@ -1224,3 +1224,13 @@
 @media (prefers-reduced-motion: reduce) {
   #guide .final-ready__ribbon { animation: none; stroke-dasharray: none; opacity: .45; }
 }
+
+/* White body copy beneath every large rulebook section heading. */
+#guide .guide-scene__description,
+#guide .guide-scene__description *,
+#guide .token-station__description,
+#guide .token-station__description *,
+#guide .support-ability__description,
+#guide .support-ability__description * {
+  color: #fff;
+}
