@@ -99,10 +99,12 @@
         },
         {
           title: "PVP 시스템",
+          cornerArt: { kind: "pvp", src: "./scene-pvp-shield-v1.png", alt: "방패를 든 스티브", width: 1254, height: 1254 },
           description: "- PVP를 못하셔도 괜찮습니다!\n- 연타 시스템 도입으로 마우스를 광클해도 최대 데미지로 피격할 수 있습니다",
         },
         {
           title: "점프패드",
+          cornerArt: { kind: "jump-pad", src: "./scene-jump-pad-arrow-v1.png", alt: "위쪽을 가리키는 초록색 화살표", width: 1230, height: 1278 },
           description: "- 맵 곳곳에는 점프패드가 있습니다\n- 점프패드별로 점프 높이가 다릅니다\n- 점프패드로 떨어지면 낙하피해를 입지 않습니다",
         },
       ],
@@ -549,6 +551,18 @@
     const section = document.createElement("section");
     section.className = "guide-scene";
     section.style.setProperty("--scene-index", String(index));
+
+    if (scene.cornerArt) {
+      section.classList.add("guide-scene--corner-art", "guide-scene--" + scene.cornerArt.kind);
+      const artwork = document.createElement("img");
+      artwork.className = "guide-scene__corner-art";
+      artwork.src = scene.cornerArt.src;
+      artwork.alt = scene.cornerArt.alt;
+      artwork.width = scene.cornerArt.width;
+      artwork.height = scene.cornerArt.height;
+      artwork.decoding = "async";
+      section.appendChild(artwork);
+    }
 
     if (scene.revival) {
       section.classList.add("guide-scene--revival");
