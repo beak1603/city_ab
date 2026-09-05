@@ -684,3 +684,25 @@
   filter: none;
   mix-blend-mode: normal;
 }
+
+
+/* Isolate every remaining scene icon over the shared token-system gradient. */
+#guide .guide-detail__panel--scenes[data-guide-id] > .guide-scene.guide-scene--isolated-icon::before {
+  display: none !important;
+  content: none !important;
+}
+
+#guide .guide-scene__isolated-icon {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  display: block;
+  width: auto;
+  height: 100%;
+  pointer-events: none;
+  background: transparent;
+  border: 0;
+  filter: none;
+  mix-blend-mode: normal;
+}
