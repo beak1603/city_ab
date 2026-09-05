@@ -61,6 +61,11 @@
           title: "3. 토큰시스템",
           description: "맵 곳곳에있는 토큰생성소를 점령하여\n토큰을 획득하고 상점에서 필요한 아이템을 구입할 수 있습니다",
         },
+        {
+          title: "3-1. 토큰생성소",
+          description: "- 토큰생성소는 총 8개입니다\n- 토큰생성소에 일정 시간 머무르면 자동으로 점령되며 충전된 토큰이 지급됩니다\n- 토큰생성소 점령 도중 다른 플레이어가 들어올 경우 점령은 취소됩니다\n- 토큰생성소에 토큰은 최대 5개까지 충전됩니다\n- 2개밖에 충전되지 않은 토큰생성소를 점령시 토큰 2개만 획득할 수 있습니다\n- 게임시작시 8개 중 2개만 활성화되며, 누군가 토큰 생성소 점령 완료 했을 경우 다른 토큰생성소가 활성화 됩니다\n- 일정시간 이후에는 모든 토큰생성소가 활성화됩니다",
+          diagram: "token-stations",
+        },
       ],
     },
     "other-systems": {
@@ -541,6 +546,59 @@
       renderAbility();
       content.appendChild(copy);
       content.appendChild(stage);
+      section.appendChild(shade);
+      section.appendChild(content);
+      return section;
+    }
+
+    if (scene.diagram === "token-stations") {
+      section.classList.add("guide-scene--token-station");
+
+      const copy = document.createElement("div");
+      copy.className = "token-station__copy";
+
+      const title = document.createElement("h3");
+      title.textContent = scene.title;
+
+      const description = document.createElement("p");
+      description.className = "guide-scene__description token-station__description";
+      description.textContent = scene.description;
+
+      const diagram = document.createElement("div");
+      diagram.className = "token-station__diagram";
+      diagram.setAttribute("aria-hidden", "true");
+      diagram.innerHTML = [
+        "<svg viewBox='0 0 600 600' role='presentation' focusable='false'>",
+        "<defs>",
+        "<filter id='token-station-glow' x='-40%' y='-40%' width='180%' height='180%'>",
+        "<feGaussianBlur stdDeviation='10' result='blur'/>",
+        "<feMerge><feMergeNode in='blur'/><feMergeNode in='SourceGraphic'/></feMerge>",
+        "</filter>",
+        "<radialGradient id='token-station-white' cx='38%' cy='30%' r='72%'>",
+        "<stop offset='0%' stop-color='#ffffff'/><stop offset='100%' stop-color='#dbe9ff'/>",
+        "</radialGradient>",
+        "<radialGradient id='token-station-yellow' cx='38%' cy='30%' r='72%'>",
+        "<stop offset='0%' stop-color='#fff774'/><stop offset='100%' stop-color='#ffd900'/>",
+        "</radialGradient>",
+        "</defs>",
+        "<circle class='token-station__ring' cx='300' cy='300' r='210'/>",
+        "<g class='token-station__nodes'>",
+        "<circle class='token-station__node token-station__node--active' cx='300' cy='90' r='25'/>",
+        "<circle class='token-station__node' cx='448' cy='152' r='25'/>",
+        "<circle class='token-station__node' cx='510' cy='300' r='25'/>",
+        "<circle class='token-station__node token-station__node--active' cx='448' cy='448' r='25'/>",
+        "<circle class='token-station__node' cx='300' cy='510' r='25'/>",
+        "<circle class='token-station__node' cx='152' cy='448' r='25'/>",
+        "<circle class='token-station__node' cx='90' cy='300' r='25'/>",
+        "<circle class='token-station__node' cx='152' cy='152' r='25'/>",
+        "</g>",
+        "</svg>",
+      ].join("");
+
+      copy.appendChild(title);
+      copy.appendChild(description);
+      content.appendChild(copy);
+      content.appendChild(diagram);
       section.appendChild(shade);
       section.appendChild(content);
       return section;
