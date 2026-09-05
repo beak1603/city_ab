@@ -807,6 +807,7 @@
         contrastFloor: 7,
         contrastWeight: 0,
         alphaFloor: 26,
+        opaqueBodyY: 0.76,
       },
       "4. 최종 준비": {
         src: "./scene-final-ready-v7.png",
@@ -820,6 +821,7 @@
         contrastFloor: 7,
         contrastWeight: 0,
         alphaFloor: 30,
+        opaqueBodyY: 0.82,
       },
       "1. 자기장": {
         src: "./scene-magnetic-v5.png",
@@ -967,12 +969,17 @@
           const solidPixel =
             chroma >= isolatedIcon.colorSolid ||
             brightness >= isolatedIcon.brightnessSolid;
-          const rawAlpha =
-            (solidPixel
-              ? 255
-              : Math.max(colorAlpha, brightAlpha, contrastAlpha)) *
-            edgeFeather *
-            focusFeather;
+          const opaqueBodyPixel =
+            typeof isolatedIcon.opaqueBodyY === "number" &&
+            yRatio <= isolatedIcon.opaqueBodyY &&
+            solidPixel;
+          const rawAlpha = opaqueBodyPixel
+            ? 255
+            : (solidPixel
+                ? 255
+                : Math.max(colorAlpha, brightAlpha, contrastAlpha)) *
+              edgeFeather *
+              focusFeather;
           const cleanedAlpha =
             isolatedIcon.alphaFloor > 0
               ? Math.max(
