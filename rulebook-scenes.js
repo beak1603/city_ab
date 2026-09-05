@@ -571,27 +571,29 @@
         "<img class='token-station__art' src='./token-stations-orbit.png?v=1' alt='' loading='lazy' decoding='async'/>",
         "<svg class='token-station__overlay' viewBox='0 0 1448 1080' preserveAspectRatio='xMidYMid slice' role='presentation' focusable='false'>",
         "<defs>",
-        "<radialGradient id='token-station-soft-mask' cx='50%' cy='50%' r='50%'>",
-        "<stop offset='0%' stop-color='#fff'/>",
-        "<stop offset='52%' stop-color='#fff'/>",
-        "<stop offset='74%' stop-color='#fff' stop-opacity='0.82'/>",
-        "<stop offset='100%' stop-color='#000' stop-opacity='0'/>",
-        "</radialGradient>",
-        "<mask id='token-station-active-mask' maskUnits='userSpaceOnUse' x='0' y='0' width='1448' height='1080'>",
-        "<rect x='0' y='0' width='1448' height='1080' fill='#000'/>",
-        "<g class='token-station__nodes'>",
-        "<circle class='token-station__node token-station__node--active' cx='724' cy='116' r='128' fill='url(#token-station-soft-mask)'/>",
-        "<circle class='token-station__node' cx='1028' cy='244' r='128' fill='url(#token-station-soft-mask)'/>",
-        "<circle class='token-station__node' cx='1144' cy='522' r='128' fill='url(#token-station-soft-mask)'/>",
-        "<circle class='token-station__node token-station__node--active' cx='1028' cy='792' r='128' fill='url(#token-station-soft-mask)'/>",
-        "<circle class='token-station__node' cx='724' cy='912' r='128' fill='url(#token-station-soft-mask)'/>",
-        "<circle class='token-station__node' cx='419' cy='792' r='128' fill='url(#token-station-soft-mask)'/>",
-        "<circle class='token-station__node' cx='303' cy='522' r='128' fill='url(#token-station-soft-mask)'/>",
-        "<circle class='token-station__node' cx='419' cy='244' r='128' fill='url(#token-station-soft-mask)'/>",
+        "<filter id='token-station-diamond-glow' x='-220%' y='-220%' width='540%' height='540%' color-interpolation-filters='sRGB'>",
+        "<feGaussianBlur in='SourceGraphic' stdDeviation='13' result='diamond-blur'/>",
+        "<feFlood flood-color='#ffd51f' flood-opacity='0.8' result='diamond-gold'/>",
+        "<feComposite in='diamond-gold' in2='diamond-blur' operator='in' result='diamond-soft'/>",
+        "<feGaussianBlur in='diamond-soft' stdDeviation='9' result='diamond-wide'/>",
+        "<feMerge><feMergeNode in='diamond-wide'/><feMergeNode in='diamond-soft'/><feMergeNode in='SourceGraphic'/></feMerge>",
+        "</filter>",
+        "<g id='token-station-diamond'>",
+        "<path d='M0 -56 C7 -19 19 -7 56 0 C19 7 7 19 0 56 C-7 19 -19 7 -56 0 C-19 -7 -7 -19 0 -56 Z' fill='rgba(255,213,31,0.2)' stroke='#ffd51f' stroke-width='7' stroke-linejoin='round'/>",
+        "<path d='M0 -28 C4 -10 10 -4 28 0 C10 4 4 10 0 28 C-4 10 -10 4 -28 0 C-10 -4 -4 -10 0 -28 Z' fill='#fff5b5' stroke='#ffe265' stroke-width='3'/>",
+        "<circle cx='0' cy='0' r='5' fill='#ffffff'/>",
         "</g>",
-        "</mask>",
         "</defs>",
-        "<image class='token-station__active-art' href='./token-stations-orbit.png?v=1' x='0' y='0' width='1448' height='1080' preserveAspectRatio='xMidYMid meet' mask='url(#token-station-active-mask)'/>",
+        "<g class='token-station__nodes'>",
+        "<g class='token-station__node token-station__node--active' data-x='724' data-y='116' transform='translate(724 116)'><use href='#token-station-diamond' filter='url(#token-station-diamond-glow)'/></g>",
+        "<g class='token-station__node' data-x='1028' data-y='244' transform='translate(1028 244)'><use href='#token-station-diamond' filter='url(#token-station-diamond-glow)'/></g>",
+        "<g class='token-station__node' data-x='1144' data-y='522' transform='translate(1144 522)'><use href='#token-station-diamond' filter='url(#token-station-diamond-glow)'/></g>",
+        "<g class='token-station__node token-station__node--active' data-x='1028' data-y='792' transform='translate(1028 792)'><use href='#token-station-diamond' filter='url(#token-station-diamond-glow)'/></g>",
+        "<g class='token-station__node' data-x='724' data-y='912' transform='translate(724 912)'><use href='#token-station-diamond' filter='url(#token-station-diamond-glow)'/></g>",
+        "<g class='token-station__node' data-x='419' data-y='792' transform='translate(419 792)'><use href='#token-station-diamond' filter='url(#token-station-diamond-glow)'/></g>",
+        "<g class='token-station__node' data-x='303' data-y='522' transform='translate(303 522)'><use href='#token-station-diamond' filter='url(#token-station-diamond-glow)'/></g>",
+        "<g class='token-station__node' data-x='419' data-y='244' transform='translate(419 244)'><use href='#token-station-diamond' filter='url(#token-station-diamond-glow)'/></g>",
+        "</g>",
         "</svg>",
       ].join("");
 
@@ -618,8 +620,8 @@
         captureLabel.getAnimations().forEach(function (animation) {
           animation.cancel();
         });
-        const sourceX = Number(source.getAttribute("cx"));
-        const sourceY = Number(source.getAttribute("cy"));
+        const sourceX = Number(source.getAttribute("data-x"));
+        const sourceY = Number(source.getAttribute("data-y"));
         captureLabel.style.left =
           ((sourceX - 184) / 10.8).toFixed(3) + "%";
         captureLabel.style.top = (sourceY / 10.8).toFixed(3) + "%";
