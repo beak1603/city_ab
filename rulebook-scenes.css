@@ -336,12 +336,33 @@
   margin: 0;
 }
 
+#guide .support-ability__viewport {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  overflow: clip;
+}
+
 #guide .support-ability__slide {
   display: grid;
+  grid-area: 1 / 1;
   width: 100%;
   min-width: 0;
   place-items: center;
   gap: 10px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+#guide .support-ability__slide[data-active="true"],
+#guide .support-ability__slide[data-leaving="true"] {
+  visibility: visible;
+}
+
+#guide .support-ability__slide[data-active="true"] {
+  opacity: 1;
 }
 
 #guide .support-ability__icon {

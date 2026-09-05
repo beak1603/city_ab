@@ -388,8 +388,6 @@
       const description = document.createElement("p");
       description.className = "support-ability__description";
 
-      const abilityName = document.createElement("h4");
-      abilityName.className = "support-ability__name";
       const abilityText = document.createElement("span");
       description.appendChild(abilityText);
 
@@ -406,15 +404,17 @@
       const cardFrame = document.createElement("article");
       cardFrame.className = "support-ability__card";
 
-      // Only the icon and its label slide; the counter stays in the fixed frame.
-      const card = document.createElement("div");
-      card.className = "support-ability__slide";
+      // Keep every image mounted and decoded, and reserve one stable slide area.
+      const viewport = document.createElement("div");
+      viewport.className = "support-ability__viewport";
+      const cards = scene.abilities.map(function (ability) {
+        const card = document.createElement("div");
+        card.className = "support-ability__slide";
 
-      const icon = document.createElement("span");
-      icon.className = "support-ability__icon";
-      icon.setAttribute("aria-hidden", "true");
+        const icon = document.createElement("span");
+        icon.className = "support-ability__icon";
+        icon.setAttribute("aria-hidden", "true");
 
-      const abilityImages = scene.abilities.map(function (ability) {
         const image = document.createElement("img");
         image.className = "support-ability__image";
         image.src = ability.image;
@@ -423,16 +423,25 @@
         image.decoding = "async";
         image.width = 900;
         image.height = 900;
-        return image;
+        if (typeof image.decode === "function") {
+          image.decode().catch(function () {});
+        }
+        icon.appendChild(image);
+
+        const name = document.createElement("h4");
+        name.className = "support-ability__name";
+        name.textContent = ability.name;
+        card.appendChild(icon);
+        card.appendChild(name);
+        viewport.appendChild(card);
+        return card;
       });
 
       const count = document.createElement("span");
       count.className = "support-ability__count";
       count.setAttribute("aria-hidden", "true");
 
-      card.appendChild(icon);
-      card.appendChild(abilityName);
-      cardFrame.appendChild(card);
+      cardFrame.appendChild(viewport);
       cardFrame.appendChild(count);
       stage.appendChild(previous);
       stage.appendChild(cardFrame);
@@ -443,11 +452,14 @@
 
       const renderAbility = function () {
         const ability = scene.abilities[currentAbility];
-        abilityName.textContent = ability.name;
         featuredName.textContent = ability.name;
         abilityText.textContent = ability.description || "";
         description.hidden = !ability.description;
-        icon.replaceChildren(abilityImages[currentAbility]);
+        cards.forEach(function (card, cardIndex) {
+          const active = cardIndex === currentAbility;
+          card.setAttribute("data-active", String(active));
+          card.setAttribute("aria-hidden", String(!active));
+        });
         count.textContent =
           String(currentAbility + 1).padStart(2, "0") +
           " / " +
@@ -465,117 +477,64 @@
         const nextAbility =
           (currentAbility + direction + scene.abilities.length) %
           scene.abilities.length;
+        const outgoing = cards[currentAbility];
+        const incoming = cards[nextAbility];
         const reduceMotion = window.matchMedia(
           "(prefers-reduced-motion: reduce)"
         ).matches;
 
-        if (
-          reduceMotion ||
-          typeof card.animate !== "function" ||
-          typeof description.animate !== "function"
-        ) {
+        if (reduceMotion || typeof incoming.animate !== "function") {
           currentAbility = nextAbility;
           renderAbility();
           return;
         }
 
         isAnimatingAbility = true;
-        card.style.willChange = "transform, opacity";
-        description.style.willChange = "transform, opacity";
+        outgoing.setAttribute("data-leaving", "true");
+        outgoing.style.willChange = "transform, opacity";
+        incoming.style.willChange = "transform, opacity";
+        currentAbility = nextAbility;
         renderAbility();
 
-        const exitDistance = direction > 0 ? -44 : 44;
-        const enterDistance = -exitDistance;
-        const exitAnimation = card.animate(
-          [
-            { opacity: 1, transform: "translate3d(0, 0, 0) scale(1)" },
-            {
-              opacity: 0,
-              transform:
-                "translate3d(" + exitDistance + "px, 0, 0) scale(0.97)",
-            },
-          ],
-          {
-            duration: 220,
-            easing: "cubic-bezier(0.4, 0, 0.2, 1)",
-            fill: "both",
-          }
-        );
-        const exitDescriptionAnimation = description.animate(
-          [
-            { opacity: 1, transform: "translate3d(0, 0, 0)" },
-            { opacity: 0, transform: "translate3d(0, 8px, 0)" },
-          ],
-          {
-            duration: 180,
-            easing: "cubic-bezier(0.4, 0, 0.2, 1)",
-            fill: "both",
-          }
-        );
-
-        Promise.all([
-          exitAnimation.finished,
-          exitDescriptionAnimation.finished,
-        ])
-          .then(function () {
-            exitAnimation.cancel();
-            exitDescriptionAnimation.cancel();
-            currentAbility = nextAbility;
-            renderAbility();
-
-            const enterAnimation = card.animate(
-              [
-                {
-                  opacity: 0,
-                  transform:
-                    "translate3d(" + enterDistance + "px, 0, 0) scale(0.97)",
-                },
-                { opacity: 1, transform: "translate3d(0, 0, 0) scale(1)" },
-              ],
-              {
-                duration: 340,
-                easing: "cubic-bezier(0.22, 1, 0.36, 1)",
-                fill: "both",
-              }
-            );
-            const enterDescriptionAnimation = description.animate(
-              [
-                { opacity: 0, transform: "translate3d(0, -8px, 0)" },
-                { opacity: 1, transform: "translate3d(0, 0, 0)" },
-              ],
-              {
-                duration: 320,
-                easing: "cubic-bezier(0.22, 1, 0.36, 1)",
-                fill: "both",
-              }
-            );
-
-            return Promise.all([
-              enterAnimation.finished,
-              enterDescriptionAnimation.finished,
-            ]).then(function () {
-              enterAnimation.cancel();
-              enterDescriptionAnimation.cancel();
-            });
-          })
-          .then(function () {
+        // Start both slides together, matching the main ability carousel's
+        // 680ms ease-out instead of waiting for an exit before entering.
+        const options = {
+          duration: 680,
+          easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+          fill: "both",
+        };
+        const animations = [];
+        const finishTransition = function () {
+          outgoing.removeAttribute("data-leaving");
+          animations.forEach(function (animation) { animation.cancel(); });
+          [outgoing, incoming].forEach(function (card) {
             card.style.removeProperty("will-change");
-            description.style.removeProperty("will-change");
-            isAnimatingAbility = false;
-            renderAbility();
-          })
-          .catch(function () {
-            [card, description].forEach(function (element) {
-              element.getAnimations().forEach(function (animation) {
-                animation.cancel();
-              });
-              element.style.removeProperty("will-change");
-              element.style.removeProperty("transform");
-              element.style.removeProperty("opacity");
-            });
-            isAnimatingAbility = false;
-            renderAbility();
           });
+          isAnimatingAbility = false;
+          renderAbility();
+        };
+
+        try {
+          animations.push(outgoing.animate(
+            [
+              { opacity: 1, transform: "translate3d(0, 0, 0) scale(1)" },
+              { opacity: 0, transform: "translate3d(" + (-direction * 65) + "%, 0, 0) scale(0.92)" },
+            ],
+            options
+          ));
+          animations.push(incoming.animate(
+            [
+              { opacity: 0, transform: "translate3d(" + (direction * 65) + "%, 0, 0) scale(0.92)" },
+              { opacity: 1, transform: "translate3d(0, 0, 0) scale(1)" },
+            ],
+            options
+          ));
+          Promise.all(animations.map(function (animation) {
+            return animation.finished;
+          })).then(finishTransition, finishTransition);
+        } catch (error) {
+          finishTransition();
+        }
       };
 
       previous.addEventListener("click", function () {
