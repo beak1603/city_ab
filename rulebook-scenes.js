@@ -485,6 +485,35 @@
     });
   }
 
+  // Composite a floor shadow beneath the unchanged supplied question-mark image.
+  function drawGroundedQuestion(context, source, width, height) {
+    context.save();
+    context.scale(width / 1254, height / 1254);
+    context.translate(635, 1090);
+    context.scale(180, 40);
+    const shadow = context.createRadialGradient(0, 0, 0, 0, 0, 1);
+    shadow.addColorStop(0, "rgba(0, 0, 0, 0.62)");
+    shadow.addColorStop(0.45, "rgba(0, 0, 0, 0.35)");
+    shadow.addColorStop(1, "rgba(0, 0, 0, 0)");
+    context.fillStyle = shadow;
+    context.fillRect(-1, -1, 2, 2);
+    context.restore();
+
+    context.save();
+    context.scale(width / 1254, height / 1254);
+    context.filter = "blur(8px)";
+    context.fillStyle = "rgba(0, 0, 0, 0.58)";
+    context.beginPath();
+    context.moveTo(492, 1061);
+    context.lineTo(651, 1109);
+    context.lineTo(767, 1061);
+    context.lineTo(610, 1024);
+    context.closePath();
+    context.fill();
+    context.restore();
+    context.drawImage(source, 0, 0, width, height);
+  }
+
   function createScene(scene, index) {
     const section = document.createElement("section");
     section.className = "guide-scene";
@@ -1084,8 +1113,8 @@
         anchorX: 0.673,
       },
       "2. 능력 추첨": {
-        src: "./scene-ability-question-v3.svg",
-        directImage: true,
+        src: "./scene-ability-question-supplied-v1.png",
+        groundedQuestion: true,
         alt: "마인크래프트 스타일 입체 픽셀 물음표",
         anchorX: 0.673,
       },
@@ -1173,6 +1202,11 @@
 
         iconCanvas.width = width;
         iconCanvas.height = height;
+        if (isolatedIcon.groundedQuestion) {
+          drawGroundedQuestion(context, iconSource, width, height);
+          balanceSceneArtwork(iconCanvas, iconCanvas);
+          return;
+        }
         if (isolatedIcon.groundedFieldBoxes) {
           drawGroundedFieldBoxes(context, iconSource, width, height);
           balanceSceneArtwork(iconCanvas, iconCanvas);
