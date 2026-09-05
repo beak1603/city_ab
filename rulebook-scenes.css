@@ -630,3 +630,35 @@
     font-size: clamp(42px, 4.2vw, 52px);
   }
 }
+
+
+/* Isolate the token-system emerald over the shared token-station gradient. */
+#guide .guide-detail__panel--scenes[data-guide-id="game-start"] > .guide-scene:nth-child(3)::before {
+  inset: 0 0 0 auto !important;
+  width: auto !important;
+  height: 100% !important;
+  aspect-ratio: 2170 / 725 !important;
+  background-color: transparent !important;
+  background-image: url("./scene-token-system-v10.png") !important;
+  background-position: center !important;
+  background-size: 100% 100% !important;
+  background-repeat: no-repeat !important;
+  mix-blend-mode: screen;
+  filter: none !important;
+  -webkit-mask-image: radial-gradient(
+    ellipse 12% 29% at 67.4% 58%,
+    #000 0%,
+    #000 50%,
+    rgba(0, 0, 0, 0.78) 66%,
+    rgba(0, 0, 0, 0.3) 83%,
+    transparent 100%
+  ) !important;
+  mask-image: radial-gradient(
+    ellipse 12% 29% at 67.4% 58%,
+    #000 0%,
+    #000 50%,
+    rgba(0, 0, 0, 0.78) 66%,
+    rgba(0, 0, 0, 0.3) 83%,
+    transparent 100%
+  ) !important;
+}
