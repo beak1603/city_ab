@@ -366,6 +366,60 @@
     context.drawImage(source, ...sourceBounds, ...targetBounds);
   }
 
+  function drawGroundedEnchant(context, source, width, height) {
+    const floorY = 570;
+    const reflectionScale = 0.38;
+    const reflected = document.createElement("canvas");
+    reflected.width = width;
+    reflected.height = height;
+    const mirror = reflected.getContext("2d");
+    if (mirror) {
+      mirror.save();
+      mirror.translate(0, floorY * (1 + reflectionScale));
+      mirror.scale(1, -reflectionScale);
+      mirror.filter = "blur(3px)";
+      mirror.drawImage(source, 0, 0);
+      mirror.restore();
+      mirror.globalCompositeOperation = "destination-in";
+      const fade = mirror.createLinearGradient(0, floorY, 0, floorY + 114);
+      fade.addColorStop(0, "rgba(0, 0, 0, 0.28)");
+      fade.addColorStop(0.45, "rgba(0, 0, 0, 0.14)");
+      fade.addColorStop(1, "rgba(0, 0, 0, 0)");
+      mirror.fillStyle = fade;
+      mirror.fillRect(0, 0, width, height);
+      context.drawImage(reflected, 0, 0);
+    }
+
+    // The contact shadow follows the table's diamond-shaped footprint.
+    context.save();
+    context.filter = "blur(10px)";
+    context.fillStyle = "rgba(0, 0, 0, 0.38)";
+    context.beginPath();
+    context.moveTo(1310, 506);
+    context.lineTo(1462, 440);
+    context.lineTo(1614, 506);
+    context.lineTo(1462, 580);
+    context.closePath();
+    context.fill();
+    context.restore();
+
+    const floorLight = function (x, y, radiusX, radiusY) {
+      context.save();
+      context.translate(x, y);
+      context.scale(radiusX, radiusY);
+      const glow = context.createRadialGradient(0, 0, 0, 0, 0, 1);
+      glow.addColorStop(0, "rgba(72, 218, 204, 0.17)");
+      glow.addColorStop(0.35, "rgba(43, 166, 173, 0.09)");
+      glow.addColorStop(1, "rgba(43, 166, 173, 0)");
+      context.fillStyle = glow;
+      context.fillRect(-1, -1, 2, 2);
+      context.restore();
+    };
+    floorLight(1324, 521, 78, 25);
+    floorLight(1600, 521, 78, 25);
+    context.drawImage(source, 0, 0);
+  }
+
   function createScene(scene, index) {
     const section = document.createElement("section");
     section.className = "guide-scene";
@@ -880,7 +934,8 @@
         alphaFloor: 26,
       },
       "3. 인첸트": {
-        src: "./scene-enchant-transparent-v2.png",
+        src: "./scene-enchant-reference-v1.png",
+        groundedEnchant: true,
         bounds: [0.5, 0.81, 0.16, 0.99],
         focus: [0.65, 0.67, 0.17, 0.44],
         precut: true,
@@ -960,6 +1015,10 @@
 
         iconCanvas.width = width;
         iconCanvas.height = height;
+        if (isolatedIcon.groundedEnchant) {
+          drawGroundedEnchant(context, iconSource, width, height);
+          return;
+        }
         if (isolatedIcon.groundedSword) {
           drawGroundedSword(context, iconSource, width, height);
           return;
