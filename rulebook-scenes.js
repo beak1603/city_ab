@@ -533,6 +533,21 @@
 
     if (scene.steve) {
       section.classList.add("guide-scene--final-ready");
+      const aura = document.createElement("div");
+      aura.className = "final-ready__aura";
+      aura.setAttribute("aria-hidden", "true");
+      const auraColors = ["91, 239, 163", "83, 213, 255", "152, 113, 255", "233, 125, 234", "255, 202, 108"];
+      [7, 90, 17, 80, 3, 96, 26, 72, 12, 86, 35, 63].forEach(function (left, index) {
+        const wisp = document.createElement("span");
+        wisp.className = "final-ready__aura-wisp";
+        wisp.style.setProperty("--aura-left", left + "%");
+        wisp.style.setProperty("--aura-color", auraColors[index % auraColors.length]);
+        wisp.style.setProperty("--aura-duration", (4.8 + (index % 4) * 0.55) + "s");
+        wisp.style.setProperty("--aura-delay", (-index * 0.61) + "s");
+        wisp.style.setProperty("--aura-drift", (index % 2 ? -18 : 18) + "px");
+        aura.appendChild(wisp);
+      });
+      section.appendChild(aura);
       const steve = document.createElement("img");
       steve.className = "final-ready__steve";
       steve.src = scene.steve;
