@@ -313,47 +313,6 @@
     });
   }
 
-  function renderNaturalReflection(
-    sourceCanvas,
-    reflectionCanvas,
-    options
-  ) {
-    const width = sourceCanvas.width;
-    const height = sourceCanvas.height;
-    const floorY = options.floorY * height;
-    const depth = options.reflectionDepth * height;
-    const context = reflectionCanvas.getContext("2d");
-
-    if (!context || !width || !height) return;
-
-    reflectionCanvas.width = width;
-    reflectionCanvas.height = height;
-    context.clearRect(0, 0, width, height);
-    context.save();
-    context.translate(0, floorY * 2);
-    context.scale(1, -1);
-    context.globalAlpha = options.reflectionOpacity;
-    context.filter = `blur(${options.reflectionBlur}px)`;
-    context.drawImage(sourceCanvas, 0, 0);
-    context.restore();
-
-    context.globalCompositeOperation = "destination-in";
-    const fade = context.createLinearGradient(
-      0,
-      floorY,
-      0,
-      floorY + depth
-    );
-    fade.addColorStop(0, "rgba(255, 255, 255, 0.72)");
-    fade.addColorStop(0.18, "rgba(255, 255, 255, 0.52)");
-    fade.addColorStop(0.58, "rgba(255, 255, 255, 0.18)");
-    fade.addColorStop(1, "rgba(255, 255, 255, 0)");
-    context.fillStyle = fade;
-    context.fillRect(0, floorY, width, depth);
-    context.globalCompositeOperation = "source-over";
-    context.filter = "none";
-  }
-
   function createScene(scene, index) {
     const section = document.createElement("section");
     section.className = "guide-scene";
@@ -753,16 +712,6 @@
       iconCanvas.className = "token-system__icon-layer";
       iconCanvas.setAttribute("aria-hidden", "true");
 
-      const reflectionCanvas = document.createElement("canvas");
-      reflectionCanvas.className = "token-system__reflection-layer";
-      reflectionCanvas.setAttribute("aria-hidden", "true");
-      const tokenReflection = {
-        floorY: 0.735,
-        reflectionDepth: 0.25,
-        reflectionOpacity: 0.28,
-        reflectionBlur: 8,
-      };
-
       const iconSource = new Image();
       iconSource.decoding = "async";
       iconSource.onload = function () {
@@ -807,32 +756,15 @@
             );
           }
 
-          const yRatio = y / height;
-          const objectFade =
-            yRatio <= tokenReflection.floorY
-              ? 1
-              : Math.max(
-                  0,
-                  1 -
-                    (yRatio - tokenReflection.floorY) /
-                      0.035
-                );
-
           pixels[offset + 3] = Math.min(
             pixels[offset + 3],
-            Math.round(alpha * objectFade)
+            Math.round(alpha)
           );
         }
 
         context.putImageData(imageData, 0, 0);
-        renderNaturalReflection(
-          iconCanvas,
-          reflectionCanvas,
-          tokenReflection
-        );
       };
       iconSource.src = "./scene-token-system-v10.png";
-      section.appendChild(reflectionCanvas);
       section.appendChild(iconCanvas);
     }
 
@@ -849,10 +781,6 @@
         contrastFloor: 8,
         contrastWeight: 0,
         alphaFloor: 26,
-        floorY: 0.7,
-        reflectionDepth: 0.25,
-        reflectionOpacity: 0.28,
-        reflectionBlur: 8,
       },
       "2. 능력 추첨": {
         src: "./scene-ability-draw-v4.png",
@@ -866,10 +794,6 @@
         contrastFloor: 8,
         contrastWeight: 0,
         alphaFloor: 26,
-        floorY: 0.7,
-        reflectionDepth: 0.25,
-        reflectionOpacity: 0.26,
-        reflectionBlur: 8,
       },
       "3. 인첸트": {
         src: "./scene-enchant-v4.png",
@@ -883,10 +807,6 @@
         contrastFloor: 7,
         contrastWeight: 0,
         alphaFloor: 26,
-        floorY: 0.74,
-        reflectionDepth: 0.23,
-        reflectionOpacity: 0.24,
-        reflectionBlur: 7,
       },
       "4. 최종 준비": {
         src: "./scene-final-ready-v7.png",
@@ -900,10 +820,6 @@
         contrastFloor: 7,
         contrastWeight: 0,
         alphaFloor: 30,
-        floorY: 0.8,
-        reflectionDepth: 0.2,
-        reflectionOpacity: 0.16,
-        reflectionBlur: 5,
       },
       "1. 자기장": {
         src: "./scene-magnetic-v5.png",
@@ -930,10 +846,6 @@
         contrastFloor: 7,
         contrastWeight: 0,
         alphaFloor: 30,
-        floorY: 0.84,
-        reflectionDepth: 0.16,
-        reflectionOpacity: 0.2,
-        reflectionBlur: 6,
       },
     };
     const isolatedIcon = isolatedSceneIcons[scene.title];
@@ -948,20 +860,6 @@
         "--scene-icon-anchor",
         `${isolatedIcon.anchorX * 100}%`
       );
-
-      const reflectionCanvas =
-        typeof isolatedIcon.floorY === "number"
-          ? document.createElement("canvas")
-          : null;
-      if (reflectionCanvas) {
-        reflectionCanvas.className =
-          "guide-scene__isolated-reflection";
-        reflectionCanvas.setAttribute("aria-hidden", "true");
-        reflectionCanvas.style.setProperty(
-          "--scene-icon-anchor",
-          `${isolatedIcon.anchorX * 100}%`
-        );
-      }
 
       const iconSource = new Image();
       iconSource.decoding = "async";
@@ -1087,36 +985,15 @@
                 )
               : rawAlpha;
 
-          const objectFade =
-            typeof isolatedIcon.floorY !== "number" ||
-            yRatio <= isolatedIcon.floorY
-              ? 1
-              : Math.max(
-                  0,
-                  1 -
-                    (yRatio - isolatedIcon.floorY) /
-                      0.035
-                );
-
           pixels[offset + 3] = Math.min(
             pixels[offset + 3],
-            Math.round(cleanedAlpha * objectFade)
+            Math.round(cleanedAlpha)
           );
         }
 
         context.putImageData(imageData, 0, 0);
-        if (reflectionCanvas) {
-          renderNaturalReflection(
-            iconCanvas,
-            reflectionCanvas,
-            isolatedIcon
-          );
-        }
       };
       iconSource.src = isolatedIcon.src;
-      if (reflectionCanvas) {
-        section.appendChild(reflectionCanvas);
-      }
       section.appendChild(iconCanvas);
     }
 
