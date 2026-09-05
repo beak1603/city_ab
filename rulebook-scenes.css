@@ -1180,3 +1180,47 @@
 #guide .guide-scene h3 {
   color: #c7efb4;
 }
+
+/* Localized energy ribbons follow the marked head, shoulder, arm and waist arcs. */
+#guide .final-ready__ribbon-aura {
+  position: absolute;
+  z-index: 3;
+  left: 81.5%;
+  bottom: 0;
+  width: 34%;
+  height: 100%;
+  transform: translateX(-50%);
+  overflow: visible;
+  pointer-events: none;
+}
+#guide .final-ready__ribbon {
+  fill: none;
+  stroke: url("#steve-ribbon-color");
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 56 144;
+  animation: steve-ribbon-flow var(--ribbon-duration) ease-in-out var(--ribbon-delay) infinite;
+}
+#guide .final-ready__ribbon--glow {
+  stroke-width: 30;
+  filter: url("#steve-ribbon-glow");
+}
+#guide .final-ready__ribbon--core {
+  stroke-width: 5;
+}
+@keyframes steve-ribbon-flow {
+  0% { stroke-dashoffset: 56; opacity: 0; }
+  18% { opacity: .8; }
+  65% { opacity: .72; }
+  100% { stroke-dashoffset: -100; opacity: 0; }
+}
+@media (max-width: 720px) {
+  #guide .final-ready__ribbon-aura {
+    left: 50%;
+    width: 90%;
+    height: 330px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #guide .final-ready__ribbon { animation: none; stroke-dasharray: none; opacity: .45; }
+}
