@@ -624,24 +624,24 @@
         captureLabel.style.top = (sourceY / 6).toFixed(3) + "%";
 
         let startTransform =
-          "translate3d(-50%, -110%, 0) scale(0.94)";
+          "translate3d(-50%, -190%, 0) scale(0.94)";
         let visibleTransform =
-          "translate3d(-50%, -170%, 0) scale(1)";
+          "translate3d(-50%, -250%, 0) scale(1)";
         let holdTransform =
-          "translate3d(-50%, -178%, 0) scale(1)";
+          "translate3d(-50%, -260%, 0) scale(1)";
         let exitTransform =
-          "translate3d(-50%, -205%, 0) scale(0.97)";
+          "translate3d(-50%, -290%, 0) scale(0.97)";
 
         if (sourceX > 300) {
-          startTransform = "translate3d(-105%, -50%, 0) scale(0.94)";
-          visibleTransform = "translate3d(-150%, -50%, 0) scale(1)";
-          holdTransform = "translate3d(-158%, -50%, 0) scale(1)";
-          exitTransform = "translate3d(-180%, -50%, 0) scale(0.97)";
+          startTransform = "translate3d(-175%, -50%, 0) scale(0.94)";
+          visibleTransform = "translate3d(-220%, -50%, 0) scale(1)";
+          holdTransform = "translate3d(-230%, -50%, 0) scale(1)";
+          exitTransform = "translate3d(-260%, -50%, 0) scale(0.97)";
         } else if (sourceX < 300) {
-          startTransform = "translate3d(5%, -50%, 0) scale(0.94)";
-          visibleTransform = "translate3d(48%, -50%, 0) scale(1)";
-          holdTransform = "translate3d(56%, -50%, 0) scale(1)";
-          exitTransform = "translate3d(78%, -50%, 0) scale(0.97)";
+          startTransform = "translate3d(70%, -50%, 0) scale(0.94)";
+          visibleTransform = "translate3d(115%, -50%, 0) scale(1)";
+          holdTransform = "translate3d(125%, -50%, 0) scale(1)";
+          exitTransform = "translate3d(155%, -50%, 0) scale(0.97)";
         }
 
         captureLabel.animate(
