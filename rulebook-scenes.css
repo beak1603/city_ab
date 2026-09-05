@@ -1085,3 +1085,46 @@
   overflow: hidden;
   overflow: clip;
 }
+
+/* Attach the supplied portrait's cut edge directly to the final-ready scene floor. */
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] > .guide-scene--final-ready::before {
+  content: none !important;
+  display: none !important;
+}
+#guide .final-ready__steve {
+  position: absolute;
+  z-index: 2;
+  top: auto;
+  bottom: 0;
+  left: 81.5%;
+  right: auto;
+  display: block;
+  width: auto;
+  height: 100%;
+  max-width: 34%;
+  object-fit: contain;
+  object-position: center bottom;
+  transform: translateX(-50%);
+  opacity: 1;
+  filter: none;
+  mix-blend-mode: normal;
+  background: transparent;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+}
+@media (max-width: 720px) {
+  #guide .guide-scene--final-ready .guide-scene__content {
+    position: relative;
+    top: auto;
+    transform: none;
+    animation-name: support-scene-enter;
+    padding: 28px 22px 350px;
+  }
+  #guide .final-ready__steve {
+    left: 50%;
+    height: 330px;
+    max-width: 90%;
+  }
+}

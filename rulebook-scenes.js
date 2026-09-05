@@ -42,6 +42,7 @@
         },
         {
           title: "4. 최종 준비",
+          steve: "./scene-final-ready-steve-v1.png",
           description: "모든 플레이어가 최종 준비가 되면\n최후의 1인을 가리는 게임이 시작됩니다",
         },
       ],
@@ -499,6 +500,18 @@
       artwork.height = 1244;
       artwork.decoding = "async";
       section.appendChild(artwork);
+    }
+
+    if (scene.steve) {
+      section.classList.add("guide-scene--final-ready");
+      const steve = document.createElement("img");
+      steve.className = "final-ready__steve";
+      steve.src = scene.steve;
+      steve.alt = "정면을 바라보며 결의를 다지는 스티브";
+      steve.width = 1145;
+      steve.height = 1374;
+      steve.decoding = "async";
+      section.appendChild(steve);
     }
 
     if (scene.image) {
@@ -1052,21 +1065,6 @@
         contrastFloor: 7,
         contrastWeight: 0,
         alphaFloor: 26,
-      },
-      "4. 최종 준비": {
-        src: "./scene-final-ready-3d-v1.png",
-        groundedSword: true,
-        bounds: [0.55, 0.86, 0.15, 0.995],
-        focus: [0.69, 0.69, 0.14, 0.44],
-        precut: true,
-        anchorX: 0.69,
-        colorFloor: 10,
-        colorSolid: 24,
-        brightnessFloor: 110,
-        brightnessSolid: 135,
-        contrastFloor: 7,
-        contrastWeight: 0,
-        alphaFloor: 30,
       },
       "1. 자기장": {
         src: "./scene-magnetic-v5.png",
