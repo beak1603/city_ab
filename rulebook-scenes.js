@@ -90,7 +90,7 @@
             { name: "비상 가속", category: "survival", image: "./support-emergency-boost.webp", description: "피해를 받고 체력이 일정 체력 이하가 되면 일정 시간 동안 빠른 이동 속도를 얻습니다." },
             { name: "생명 포식", category: "survival", image: "./support-life-devour.webp", description: "다른 플레이어를 처치하면 일시적으로 재생효과를 얻습니다." },
             { name: "정화 장막", category: "survival", image: "./support-purifying-barrier.webp", description: "사용 시 본인에게 적용되는 해로운 효과들을 일시적으로 막습니다." },
-            { name: "위치 투영기", category: "information", image: "./support-position-projector.webp", description: "사용 시 주변 플레이어 위치에 잔상을 남깁니다." },
+            { name: "위치 투영기", category: "information", image: "./support-position-projector.webp", description: "사용시 일정 반경 이내 다른 플레이어들의 위치를 잔상으로 남깁니다" },
             { name: "생체 분석기", category: "information", image: "./support-bio-analyzer.webp", description: "다른 플레이어들의 남은 체력을 확인할 수 있습니다." },
             { name: "고속 추출기", category: "resource", image: "./support-high-speed-extractor.webp", description: "토큰 생성소 점령시간이 절반으로 줄어듭니다." },
             { name: "현상금 증폭기", category: "resource", image: "./support-bounty-amplifier.webp", description: "플레이어 처치 보상이 토큰 2개에서 3개로 증가합니다." },
