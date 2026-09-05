@@ -611,6 +611,9 @@
       // Keep every image mounted and decoded, and reserve one stable slide area.
       const viewport = document.createElement("div");
       viewport.className = "support-ability__viewport";
+      const captions = document.createElement("div");
+      captions.className = "support-ability__viewport";
+      const cardNames = [];
       const cards = scene.abilities.map(function (ability) {
         const card = document.createElement("div");
         card.className = "support-ability__slide";
@@ -633,10 +636,11 @@
         icon.appendChild(image);
 
         const name = document.createElement("h4");
-        name.className = "support-ability__name";
+        name.className = "support-ability__name support-ability__slide";
         name.textContent = ability.name;
         card.appendChild(icon);
-        card.appendChild(name);
+        captions.appendChild(name);
+        cardNames.push(name);
         viewport.appendChild(card);
         return card;
       });
@@ -646,6 +650,7 @@
       count.setAttribute("aria-hidden", "true");
 
       cardFrame.appendChild(viewport);
+      cardFrame.appendChild(captions);
       cardFrame.appendChild(count);
       stage.appendChild(previous);
       stage.appendChild(cardFrame);
@@ -656,8 +661,8 @@
 
       const renderAbility = function () {
         const ability = scene.abilities[currentAbility];
-        abilityNames.forEach(function (name, nameIndex) {
-          const active = nameIndex === currentAbility;
+        abilityNames.concat(cardNames).forEach(function (name, nameIndex) {
+          const active = nameIndex % scene.abilities.length === currentAbility;
           name.setAttribute("data-active", String(active));
           name.setAttribute("aria-hidden", String(!active));
         });
@@ -695,6 +700,11 @@
         const incomingText = abilityTexts[nextAbility];
         const outgoingName = abilityNames[currentAbility];
         const incomingName = abilityNames[nextAbility];
+        const textPairs = [
+          [outgoingText, incomingText],
+          [outgoingName, incomingName],
+          [cardNames[currentAbility], cardNames[nextAbility]],
+        ];
         const reduceMotion = window.matchMedia(
           "(prefers-reduced-motion: reduce)"
         ).matches;
@@ -707,18 +717,16 @@
 
         isAnimatingAbility = true;
         outgoing.setAttribute("data-leaving", "true");
-        outgoingText.setAttribute("data-leaving", "true");
-        outgoingName.setAttribute("data-leaving", "true");
+        textPairs.forEach(function (pair) {
+          pair[0].setAttribute("data-leaving", "true");
+          pair.forEach(function (element) { element.style.willChange = "opacity"; });
+        });
         outgoing.style.willChange = "transform, opacity";
         incoming.style.willChange = "transform, opacity";
-        outgoingText.style.willChange = "transform, opacity";
-        incomingText.style.willChange = "transform, opacity";
-        outgoingName.style.willChange = "transform, opacity";
-        incomingName.style.willChange = "transform, opacity";
         currentAbility = nextAbility;
         renderAbility();
 
-        // Move both slides continuously on one clock, with no wait between exit and entry.
+        // Keep the icon slide; fade all copy in place without overlapping readable text.
         const options = {
           duration: 450,
           easing: "cubic-bezier(0.2, 0.72, 0.28, 1)",
@@ -727,10 +735,9 @@
         const animations = [];
         const finishTransition = function () {
           outgoing.removeAttribute("data-leaving");
-          outgoingText.removeAttribute("data-leaving");
-          outgoingName.removeAttribute("data-leaving");
+          textPairs.forEach(function (pair) { pair[0].removeAttribute("data-leaving"); });
           animations.forEach(function (animation) { animation.cancel(); });
-          [outgoing, incoming, outgoingText, incomingText, outgoingName, incomingName].forEach(function (card) {
+          [outgoing, incoming].concat(...textPairs).forEach(function (card) {
             card.style.removeProperty("will-change");
           });
           isAnimatingAbility = false;
@@ -760,13 +767,25 @@
             "translate3d(" + (direction * 100) + "%, 0, 0)",
             "translate3d(0, 0, 0)"
           );
-          [ [outgoingText, incomingText], [outgoingName, incomingName] ].forEach(function (pair) {
-            animatePair(
-              pair[0], pair[1],
-              "translate3d(" + (-direction * 100) + "%, 0, 0)",
-              "translate3d(" + (direction * 100) + "%, 0, 0)",
-              "translate3d(0, 0, 0)"
-            );
+          const textOptions = { duration: options.duration, easing: "linear", fill: "both" };
+          textPairs.forEach(function (pair) {
+            animations.push(pair[0].animate(
+              [
+                { opacity: 1, offset: 0, easing: "ease-out" },
+                { opacity: 0, offset: 0.32 },
+                { opacity: 0, offset: 1 },
+              ],
+              textOptions
+            ));
+            animations.push(pair[1].animate(
+              [
+                { opacity: 0, offset: 0 },
+                { opacity: 0, offset: 0.32, easing: "ease-in-out" },
+                { opacity: 1, offset: 0.9 },
+                { opacity: 1, offset: 1 },
+              ],
+              textOptions
+            ));
           });
           // Set one clock origin explicitly, even if frame creation spans a paint.
           const sharedStart = document.timeline && document.timeline.currentTime;
