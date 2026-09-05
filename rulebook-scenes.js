@@ -432,6 +432,12 @@
 
       const featuredName = document.createElement("p");
       featuredName.className = "support-ability__featured-name";
+      const abilityNames = scene.abilities.map(function (ability) {
+        const name = document.createElement("span");
+        name.textContent = ability.name;
+        featuredName.appendChild(name);
+        return name;
+      });
       heading.appendChild(featuredName);
 
       const description = document.createElement("p");
@@ -507,7 +513,11 @@
 
       const renderAbility = function () {
         const ability = scene.abilities[currentAbility];
-        featuredName.textContent = ability.name;
+        abilityNames.forEach(function (name, nameIndex) {
+          const active = nameIndex === currentAbility;
+          name.setAttribute("data-active", String(active));
+          name.setAttribute("aria-hidden", String(!active));
+        });
         abilityTexts.forEach(function (text, textIndex) {
           const active = textIndex === currentAbility;
           text.setAttribute("data-active", String(active));
@@ -540,6 +550,8 @@
         const incoming = cards[nextAbility];
         const outgoingText = abilityTexts[currentAbility];
         const incomingText = abilityTexts[nextAbility];
+        const outgoingName = abilityNames[currentAbility];
+        const incomingName = abilityNames[nextAbility];
         const reduceMotion = window.matchMedia(
           "(prefers-reduced-motion: reduce)"
         ).matches;
@@ -553,10 +565,13 @@
         isAnimatingAbility = true;
         outgoing.setAttribute("data-leaving", "true");
         outgoingText.setAttribute("data-leaving", "true");
+        outgoingName.setAttribute("data-leaving", "true");
         outgoing.style.willChange = "transform, opacity";
         incoming.style.willChange = "transform, opacity";
         outgoingText.style.willChange = "transform, opacity";
         incomingText.style.willChange = "transform, opacity";
+        outgoingName.style.willChange = "transform, opacity";
+        incomingName.style.willChange = "transform, opacity";
         currentAbility = nextAbility;
         renderAbility();
 
@@ -571,8 +586,9 @@
         const finishTransition = function () {
           outgoing.removeAttribute("data-leaving");
           outgoingText.removeAttribute("data-leaving");
+          outgoingName.removeAttribute("data-leaving");
           animations.forEach(function (animation) { animation.cancel(); });
-          [outgoing, incoming, outgoingText, incomingText].forEach(function (card) {
+          [outgoing, incoming, outgoingText, incomingText, outgoingName, incomingName].forEach(function (card) {
             card.style.removeProperty("will-change");
           });
           isAnimatingAbility = false;
@@ -594,22 +610,31 @@
             ],
             options
           ));
-          // Crossfade the descriptions on the same timeline as the icons,
-          // using a smaller distance to keep the text easy to follow.
-          animations.push(outgoingText.animate(
-            [
-              { opacity: 1, transform: "translate3d(0, 0, 0)" },
-              { opacity: 0, transform: "translate3d(" + (-direction * 24) + "px, 0, 0)" },
-            ],
-            options
-          ));
-          animations.push(incomingText.animate(
-            [
-              { opacity: 0, transform: "translate3d(" + (direction * 24) + "px, 0, 0)" },
-              { opacity: 1, transform: "translate3d(0, 0, 0)" },
-            ],
-            options
-          ));
+          // The old copy is fully gone at 26%; the new copy starts at 32%.
+          // Both phases share the icon timeline, without overlapping letters.
+          const animateCopy = function (oldCopy, newCopy) {
+            const exitTransform = "translate3d(" + (-direction * 16) + "px, 0, 0)";
+            const enterTransform = "translate3d(" + (direction * 16) + "px, 0, 0)";
+            const copyOptions = { duration: options.duration, easing: "linear", fill: "both" };
+            animations.push(oldCopy.animate(
+              [
+                { opacity: 1, transform: "translate3d(0, 0, 0)", offset: 0, easing: "ease-in" },
+                { opacity: 0, transform: exitTransform, offset: 0.26 },
+                { opacity: 0, transform: exitTransform, offset: 1 },
+              ],
+              copyOptions
+            ));
+            animations.push(newCopy.animate(
+              [
+                { opacity: 0, transform: enterTransform, offset: 0 },
+                { opacity: 0, transform: enterTransform, offset: 0.32, easing: options.easing },
+                { opacity: 1, transform: "translate3d(0, 0, 0)", offset: 1 },
+              ],
+              copyOptions
+            ));
+          };
+          animateCopy(outgoingText, incomingText);
+          animateCopy(outgoingName, incomingName);
           Promise.all(animations.map(function (animation) {
             return animation.finished;
           })).then(finishTransition, finishTransition);
