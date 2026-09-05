@@ -705,6 +705,69 @@
       return section;
     }
 
+    if (scene.title === "3. 토큰시스템") {
+      section.classList.add("guide-scene--token-system");
+
+      const iconCanvas = document.createElement("canvas");
+      iconCanvas.className = "token-system__icon-layer";
+      iconCanvas.setAttribute("aria-hidden", "true");
+
+      const iconSource = new Image();
+      iconSource.decoding = "async";
+      iconSource.onload = function () {
+        const width = iconSource.naturalWidth;
+        const height = iconSource.naturalHeight;
+        const context = iconCanvas.getContext("2d", {
+          willReadFrequently: true,
+        });
+        if (!context || !width || !height) return;
+
+        iconCanvas.width = width;
+        iconCanvas.height = height;
+        context.drawImage(iconSource, 0, 0);
+
+        const imageData = context.getImageData(0, 0, width, height);
+        const pixels = imageData.data;
+
+        for (let offset = 0; offset < pixels.length; offset += 4) {
+          const red = pixels[offset];
+          const green = pixels[offset + 1];
+          const blue = pixels[offset + 2];
+          const pixelIndex = offset / 4;
+          const x = pixelIndex % width;
+          const y = Math.floor(pixelIndex / width);
+          const greenDominance = green - Math.max(red, blue);
+          const brightness = (red + green + blue) / 3;
+          const insideHighlight =
+            x > width * 0.6 &&
+            x < width * 0.75 &&
+            y > height * 0.34 &&
+            y < height * 0.82;
+
+          let alpha = Math.max(
+            0,
+            Math.min(255, (greenDominance - 3) * 12)
+          );
+
+          if (insideHighlight && brightness > 165) {
+            alpha = Math.max(
+              alpha,
+              Math.min(255, (brightness - 165) * 5)
+            );
+          }
+
+          pixels[offset + 3] = Math.min(
+            pixels[offset + 3],
+            Math.round(alpha)
+          );
+        }
+
+        context.putImageData(imageData, 0, 0);
+      };
+      iconSource.src = "./scene-token-system-v10.png";
+      section.appendChild(iconCanvas);
+    }
+
     const title = document.createElement("h3");
     title.textContent = scene.title;
     content.appendChild(title);
