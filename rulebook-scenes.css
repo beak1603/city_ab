@@ -1175,3 +1175,8 @@
     drop-shadow(0 0 24px rgba(255, 211, 75, .26))
     drop-shadow(0 0 46px rgba(231, 175, 44, .16));
 }
+
+/* Pale green for the large rulebook section headings. */
+#guide .guide-scene h3 {
+  color: #c7efb4;
+}
