@@ -1161,3 +1161,17 @@
       drop-shadow(0 0 52px rgba(124, 51, 204, .22));
   }
 }
+
+/* Gentle colored light around the preparation and ability-draw artwork. */
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] > .guide-scene:nth-child(1) .guide-scene__isolated-icon {
+  filter:
+    drop-shadow(0 0 7px rgba(159, 255, 116, .34))
+    drop-shadow(0 0 24px rgba(94, 226, 103, .26))
+    drop-shadow(0 0 46px rgba(55, 182, 91, .16));
+}
+#guide .guide-detail__panel--scenes[data-guide-id="pre-game"] > .guide-scene:nth-child(2) .guide-scene__isolated-icon {
+  filter:
+    drop-shadow(0 0 7px rgba(255, 238, 126, .34))
+    drop-shadow(0 0 24px rgba(255, 211, 75, .26))
+    drop-shadow(0 0 46px rgba(231, 175, 44, .16));
+}
