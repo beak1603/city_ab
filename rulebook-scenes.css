@@ -1235,3 +1235,24 @@
     overflow-wrap: normal;
   }
 }
+
+/* Use the supplied transparent logo while retaining the accessible page heading. */
+.hero #hero-title {
+  display: block;
+  width: min(100%, 860px);
+  max-width: none;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 2048 / 682;
+  padding: 0;
+  font-size: 0;
+  line-height: 0;
+  white-space: nowrap;
+  text-indent: -9999px;
+  overflow: hidden;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+  background: url("./city-ability-main-logo-v1.png") center / contain no-repeat;
+}
