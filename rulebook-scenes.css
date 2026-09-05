@@ -706,3 +706,20 @@
   filter: none;
   mix-blend-mode: normal;
 }
+
+
+/* Align every guide icon to the token-station center axis on desktop. */
+@media (min-width: 721px) {
+  #guide .token-system__icon-layer,
+  #guide .guide-scene__isolated-icon {
+    left: 81.5%;
+    right: auto;
+    transform: translateX(
+      calc(var(--scene-icon-anchor, 70%) * -1)
+    );
+  }
+
+  #guide .token-system__icon-layer {
+    --scene-icon-anchor: 67.7%;
+  }
+}
