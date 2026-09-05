@@ -454,17 +454,29 @@
       context.restore();
     });
 
-    // Contact shadows follow the actual base perspective, not a floating oval.
+    // Spread the cast shadow beyond the cube so it stays visible at site scale.
     boxes.forEach(function (box) {
+      const centerX = box.base.reduce(function (sum, point) { return sum + point[0]; }, 0) / box.base.length;
+      const centerY = box.base.reduce(function (sum, point) { return sum + point[1]; }, 0) / box.base.length;
+      const cast = box.base.map(function (point) {
+        return [centerX + (point[0] - centerX) * 1.18 - 16,
+          centerY + (point[1] - centerY) * 1.18 + 14];
+      });
       context.save();
-      context.filter = "blur(" + (7 * scaleX) + "px)";
-      context.fillStyle = "rgba(0,0,0,0.46)";
+      context.filter = "blur(" + (9 * scaleX) + "px)";
+      context.fillStyle = "rgba(0,0,0,0.86)";
+      trace(context, cast);
+      context.fill();
+
+      // A dense soft edge directly touches both visible bottom faces.
+      context.filter = "blur(" + (3 * scaleX) + "px)";
+      context.fillStyle = "rgba(0,0,0,0.92)";
+      context.strokeStyle = "rgba(0,0,0,0.88)";
+      context.lineWidth = 14 * scaleX;
+      context.lineJoin = "round";
       trace(context, box.base);
       context.fill();
-      context.filter = "blur(" + (2 * scaleX) + "px)";
-      context.fillStyle = "rgba(0,0,0,0.62)";
-      trace(context, box.base);
-      context.fill();
+      context.stroke();
       context.restore();
     });
     cutouts.forEach(function (canvas) {
