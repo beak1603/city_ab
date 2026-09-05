@@ -365,7 +365,9 @@
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene--token-station {
   min-height: clamp(460px, 50vw, 560px) !important;
   overflow: hidden;
-  background: #000 !important;
+  background:
+    radial-gradient(circle at 82% 36%, rgba(82, 89, 86, 0.26) 0%, rgba(34, 39, 37, 0.12) 26%, transparent 48%),
+    linear-gradient(90deg, #000000 0%, #030504 42%, #0b0e0c 70%, #181a19 100%) !important;
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene.guide-scene--token-station::before {
@@ -382,7 +384,13 @@
 
 #guide .guide-scene--token-station .guide-scene__shade {
   z-index: 0;
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.48), rgba(3, 11, 7, 0.08)) !important;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.78) 0%,
+    rgba(0, 0, 0, 0.54) 34%,
+    rgba(0, 0, 0, 0.18) 58%,
+    rgba(0, 0, 0, 0.03) 82%
+  ) !important;
 }
 
 #guide .guide-scene--token-station .guide-scene__content {
@@ -401,9 +409,9 @@
 }
 
 #guide .token-station__copy {
-  width: min(40vw, 720px);
+  width: min(52vw, 980px);
   min-width: 0;
-  margin-left: clamp(180px, 30vw, 620px);
+  margin-left: clamp(240px, 34vw, 700px);
 }
 
 #guide .token-station__description {
@@ -413,7 +421,7 @@
   font-size: clamp(14px, 1.18vw, 16px);
   line-height: 1.85;
   letter-spacing: -0.025em;
-  white-space: pre-line;
+  white-space: pre;
   word-break: keep-all;
 }
 
@@ -443,10 +451,12 @@
 
 #guide .token-station__art {
   object-fit: cover;
+  mix-blend-mode: screen;
   filter: grayscale(1) saturate(0) brightness(1.08) contrast(1.04);
 }
 
 #guide .token-station__overlay {
+  mix-blend-mode: screen;
   pointer-events: none;
 }
 
@@ -503,6 +513,7 @@
     margin-top: 14px;
     font-size: 13px;
     line-height: 1.7;
+    white-space: pre-line;
   }
 
   #guide .token-station__copy {
