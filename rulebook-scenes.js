@@ -421,7 +421,11 @@
           "(prefers-reduced-motion: reduce)"
         ).matches;
 
-        if (reduceMotion || typeof card.animate !== "function") {
+        if (
+          reduceMotion ||
+          typeof card.animate !== "function" ||
+          typeof description.animate !== "function"
+        ) {
           currentAbility = nextAbility;
           renderAbility();
           return;
@@ -429,6 +433,7 @@
 
         isAnimatingAbility = true;
         card.style.willChange = "transform, opacity";
+        description.style.willChange = "transform, opacity";
         renderAbility();
 
         const exitDistance = direction > 0 ? -44 : 44;
@@ -448,10 +453,25 @@
             fill: "both",
           }
         );
+        const exitDescriptionAnimation = description.animate(
+          [
+            { opacity: 1, transform: "translate3d(0, 0, 0)" },
+            { opacity: 0, transform: "translate3d(0, 8px, 0)" },
+          ],
+          {
+            duration: 180,
+            easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+            fill: "both",
+          }
+        );
 
-        exitAnimation.finished
+        Promise.all([
+          exitAnimation.finished,
+          exitDescriptionAnimation.finished,
+        ])
           .then(function () {
             exitAnimation.cancel();
+            exitDescriptionAnimation.cancel();
             currentAbility = nextAbility;
             renderAbility();
 
@@ -470,23 +490,41 @@
                 fill: "both",
               }
             );
+            const enterDescriptionAnimation = description.animate(
+              [
+                { opacity: 0, transform: "translate3d(0, -8px, 0)" },
+                { opacity: 1, transform: "translate3d(0, 0, 0)" },
+              ],
+              {
+                duration: 320,
+                easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+                fill: "both",
+              }
+            );
 
-            return enterAnimation.finished.then(function () {
+            return Promise.all([
+              enterAnimation.finished,
+              enterDescriptionAnimation.finished,
+            ]).then(function () {
               enterAnimation.cancel();
+              enterDescriptionAnimation.cancel();
             });
           })
           .then(function () {
             card.style.removeProperty("will-change");
+            description.style.removeProperty("will-change");
             isAnimatingAbility = false;
             renderAbility();
           })
           .catch(function () {
-            card.getAnimations().forEach(function (animation) {
-              animation.cancel();
+            [card, description].forEach(function (element) {
+              element.getAnimations().forEach(function (animation) {
+                animation.cancel();
+              });
+              element.style.removeProperty("will-change");
+              element.style.removeProperty("transform");
+              element.style.removeProperty("opacity");
             });
-            card.style.removeProperty("will-change");
-            card.style.removeProperty("transform");
-            card.style.removeProperty("opacity");
             isAnimatingAbility = false;
             renderAbility();
           });
