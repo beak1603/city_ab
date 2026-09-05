@@ -747,3 +747,10 @@
     --scene-icon-anchor: 67.7%;
   }
 }
+
+
+/* Keep isolated guide icons above the readability shade. */
+#guide .token-system__icon-layer,
+#guide .guide-scene__isolated-icon {
+  z-index: 2;
+}
