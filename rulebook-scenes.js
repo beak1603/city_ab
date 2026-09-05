@@ -68,7 +68,7 @@
         },
         {
           title: "3-2. 토큰상점",
-          description: "- 판매품목은 전술 아이템/고급 능력 리롤권/보조 능력이 있습니다\n- 전술 아이템은 전투에 필요한 기본적인 아이템들이 있습니다\n- 고급 능력 리롤권은 준수한 성능 이상의 능력으로 리롤할 수 있습니다\n- 보조 능력은 처음 추첨한 능력 이외에 전투에 도움이 되는 간단한 보조 능력입니다\n- 보조 능력은 중복으로 구매할 수 없으며 새로운 보조 능력 구매시 이전 보조능력은 사라집니다",
+          description: "- 판매품목은 전술 아이템/고급 능력 리롤권/보조능력이 있습니다\n- 전술 아이템은 전투에 필요한 기본적인 아이템들이 있습니다\n- 고급 능력 리롤권은 준수한 성능 이상의 능력으로 리롤할 수 있습니다\n- 보조능력은 처음 추첨한 능력 이외에 전투에 도움이 되는 간단한 보조능력입니다\n- 보조능력은 중복으로 구매할 수 없으며 새로운 보조능력 구매시 이전 보조능력은 사라집니다",
           villager: "./token-shop-librarian-v1.png",
         },
         {
@@ -79,10 +79,10 @@
       ],
     },
     "other-systems": {
-      label: "보조 능력",
+      label: "보조능력",
       scenes: [
         {
-          title: "보조 능력 소개",
+          title: "보조능력 소개",
           abilities: [
             { name: "고속 추출기", image: "./support-high-speed-extractor.webp", description: "토큰 생성소 점령시간이 절반으로 줄어듭니다." },
             { name: "광역 탐색기", image: "./support-wide-area-scanner.webp", description: "필드상자 감지 범위를 2배 증가시킵니다." },
@@ -420,18 +420,18 @@
 
       const controls = document.createElement("div");
       controls.className = "support-ability__controls";
-      controls.setAttribute("aria-label", "보조 능력 넘기기");
+      controls.setAttribute("aria-label", "보조능력 넘기기");
 
       const previous = document.createElement("button");
       previous.type = "button";
       previous.className = "support-ability__arrow";
-      previous.setAttribute("aria-label", "이전 보조 능력");
+      previous.setAttribute("aria-label", "이전 보조능력");
       previous.textContent = "<";
 
       const next = document.createElement("button");
       next.type = "button";
       next.className = "support-ability__arrow";
-      next.setAttribute("aria-label", "다음 보조 능력");
+      next.setAttribute("aria-label", "다음 보조능력");
       next.textContent = ">";
 
       controls.appendChild(previous);
