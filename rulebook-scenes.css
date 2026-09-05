@@ -1,5 +1,29 @@
 @import url("./rulebook-scenes-base.css?v=50");
 
+/* Let the revival rules grow naturally on narrow screens. */
+#guide .guide-scene--revival {
+  display: grid;
+  align-items: center;
+}
+
+#guide .guide-scene--revival .guide-scene__content {
+  position: relative;
+  top: auto;
+  z-index: 2;
+  transform: none;
+  animation: support-scene-enter 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+#guide .guide-scene--revival .guide-scene__description {
+  max-width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #guide .guide-scene--revival .guide-scene__content {
+    animation: none;
+  }
+}
+
 #guide {
   --guide-art-left-shift: clamp(8px, calc(5vw - 36px), 48px);
 }

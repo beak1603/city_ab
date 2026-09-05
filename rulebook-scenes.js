@@ -71,6 +71,11 @@
           description: "- 판매품목은 전술 아이템/고급 능력 리롤권/보조 능력이 있습니다\n- 전술 아이템은 전투에 필요한 기본적인 아이템들이 있습니다\n- 고급 능력 리롤권은 준수한 성능 이상의 능력으로 리롤할 수 있습니다\n- 보조 능력은 처음 추첨한 능력 이외에 전투에 도움이 되는 간단한 보조 능력입니다\n- 보조 능력은 중복으로 구매할 수 없으며 새로운 보조 능력 구매시 이전 보조능력은 사라집니다",
           villager: "./token-shop-librarian-v1.png",
         },
+        {
+          title: "4. 부활시스템",
+          description: "- 게임 시작 후 일정시간 동안은 처치당해도 부활이 가능합니다\n- 처치 당했을시 주능력, 기본템 및 보유하고 있던 토큰을 제외하고 모두 시체상자에 드랍합니다\n- 일정시간 이후 부활이 불가능하며 이때 처치당할 시 탈락 처리됩니다",
+          revival: true,
+        },
       ],
     },
     "other-systems": {
@@ -371,6 +376,8 @@
     const section = document.createElement("section");
     section.className = "guide-scene";
     section.style.setProperty("--scene-index", String(index));
+
+    if (scene.revival) section.classList.add("guide-scene--revival");
 
     if (scene.image) {
       const image = document.createElement("div");
