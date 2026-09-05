@@ -592,7 +592,6 @@
         "<circle class='token-station__node' cx='90' cy='300' r='16'/>",
         "<circle class='token-station__node' cx='152' cy='152' r='16'/>",
         "</g>",
-        "<circle class='token-station__traveler' cx='300' cy='90' r='16'/>",
         "</svg>",
       ].join("");
 
@@ -604,9 +603,6 @@
       const stationNodes = Array.from(
         diagram.querySelectorAll(".token-station__node")
       );
-      const traveler = diagram.querySelector(".token-station__traveler");
-      let travelFrame = 0;
-
       const setActiveStations = function (activeIndexes) {
         stationNodes.forEach(function (node, nodeIndex) {
           node.classList.toggle(
@@ -615,7 +611,6 @@
           );
         });
       };
-
       const showCaptureLabel = function (sourceIndex) {
         const source = stationNodes[sourceIndex];
         if (!source || typeof captureLabel.animate !== "function") return;
@@ -672,143 +667,31 @@
         );
       };
 
-      const animateStationTravel = function (
-        sourceIndex,
-        targetIndex,
-        duration
-      ) {
-        return new Promise(function (resolve) {
-          const source = stationNodes[sourceIndex];
-          const target = stationNodes[targetIndex];
-          if (!source || !target || !traveler) {
-            resolve();
-            return;
-          }
-
-          if (travelFrame) {
-            window.cancelAnimationFrame(travelFrame);
-            travelFrame = 0;
-          }
-
-          const activeWithoutSource = stationNodes.reduce(function (
-            activeIndexes,
-            node,
-            nodeIndex
-          ) {
-            if (
-              nodeIndex !== sourceIndex &&
-              node.classList.contains("token-station__node--active")
-            ) {
-              activeIndexes.push(nodeIndex);
-            }
-            return activeIndexes;
-          },
-          []);
-          setActiveStations(activeWithoutSource);
-
-          const centerX = 300;
-          const centerY = 300;
-          const sourceX = Number(source.getAttribute("cx"));
-          const sourceY = Number(source.getAttribute("cy"));
-          const targetX = Number(target.getAttribute("cx"));
-          const targetY = Number(target.getAttribute("cy"));
-          const radius = Math.hypot(sourceX - centerX, sourceY - centerY);
-          const sourceAngle = Math.atan2(sourceY - centerY, sourceX - centerX);
-          const targetAngle = Math.atan2(targetY - centerY, targetX - centerX);
-          let angleDelta = targetAngle - sourceAngle;
-
-          while (angleDelta > Math.PI) angleDelta -= Math.PI * 2;
-          while (angleDelta < -Math.PI) angleDelta += Math.PI * 2;
-
-          traveler.setAttribute("cx", String(sourceX));
-          traveler.setAttribute("cy", String(sourceY));
-          traveler.classList.add("is-moving");
-
-          const startedAt = performance.now();
-          const moveFrame = function (now) {
-            if (!section.isConnected) {
-              traveler.classList.remove("is-moving");
-              travelFrame = 0;
-              resolve();
-              return;
-            }
-
-            const progress = Math.min(1, (now - startedAt) / duration);
-            const easedProgress =
-              0.5 - Math.cos(Math.PI * progress) / 2;
-            const angle = sourceAngle + angleDelta * easedProgress;
-            traveler.setAttribute(
-              "cx",
-              String(centerX + Math.cos(angle) * radius)
-            );
-            traveler.setAttribute(
-              "cy",
-              String(centerY + Math.sin(angle) * radius)
-            );
-
-            if (progress < 1) {
-              travelFrame = window.requestAnimationFrame(moveFrame);
-              return;
-            }
-
-            traveler.setAttribute("cx", String(targetX));
-            traveler.setAttribute("cy", String(targetY));
-            travelFrame = 0;
-            resolve();
-          };
-
-          travelFrame = window.requestAnimationFrame(moveFrame);
-        });
-      };
-
       const reduceTokenMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
       ).matches;
       if (!reduceTokenMotion) {
         const animationSteps = [
-          { delay: 5000, source: 0, target: 6, active: [6, 3] },
-          { delay: 2600, source: 3, target: 5, active: [6, 5] },
-          { delay: 2600, source: 6, target: 1, active: [1, 5] },
-          { delay: 2600, source: 5, target: 7, active: [1, 7] },
-          { delay: 3200, active: [0, 1, 2, 3, 4, 5, 6, 7] },
+          { delay: 5000, source: 0, active: [6, 3] },
+          { delay: 4400, source: 3, active: [6, 5] },
+          { delay: 4400, source: 6, active: [1, 5] },
+          { delay: 4400, source: 5, active: [1, 7] },
+          { delay: 4400, active: [0, 1, 2, 3, 4, 5, 6, 7] },
           { delay: 5000, active: [0, 3] },
         ];
         let animationStep = 0;
-
-        const advanceTokenStep = function () {
-          animationStep = (animationStep + 1) % animationSteps.length;
-          queueTokenStep();
-        };
 
         const queueTokenStep = function () {
           const step = animationSteps[animationStep];
           window.setTimeout(function () {
             if (!section.isConnected) return;
 
-            if (
-              typeof step.source === "number" &&
-              typeof step.target === "number"
-            ) {
+            if (typeof step.source === "number") {
               showCaptureLabel(step.source);
-              window.setTimeout(function () {
-                if (!section.isConnected) return;
-
-                animateStationTravel(step.source, step.target, 1700).then(
-                  function () {
-                    if (!section.isConnected) return;
-                    setActiveStations(step.active);
-                    window.setTimeout(function () {
-                      if (traveler) traveler.classList.remove("is-moving");
-                    }, 450);
-                    advanceTokenStep();
-                  }
-                );
-              }, 600);
-              return;
             }
-
             setActiveStations(step.active);
-            advanceTokenStep();
+            animationStep = (animationStep + 1) % animationSteps.length;
+            queueTokenStep();
           }, step.delay);
         };
 
