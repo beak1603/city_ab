@@ -160,3 +160,197 @@
     background-position: calc(100% + 50px) center !important;
   }
 }
+
+/* Support ability carousel inside the single auxiliary-ability scene. */
+#guide .guide-detail__panel--scenes[data-guide-id="other-systems"] .guide-scene--support-abilities {
+  min-height: clamp(300px, 42vw, 420px);
+  background:
+    radial-gradient(circle at 82% 48%, rgba(142, 255, 108, 0.09), transparent 27%),
+    #050b07;
+}
+
+#guide .guide-detail__panel--scenes[data-guide-id="other-systems"] .guide-scene--support-abilities .guide-scene__shade {
+  z-index: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.4), rgba(4, 13, 8, 0.08)) !important;
+}
+
+#guide .guide-scene--support-abilities .guide-scene__content {
+  position: relative;
+  top: auto;
+  z-index: 2;
+  display: grid;
+  min-height: clamp(300px, 42vw, 420px);
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 280px);
+  align-items: center;
+  gap: clamp(32px, 7vw, 96px);
+  transform: none;
+  animation: none;
+}
+
+#guide .support-ability__copy {
+  min-width: 0;
+}
+
+#guide .support-ability__heading {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2.3vw, 28px);
+}
+
+#guide .support-ability__heading h3 {
+  max-width: none;
+}
+
+#guide .support-ability__controls {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 8px;
+}
+
+#guide .support-ability__arrow {
+  display: inline-flex;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(225, 255, 199, 0.34);
+  border-radius: 50%;
+  color: #f4fff0;
+  background: rgba(11, 27, 16, 0.72);
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    transform 160ms ease,
+    opacity 160ms ease;
+}
+
+#guide .support-ability__arrow:hover:not(:disabled),
+#guide .support-ability__arrow:focus-visible:not(:disabled) {
+  border-color: rgba(190, 255, 126, 0.8);
+  background: rgba(117, 210, 70, 0.18);
+  outline: none;
+  transform: translateY(-2px);
+}
+
+#guide .support-ability__arrow:disabled {
+  opacity: 0.42;
+  cursor: default;
+}
+
+#guide .support-ability__description {
+  display: grid;
+  max-width: 620px;
+  gap: 5px;
+  margin: 18px 0 0;
+  color: rgba(244, 255, 240, 0.72);
+  font-size: clamp(14px, 1.35vw, 17px);
+  line-height: 1.65;
+  letter-spacing: -0.02em;
+  word-break: keep-all;
+}
+
+#guide .support-ability__description strong {
+  color: #e5ffd8;
+  font-size: 1.06em;
+  font-weight: 750;
+}
+
+#guide .support-ability__description span {
+  display: block;
+}
+
+#guide .support-ability__stage {
+  display: grid;
+  min-width: 0;
+  place-items: center;
+}
+
+#guide .support-ability__card {
+  display: grid;
+  width: min(100%, 220px);
+  place-items: center;
+  gap: 14px;
+  margin: 0;
+}
+
+#guide .support-ability__icon {
+  display: grid;
+  width: clamp(132px, 15vw, 176px);
+  aspect-ratio: 1;
+  place-items: center;
+  border: 2px solid rgba(196, 255, 143, 0.62);
+  border-radius: 22px;
+  color: #d7ffb2;
+  background:
+    linear-gradient(145deg, rgba(178, 255, 111, 0.12), rgba(5, 18, 9, 0.9)),
+    #07120a;
+  box-shadow:
+    0 0 0 8px rgba(184, 255, 117, 0.035),
+    0 20px 48px rgba(0, 0, 0, 0.34),
+    inset 0 0 32px rgba(170, 255, 99, 0.08);
+  font-size: clamp(64px, 8vw, 92px);
+  font-weight: 900;
+  line-height: 1;
+  text-shadow: 0 0 22px rgba(182, 255, 112, 0.28);
+}
+
+#guide .support-ability__count {
+  color: rgba(222, 255, 204, 0.56);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.14em;
+}
+
+@media (max-width: 720px) {
+  #guide .guide-scene--support-abilities .guide-scene__content {
+    min-height: 300px;
+    grid-template-columns: minmax(0, 1fr) 112px;
+    gap: 14px;
+    padding: 22px;
+  }
+
+  #guide .support-ability__heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 13px;
+  }
+
+  #guide .support-ability__controls {
+    gap: 7px;
+  }
+
+  #guide .support-ability__arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 21px;
+  }
+
+  #guide .support-ability__description {
+    max-width: 48vw;
+    margin-top: 13px;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  #guide .support-ability__card {
+    width: 100%;
+    gap: 10px;
+  }
+
+  #guide .support-ability__icon {
+    width: min(100%, 106px);
+    border-radius: 16px;
+    font-size: 54px;
+  }
+
+  #guide .support-ability__count {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+  }
+}
