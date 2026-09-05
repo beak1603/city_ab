@@ -1255,4 +1255,5 @@
   -webkit-text-stroke: 0;
   text-shadow: none;
   background: url("./city-ability-main-logo-v1.png") center / contain no-repeat;
+  translate: -10% 0;
 }
