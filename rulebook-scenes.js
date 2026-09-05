@@ -428,22 +428,24 @@
         }
 
         isAnimatingAbility = true;
+        card.style.willChange = "transform, opacity";
         renderAbility();
 
-        const exitDistance = direction > 0 ? -62 : 62;
+        const exitDistance = direction > 0 ? -44 : 44;
         const enterDistance = -exitDistance;
         const exitAnimation = card.animate(
           [
-            { opacity: 1, transform: "translateX(0) scale(1)" },
+            { opacity: 1, transform: "translate3d(0, 0, 0) scale(1)" },
             {
               opacity: 0,
-              transform: "translateX(" + exitDistance + "px) scale(0.92)",
+              transform:
+                "translate3d(" + exitDistance + "px, 0, 0) scale(0.97)",
             },
           ],
           {
-            duration: 170,
-            easing: "cubic-bezier(0.4, 0, 1, 1)",
-            fill: "forwards",
+            duration: 220,
+            easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+            fill: "both",
           }
         );
 
@@ -457,14 +459,15 @@
               [
                 {
                   opacity: 0,
-                  transform: "translateX(" + enterDistance + "px) scale(0.92)",
+                  transform:
+                    "translate3d(" + enterDistance + "px, 0, 0) scale(0.97)",
                 },
-                { opacity: 1, transform: "translateX(0) scale(1)" },
+                { opacity: 1, transform: "translate3d(0, 0, 0) scale(1)" },
               ],
               {
-                duration: 280,
-                easing: "cubic-bezier(0.16, 1, 0.3, 1)",
-                fill: "forwards",
+                duration: 340,
+                easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+                fill: "both",
               }
             );
 
@@ -473,10 +476,17 @@
             });
           })
           .then(function () {
+            card.style.removeProperty("will-change");
             isAnimatingAbility = false;
             renderAbility();
           })
           .catch(function () {
+            card.getAnimations().forEach(function (animation) {
+              animation.cancel();
+            });
+            card.style.removeProperty("will-change");
+            card.style.removeProperty("transform");
+            card.style.removeProperty("opacity");
             isAnimatingAbility = false;
             renderAbility();
           });
