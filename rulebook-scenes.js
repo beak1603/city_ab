@@ -317,6 +317,55 @@
     });
   }
 
+  // Draw the existing transparent sword at a larger size, with a contact
+  // shadow and its own mirrored image fading into the shared scene floor.
+  function drawGroundedSword(context, source, width, height) {
+    const sourceBounds = [1259, 332, 263, 268];
+    const targetBounds = [1230, 282, 320, 326];
+    const floorY = 608;
+    const reflectionScale = 0.36;
+    const reflection = document.createElement("canvas");
+    reflection.width = width;
+    reflection.height = height;
+    const reflectionContext = reflection.getContext("2d");
+
+    if (reflectionContext) {
+      reflectionContext.save();
+      reflectionContext.translate(0, floorY * (1 + reflectionScale));
+      reflectionContext.scale(1, -reflectionScale);
+      reflectionContext.filter = "blur(2.5px)";
+      reflectionContext.drawImage(source, ...sourceBounds, ...targetBounds);
+      reflectionContext.restore();
+
+      reflectionContext.globalCompositeOperation = "destination-in";
+      const fade = reflectionContext.createLinearGradient(0, floorY, 0, floorY + 118);
+      fade.addColorStop(0, "rgba(0, 0, 0, 0.28)");
+      fade.addColorStop(0.2, "rgba(0, 0, 0, 0.19)");
+      fade.addColorStop(0.6, "rgba(0, 0, 0, 0.065)");
+      fade.addColorStop(1, "rgba(0, 0, 0, 0)");
+      reflectionContext.fillStyle = fade;
+      reflectionContext.fillRect(0, 0, width, height);
+      context.drawImage(reflection, 0, 0);
+    }
+
+    const shadow = function (x, y, radiusX, radiusY, opacity) {
+      context.save();
+      context.translate(x, y);
+      context.scale(radiusX, radiusY);
+      const falloff = context.createRadialGradient(0, 0, 0, 0, 0, 1);
+      falloff.addColorStop(0, "rgba(0, 0, 0, " + opacity + ")");
+      falloff.addColorStop(0.4, "rgba(0, 0, 0, " + opacity * 0.62 + ")");
+      falloff.addColorStop(1, "rgba(0, 0, 0, 0)");
+      context.fillStyle = falloff;
+      context.fillRect(-1, -1, 2, 2);
+      context.restore();
+    };
+    shadow(1304, floorY + 3, 136, 15, 0.25);
+    shadow(1268, floorY + 1, 48, 6, 0.58);
+
+    context.drawImage(source, ...sourceBounds, ...targetBounds);
+  }
+
   function createScene(scene, index) {
     const section = document.createElement("section");
     section.className = "guide-scene";
@@ -836,6 +885,7 @@
       },
       "4. 최종 준비": {
         src: "./scene-final-ready-3d-v1.png",
+        groundedSword: true,
         bounds: [0.55, 0.86, 0.15, 0.995],
         focus: [0.69, 0.69, 0.14, 0.44],
         precut: true,
@@ -900,6 +950,10 @@
 
         iconCanvas.width = width;
         iconCanvas.height = height;
+        if (isolatedIcon.groundedSword) {
+          drawGroundedSword(context, iconSource, width, height);
+          return;
+        }
         context.drawImage(iconSource, 0, 0);
         if (isolatedIcon.precut) return;
 
