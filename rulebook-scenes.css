@@ -447,43 +447,31 @@
   height: 100%;
   overflow: visible;
   background: transparent;
+  border: 0;
+  outline: 0;
+  box-shadow: none;
 }
 
 #guide .token-station__art {
   object-fit: cover;
-  mix-blend-mode: screen;
-  clip-path: inset(3px);
-  -webkit-mask-image: linear-gradient(
-    90deg,
-    transparent 0%,
-    #000 6%,
-    #000 94%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    90deg,
-    transparent 0%,
-    #000 6%,
-    #000 94%,
-    transparent 100%
-  );
-  filter: grayscale(1) saturate(0) brightness(1.06) contrast(1.65);
+  mix-blend-mode: normal;
+  filter: grayscale(1) saturate(0) brightness(1.06) contrast(1.5);
 }
 
 #guide .token-station__overlay {
-  mix-blend-mode: screen;
+  mix-blend-mode: normal;
   pointer-events: none;
 }
 
 #guide .token-station__active-art {
   filter:
     sepia(1)
-    saturate(7)
-    hue-rotate(355deg)
-    brightness(1.12)
-    contrast(1.05)
-    drop-shadow(0 0 10px rgba(255, 218, 42, 0.72))
-    drop-shadow(0 0 26px rgba(255, 192, 0, 0.38));
+    saturate(12)
+    hue-rotate(342deg)
+    brightness(1.18)
+    contrast(1.12)
+    drop-shadow(0 0 9px rgba(255, 151, 0, 0.82))
+    drop-shadow(0 0 22px rgba(255, 110, 0, 0.42));
 }
 
 #guide .token-station__capture {
