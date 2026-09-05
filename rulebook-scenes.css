@@ -1392,3 +1392,51 @@
     animation: none;
   }
 }
+
+/* Match the support carousel's grid, stage width, and horizontal offset. */
+#guide .guide-scene__corner-layout {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  box-sizing: border-box;
+  padding-right: clamp(34px, 5vw, 96px);
+  padding-left: max(24px, calc((100vw - var(--max-width)) / 2 + 64px));
+  grid-template-columns: minmax(0, 0.86fr) minmax(420px, 1.14fr);
+  gap: clamp(30px, 5vw, 84px);
+  pointer-events: none;
+}
+#guide .guide-scene__corner-stage {
+  position: relative;
+  grid-column: 2;
+  width: 100%;
+  max-width: 680px;
+  min-width: 0;
+  margin-left: auto;
+  transform: translateX(calc(-48px - var(--guide-art-left-shift)));
+}
+#guide .guide-scene__corner-stage .guide-scene__corner-art {
+  left: 50%;
+  right: auto;
+  max-width: 100%;
+  object-position: center bottom;
+  transform: translateX(-50%);
+}
+#guide .guide-scene--pvp .guide-scene__corner-art {
+  filter: drop-shadow(1px 0 0 rgba(255, 255, 255, .95))
+          drop-shadow(-1px 0 0 rgba(255, 255, 255, .95))
+          drop-shadow(0 1px 0 rgba(255, 255, 255, .95))
+          drop-shadow(0 -1px 0 rgba(255, 255, 255, .95));
+}
+@media (max-width: 720px) {
+  #guide .guide-scene__corner-layout {
+    display: block;
+    padding: 0 22px;
+  }
+  #guide .guide-scene__corner-stage {
+    height: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    transform: translateX(calc(-1 * var(--guide-art-left-shift)));
+  }
+}
