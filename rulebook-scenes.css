@@ -366,8 +366,8 @@
   min-height: clamp(460px, 50vw, 560px) !important;
   overflow: hidden;
   background:
-    radial-gradient(circle at 82% 36%, rgba(82, 89, 86, 0.26) 0%, rgba(34, 39, 37, 0.12) 26%, transparent 48%),
-    linear-gradient(90deg, #000000 0%, #030504 42%, #0b0e0c 70%, #181a19 100%) !important;
+    radial-gradient(ellipse 54% 112% at 100% 0%, rgba(142, 136, 129, 0.72) 0%, rgba(83, 80, 76, 0.48) 28%, rgba(38, 40, 38, 0.24) 56%, transparent 78%),
+    linear-gradient(90deg, #000000 0%, #030403 42%, #0b0e0c 70%, #191c1a 100%) !important;
 }
 
 #guide .guide-detail__panel--scenes[data-guide-id="game-start"] .guide-scene.guide-scene--token-station::before {
@@ -397,7 +397,8 @@
   position: relative;
   top: auto;
   z-index: 2;
-  display: block;
+  display: flex;
+  align-items: center;
   width: 100vw;
   max-width: none;
   min-height: clamp(460px, 50vw, 560px);
@@ -506,6 +507,7 @@
   }
 
   #guide .guide-scene--token-station .guide-scene__content {
+    display: block;
     width: 100%;
     margin: 0;
     padding: 34px 22px 42px;
