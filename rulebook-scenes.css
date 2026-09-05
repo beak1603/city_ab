@@ -1106,7 +1106,9 @@
   object-position: center bottom;
   transform: translateX(-50%);
   opacity: 1;
-  filter: none;
+  filter: drop-shadow(0 0 3px rgba(164, 255, 112, 0.58))
+    drop-shadow(0 0 12px rgba(84, 231, 96, 0.38))
+    drop-shadow(0 0 26px rgba(55, 203, 109, 0.22));
   mix-blend-mode: normal;
   background: transparent;
   border: 0;
