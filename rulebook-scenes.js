@@ -915,17 +915,10 @@
         alphaFloor: 26,
       },
       "2. 능력 추첨": {
-        src: "./scene-ability-draw-v4.png",
-        bounds: [0.57, 0.85, 0.18, 0.985],
-        focus: [0.72, 0.67, 0.145, 0.42],
-        anchorX: 0.72,
-        colorFloor: 10,
-        colorSolid: 24,
-        brightnessFloor: 130,
-        brightnessSolid: 160,
-        contrastFloor: 8,
-        contrastWeight: 0,
-        alphaFloor: 26,
+        src: "./scene-ability-question-v1.svg",
+        directImage: true,
+        alt: "마인크래프트 스타일 입체 픽셀 물음표",
+        anchorX: 0.673,
       },
       "3. 인첸트": {
         src: "./scene-enchant-supplied-shadow-v4.png",
@@ -991,7 +984,7 @@
       const suppliedImage = document.createElement("img");
       suppliedImage.className = "guide-scene__isolated-icon";
       suppliedImage.src = isolatedIcon.src;
-      suppliedImage.alt = "첨부한 인첸트 테이블 이미지";
+      suppliedImage.alt = isolatedIcon.alt || "첨부한 인첸트 테이블 이미지";
       suppliedImage.width = 2172;
       suppliedImage.height = 724;
       suppliedImage.decoding = "async";
