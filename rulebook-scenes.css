@@ -405,17 +405,17 @@
   background:
     radial-gradient(
       ellipse 62% 118% at 100% 18%,
-      rgba(38, 123, 60, 0.3) 0%,
-      rgba(20, 78, 39, 0.22) 34%,
-      rgba(8, 38, 20, 0.14) 58%,
+      rgba(46, 142, 70, 0.36) 0%,
+      rgba(24, 92, 46, 0.26) 34%,
+      rgba(10, 48, 25, 0.17) 58%,
       transparent 80%
     ),
     linear-gradient(
       90deg,
-      #000000 0%,
-      #010603 38%,
-      #041108 66%,
-      #0a2111 100%
+      #010402 0%,
+      #020a05 38%,
+      #06170c 66%,
+      #0d2a16 100%
     ) !important;
 }
 
@@ -430,17 +430,17 @@
   background:
     radial-gradient(
       ellipse 62% 118% at 100% 18%,
-      rgba(38, 123, 60, 0.3) 0%,
-      rgba(20, 78, 39, 0.22) 34%,
-      rgba(8, 38, 20, 0.14) 58%,
+      rgba(46, 142, 70, 0.36) 0%,
+      rgba(24, 92, 46, 0.26) 34%,
+      rgba(10, 48, 25, 0.17) 58%,
       transparent 80%
     ),
     linear-gradient(
       90deg,
-      #000000 0%,
-      #010603 38%,
-      #041108 66%,
-      #0a2111 100%
+      #010402 0%,
+      #020a05 38%,
+      #06170c 66%,
+      #0d2a16 100%
     ) !important;
 }
 
@@ -732,29 +732,10 @@
 }
 
 
-/* Natural floor reflections generated from the isolated icon canvases. */
-#guide .token-system__reflection-layer,
-#guide .guide-scene__isolated-reflection {
-  position: absolute;
-  z-index: 0;
-  top: 0;
-  right: 0;
-  display: block;
-  width: auto;
-  height: 100%;
-  pointer-events: none;
-  background: transparent;
-  border: 0;
-  filter: none;
-  mix-blend-mode: normal;
-}
-
 /* Align every guide icon to the token-station center axis on desktop. */
 @media (min-width: 721px) {
   #guide .token-system__icon-layer,
-  #guide .token-system__reflection-layer,
-  #guide .guide-scene__isolated-icon,
-  #guide .guide-scene__isolated-reflection {
+  #guide .guide-scene__isolated-icon {
     left: 81.5%;
     right: auto;
     transform: translateX(
@@ -762,8 +743,7 @@
     );
   }
 
-  #guide .token-system__icon-layer,
-  #guide .token-system__reflection-layer {
+  #guide .token-system__icon-layer {
     --scene-icon-anchor: 67.7%;
   }
 }
