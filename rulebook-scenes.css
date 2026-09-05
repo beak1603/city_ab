@@ -452,27 +452,38 @@
 #guide .token-station__art {
   object-fit: cover;
   mix-blend-mode: screen;
-  clip-path: inset(2px);
+  clip-path: inset(3px);
   -webkit-mask-image: linear-gradient(
     90deg,
     transparent 0%,
-    #000 5%,
-    #000 95%,
+    #000 6%,
+    #000 94%,
     transparent 100%
   );
   mask-image: linear-gradient(
     90deg,
     transparent 0%,
-    #000 5%,
-    #000 95%,
+    #000 6%,
+    #000 94%,
     transparent 100%
   );
-  filter: grayscale(1) saturate(0) brightness(1.08) contrast(1.04);
+  filter: grayscale(1) saturate(0) brightness(1.06) contrast(1.65);
 }
 
 #guide .token-station__overlay {
-  mix-blend-mode: normal;
+  mix-blend-mode: screen;
   pointer-events: none;
+}
+
+#guide .token-station__active-art {
+  filter:
+    sepia(1)
+    saturate(7)
+    hue-rotate(355deg)
+    brightness(1.12)
+    contrast(1.05)
+    drop-shadow(0 0 10px rgba(255, 218, 42, 0.72))
+    drop-shadow(0 0 26px rgba(255, 192, 0, 0.38));
 }
 
 #guide .token-station__capture {
