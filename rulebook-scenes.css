@@ -1201,3 +1201,19 @@
     opacity: .3;
   }
 }
+
+/* Soft violet light follows the supplied enchantment icon's transparent silhouette. */
+#guide .guide-scene__isolated-icon[src*="scene-enchant-"] {
+  filter:
+    drop-shadow(0 0 10px rgba(200, 129, 255, .38))
+    drop-shadow(0 0 26px rgba(158, 75, 242, .30))
+    drop-shadow(0 0 48px rgba(124, 51, 204, .20));
+}
+@media (max-width: 720px) {
+  #guide .guide-scene__isolated-icon[src*="scene-enchant-"] {
+    filter:
+      drop-shadow(0 0 8px rgba(200, 129, 255, .36))
+      drop-shadow(0 0 20px rgba(158, 75, 242, .28))
+      drop-shadow(0 0 34px rgba(124, 51, 204, .18));
+  }
+}
