@@ -4,6 +4,9 @@
 #guide .guide-scene--revival {
   display: grid;
   align-items: center;
+  box-sizing: border-box;
+  min-height: calc(clamp(300px, 42vw, 420px) + 40px);
+  padding-bottom: 40px;
 }
 
 #guide .guide-scene--revival .guide-scene__content {
@@ -21,11 +24,12 @@
 #guide .revival__art {
   position: absolute;
   right: calc(clamp(16px, 3vw, 64px) + var(--guide-art-left-shift));
-  bottom: 0;
+  bottom: 8px;
   z-index: 2;
   display: block;
   width: auto;
-  height: 90%;
+  height: calc((100% - 40px) * 0.9);
+  max-height: calc(100% - 24px);
   max-width: 36%;
   object-fit: contain;
   object-position: right bottom;
@@ -33,6 +37,11 @@
 }
 
 @media (max-width: 720px) {
+  #guide .guide-scene--revival {
+    min-height: 324px;
+    padding-bottom: 24px;
+  }
+
   #guide .guide-scene--revival .guide-scene__content {
     padding-bottom: 322px;
   }
