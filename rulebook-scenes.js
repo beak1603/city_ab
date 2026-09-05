@@ -66,8 +66,16 @@
     "other-systems": {
       label: "보조 능력",
       scenes: [
-        { title: "보조 능력 소개" },
-        { title: "추가 내용" },
+        {
+          title: "보조 능력 소개",
+          abilities: [
+            {
+              name: "보조 능력 01",
+              description: "보조 능력에 대한 설명이 이곳에 표시됩니다.",
+              icon: "?",
+            },
+          ],
+        },
       ],
     },
   };
@@ -314,6 +322,104 @@
 
     const content = document.createElement("div");
     content.className = "guide-scene__content";
+
+    if (scene.abilities && scene.abilities.length) {
+      section.classList.add("guide-scene--support-abilities");
+
+      const copy = document.createElement("div");
+      copy.className = "support-ability__copy";
+
+      const heading = document.createElement("div");
+      heading.className = "support-ability__heading";
+
+      const title = document.createElement("h3");
+      title.textContent = scene.title;
+
+      const controls = document.createElement("div");
+      controls.className = "support-ability__controls";
+      controls.setAttribute("aria-label", "보조 능력 넘기기");
+
+      const previous = document.createElement("button");
+      previous.type = "button";
+      previous.className = "support-ability__arrow";
+      previous.setAttribute("aria-label", "이전 보조 능력");
+      previous.textContent = "<";
+
+      const next = document.createElement("button");
+      next.type = "button";
+      next.className = "support-ability__arrow";
+      next.setAttribute("aria-label", "다음 보조 능력");
+      next.textContent = ">";
+
+      controls.appendChild(previous);
+      controls.appendChild(next);
+      heading.appendChild(title);
+      heading.appendChild(controls);
+
+      const description = document.createElement("p");
+      description.className = "support-ability__description";
+
+      const abilityName = document.createElement("strong");
+      const abilityText = document.createElement("span");
+      description.appendChild(abilityName);
+      description.appendChild(abilityText);
+
+      copy.appendChild(heading);
+      copy.appendChild(description);
+
+      const stage = document.createElement("div");
+      stage.className = "support-ability__stage";
+      stage.setAttribute("aria-live", "polite");
+
+      const card = document.createElement("article");
+      card.className = "support-ability__card";
+
+      const icon = document.createElement("span");
+      icon.className = "support-ability__icon";
+      icon.setAttribute("aria-hidden", "true");
+
+      const count = document.createElement("span");
+      count.className = "support-ability__count";
+      count.setAttribute("aria-hidden", "true");
+
+      card.appendChild(icon);
+      card.appendChild(count);
+      stage.appendChild(card);
+
+      let currentAbility = 0;
+      const renderAbility = function () {
+        const ability = scene.abilities[currentAbility];
+        abilityName.textContent = ability.name;
+        abilityText.textContent = ability.description;
+        icon.textContent = ability.icon || "?";
+        count.textContent =
+          String(currentAbility + 1).padStart(2, "0") +
+          " / " +
+          String(scene.abilities.length).padStart(2, "0");
+        stage.setAttribute("aria-label", ability.name + ": " + ability.description);
+        const hasMultiple = scene.abilities.length > 1;
+        previous.disabled = !hasMultiple;
+        next.disabled = !hasMultiple;
+      };
+
+      previous.addEventListener("click", function () {
+        currentAbility =
+          (currentAbility - 1 + scene.abilities.length) % scene.abilities.length;
+        renderAbility();
+      });
+
+      next.addEventListener("click", function () {
+        currentAbility = (currentAbility + 1) % scene.abilities.length;
+        renderAbility();
+      });
+
+      renderAbility();
+      content.appendChild(copy);
+      content.appendChild(stage);
+      section.appendChild(shade);
+      section.appendChild(content);
+      return section;
+    }
 
     const title = document.createElement("h3");
     title.textContent = scene.title;
