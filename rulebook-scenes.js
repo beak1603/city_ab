@@ -773,8 +773,11 @@
         src: "./scene-preparation-v4.png",
         bounds: [0.57, 0.86, 0.22, 0.985],
         focus: [0.71, 0.67, 0.15, 0.42],
+        anchorX: 0.71,
         colorFloor: 10,
+        colorSolid: 24,
         brightnessFloor: 130,
+        brightnessSolid: 160,
         contrastFloor: 8,
         contrastWeight: 0,
         alphaFloor: 26,
@@ -783,8 +786,11 @@
         src: "./scene-ability-draw-v4.png",
         bounds: [0.57, 0.85, 0.18, 0.985],
         focus: [0.72, 0.67, 0.145, 0.42],
+        anchorX: 0.72,
         colorFloor: 10,
+        colorSolid: 24,
         brightnessFloor: 130,
+        brightnessSolid: 160,
         contrastFloor: 8,
         contrastWeight: 0,
         alphaFloor: 26,
@@ -793,8 +799,11 @@
         src: "./scene-enchant-v4.png",
         bounds: [0.5, 0.81, 0.16, 0.99],
         focus: [0.65, 0.67, 0.17, 0.44],
+        anchorX: 0.65,
         colorFloor: 10,
+        colorSolid: 22,
         brightnessFloor: 125,
+        brightnessSolid: 155,
         contrastFloor: 7,
         contrastWeight: 0,
         alphaFloor: 26,
@@ -803,8 +812,11 @@
         src: "./scene-final-ready-v7.png",
         bounds: [0.55, 0.86, 0.15, 0.995],
         focus: [0.69, 0.69, 0.14, 0.44],
+        anchorX: 0.69,
         colorFloor: 10,
+        colorSolid: 24,
         brightnessFloor: 110,
+        brightnessSolid: 135,
         contrastFloor: 7,
         contrastWeight: 0,
         alphaFloor: 30,
@@ -813,8 +825,11 @@
         src: "./scene-magnetic-v5.png",
         bounds: [0.48, 0.83, 0.14, 0.99],
         focus: [0.65, 0.67, 0.2, 0.43],
+        anchorX: 0.65,
         colorFloor: 2,
+        colorSolid: 256,
         brightnessFloor: 108,
+        brightnessSolid: 256,
         contrastFloor: 7,
         contrastWeight: 0,
         alphaFloor: 0,
@@ -823,8 +838,11 @@
         src: "./scene-field-box-v10.png",
         bounds: [0.55, 0.9, 0.18, 0.995],
         focus: [0.74, 0.7, 0.18, 0.42],
+        anchorX: 0.74,
         colorFloor: 10,
+        colorSolid: 22,
         brightnessFloor: 110,
+        brightnessSolid: 140,
         contrastFloor: 7,
         contrastWeight: 0,
         alphaFloor: 30,
@@ -838,6 +856,10 @@
       const iconCanvas = document.createElement("canvas");
       iconCanvas.className = "guide-scene__isolated-icon";
       iconCanvas.setAttribute("aria-hidden", "true");
+      iconCanvas.style.setProperty(
+        "--scene-icon-anchor",
+        `${isolatedIcon.anchorX * 100}%`
+      );
 
       const iconSource = new Image();
       iconSource.decoding = "async";
@@ -942,8 +964,13 @@
             )
           );
 
+          const solidPixel =
+            chroma >= isolatedIcon.colorSolid ||
+            brightness >= isolatedIcon.brightnessSolid;
           const rawAlpha =
-            Math.max(colorAlpha, brightAlpha, contrastAlpha) *
+            (solidPixel
+              ? 255
+              : Math.max(colorAlpha, brightAlpha, contrastAlpha)) *
             edgeFeather *
             focusFeather;
           const cleanedAlpha =
