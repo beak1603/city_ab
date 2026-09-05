@@ -351,7 +351,7 @@
   font-weight: 750;
 }
 
-#guide .support-ability__featured-name span,
+#guide .support-ability__featured-name > span,
 #guide .support-ability__description span {
   display: block;
   grid-area: 1 / 1;
@@ -360,14 +360,14 @@
   visibility: hidden;
 }
 
-#guide .support-ability__featured-name span[data-active="true"],
-#guide .support-ability__featured-name span[data-leaving="true"],
+#guide .support-ability__featured-name > span[data-active="true"],
+#guide .support-ability__featured-name > span[data-leaving="true"],
 #guide .support-ability__description span[data-active="true"],
 #guide .support-ability__description span[data-leaving="true"] {
   visibility: visible;
 }
 
-#guide .support-ability__featured-name span[data-active="true"],
+#guide .support-ability__featured-name > span[data-active="true"],
 #guide .support-ability__description span[data-active="true"] {
   opacity: 1;
 }
@@ -1285,4 +1285,51 @@
 }
 .site-header .brand__text small {
   display: none;
+}
+
+/* Category pills travel with their ability name during carousel transitions. */
+#guide .support-ability__featured-name > .support-ability__name-row,
+#guide .support-ability__name.support-ability__name-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+#guide .support-ability__name.support-ability__name-row {
+  justify-content: center;
+  gap: 8px;
+}
+
+#guide .support-ability__category {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 4.6em;
+  padding: 7px 14px;
+  border-radius: 999px;
+  color: #102017;
+  font-size: clamp(14px, 1.2vw, 17px);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+#guide .support-ability__category[data-category="mobility"] { background: #8edbfa; }
+#guide .support-ability__category[data-category="survival"] { background: #f7de77; }
+#guide .support-ability__category[data-category="information"] { background: #c6a0ef; }
+#guide .support-ability__category[data-category="resource"] { background: #9bdf98; }
+
+#guide .support-ability__name .support-ability__category {
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+#guide .support-ability__name-label { min-width: 0; }
+
+@media (max-width: 720px) {
+  #guide .support-ability__featured-name > .support-ability__name-row { gap: 10px; }
+  #guide .support-ability__featured-name .support-ability__category { padding: 6px 12px; }
 }
