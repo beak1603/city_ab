@@ -772,38 +772,50 @@
       "1. 준비": {
         src: "./scene-preparation-v4.png",
         bounds: [0.57, 0.86, 0.22, 0.985],
-        brightnessFloor: 112,
+        focus: [0.71, 0.67, 0.15, 0.42],
+        brightnessFloor: 120,
         contrastFloor: 8,
+        contrastWeight: 0,
       },
       "2. 능력 추첨": {
         src: "./scene-ability-draw-v4.png",
         bounds: [0.57, 0.85, 0.18, 0.985],
-        brightnessFloor: 108,
+        focus: [0.72, 0.67, 0.145, 0.42],
+        brightnessFloor: 116,
         contrastFloor: 8,
+        contrastWeight: 0,
       },
       "3. 인첸트": {
         src: "./scene-enchant-v4.png",
         bounds: [0.5, 0.81, 0.16, 0.99],
-        brightnessFloor: 98,
+        focus: [0.65, 0.67, 0.17, 0.44],
+        brightnessFloor: 108,
         contrastFloor: 7,
+        contrastWeight: 0,
       },
       "4. 최종 준비": {
         src: "./scene-final-ready-v7.png",
         bounds: [0.55, 0.86, 0.15, 0.995],
-        brightnessFloor: 98,
-        contrastFloor: 6,
+        focus: [0.71, 0.68, 0.17, 0.45],
+        brightnessFloor: 106,
+        contrastFloor: 7,
+        contrastWeight: 1,
       },
       "1. 자기장": {
         src: "./scene-magnetic-v5.png",
         bounds: [0.48, 0.83, 0.14, 0.99],
-        brightnessFloor: 98,
+        focus: [0.65, 0.67, 0.2, 0.43],
+        brightnessFloor: 108,
         contrastFloor: 7,
+        contrastWeight: 0,
       },
       "2. 필드상자": {
         src: "./scene-field-box-v10.png",
         bounds: [0.55, 0.9, 0.18, 0.995],
-        brightnessFloor: 96,
-        contrastFloor: 6,
+        focus: [0.74, 0.68, 0.2, 0.44],
+        brightnessFloor: 104,
+        contrastFloor: 7,
+        contrastWeight: 0.65,
       },
     };
     const isolatedIcon = isolatedSceneIcons[scene.title];
@@ -890,12 +902,22 @@
               (brightness - isolatedIcon.brightnessFloor) * 5.5
             )
           );
-          const contrastAlpha = Math.max(
+          const contrastAlpha =
+            Math.max(
+              0,
+              Math.min(
+                255,
+                (localContrast - isolatedIcon.contrastFloor) * 16
+              )
+            ) * isolatedIcon.contrastWeight;
+          const focus = isolatedIcon.focus;
+          const focusDistance = Math.sqrt(
+            Math.pow((xRatio - focus[0]) / focus[2], 2) +
+              Math.pow((yRatio - focus[1]) / focus[3], 2)
+          );
+          const focusFeather = Math.max(
             0,
-            Math.min(
-              255,
-              (localContrast - isolatedIcon.contrastFloor) * 16
-            )
+            Math.min(1, (1.08 - focusDistance) / 0.18)
           );
           const edgeFeather = Math.max(
             0,
@@ -912,7 +934,8 @@
             pixels[offset + 3],
             Math.round(
               Math.max(colorAlpha, brightAlpha, contrastAlpha) *
-                edgeFeather
+                edgeFeather *
+                focusFeather
             )
           );
         }
