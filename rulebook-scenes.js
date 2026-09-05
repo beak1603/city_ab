@@ -627,7 +627,7 @@
 
       const featuredName = document.createElement("p");
       featuredName.className = "support-ability__featured-name";
-      const categoryLabels = { mobility: "이동기", survival: "생존기", information: "정보", resource: "자원" };
+      const categoryLabels = { mobility: "이동", survival: "생존", information: "정보", resource: "자원" };
       const appendAbilityName = function (element, ability) {
         element.classList.add("support-ability__name-row");
         const badge = document.createElement("span");
