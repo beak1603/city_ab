@@ -239,7 +239,7 @@
   align-items: center !important;
   justify-content: space-between;
   gap: clamp(24px, 4vw, 72px);
-  transform: none;
+  transform: translateX(-48px);
 }
 
 #guide .support-ability__arrow {
