@@ -354,7 +354,6 @@
       controls.appendChild(previous);
       controls.appendChild(next);
       heading.appendChild(title);
-      heading.appendChild(controls);
 
       const description = document.createElement("p");
       description.className = "support-ability__description";
@@ -384,7 +383,9 @@
 
       card.appendChild(icon);
       card.appendChild(count);
+      stage.appendChild(previous);
       stage.appendChild(card);
+      stage.appendChild(next);
 
       let currentAbility = 0;
       const renderAbility = function () {
