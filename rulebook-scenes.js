@@ -561,7 +561,13 @@
       artwork.width = scene.cornerArt.width;
       artwork.height = scene.cornerArt.height;
       artwork.decoding = "async";
-      section.appendChild(artwork);
+      const layout = document.createElement("div");
+      layout.className = "guide-scene__corner-layout";
+      const stage = document.createElement("div");
+      stage.className = "guide-scene__corner-stage";
+      stage.appendChild(artwork);
+      layout.appendChild(stage);
+      section.appendChild(layout);
     }
 
     if (scene.revival) {
