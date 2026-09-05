@@ -670,12 +670,12 @@
       ).matches;
       if (!reduceTokenMotion) {
         const animationSteps = [
-          { delay: 5000, source: 0, active: [6, 3] },
-          { delay: 4400, source: 3, active: [6, 5] },
-          { delay: 4400, source: 6, active: [1, 5] },
-          { delay: 4400, source: 5, active: [1, 7] },
-          { delay: 4400, active: [0, 1, 2, 3, 4, 5, 6, 7] },
-          { delay: 5000, active: [0, 3] },
+          { delay: 4000, source: 0, active: [6, 3] },
+          { delay: 3500, source: 3, active: [6, 5] },
+          { delay: 3500, source: 6, active: [1, 5] },
+          { delay: 3500, source: 5, active: [1, 7] },
+          { delay: 3500, active: [0, 1, 2, 3, 4, 5, 6, 7] },
+          { delay: 4000, active: [0, 3] },
         ];
         let animationStep = 0;
 
