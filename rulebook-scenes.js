@@ -909,20 +909,13 @@
 
     const isolatedSceneIcons = {
       "1. 준비": {
-        src: "./scene-preparation-v4.png",
-        bounds: [0.57, 0.86, 0.22, 0.985],
-        focus: [0.71, 0.67, 0.15, 0.42],
-        anchorX: 0.71,
-        colorFloor: 10,
-        colorSolid: 18,
-        brightnessFloor: 130,
-        brightnessSolid: 145,
-        contrastFloor: 8,
-        contrastWeight: 0,
-        alphaFloor: 26,
+        src: "./scene-preparation-check-v1.svg",
+        directImage: true,
+        alt: "마인크래프트 스타일 픽셀 체크표시",
+        anchorX: 0.673,
       },
       "2. 능력 추첨": {
-        src: "./scene-ability-question-v1.svg",
+        src: "./scene-ability-question-v2.svg",
         directImage: true,
         alt: "마인크래프트 스타일 입체 픽셀 물음표",
         anchorX: 0.673,
