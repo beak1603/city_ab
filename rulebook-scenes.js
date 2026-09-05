@@ -568,30 +568,24 @@
       diagram.className = "token-station__diagram";
       diagram.setAttribute("aria-hidden", "true");
       diagram.innerHTML = [
-        "<svg viewBox='0 0 600 600' role='presentation' focusable='false'>",
+        "<img class='token-station__art' src='./token-stations-orbit.png?v=1' alt='' loading='lazy' decoding='async'/>",
+        "<svg class='token-station__overlay' viewBox='0 0 1448 1080' preserveAspectRatio='xMidYMid slice' role='presentation' focusable='false'>",
         "<defs>",
-        "<filter id='token-station-glow' x='-40%' y='-40%' width='180%' height='180%'>",
-        "<feGaussianBlur stdDeviation='10' result='blur'/>",
-        "<feMerge><feMergeNode in='blur'/><feMergeNode in='SourceGraphic'/></feMerge>",
-        "</filter>",
-        "<radialGradient id='token-station-white' cx='38%' cy='30%' r='72%'>",
-        "<stop offset='0%' stop-color='#ffffff'/><stop offset='100%' stop-color='#dbe9ff'/>",
-        "</radialGradient>",
-        "<radialGradient id='token-station-yellow' cx='38%' cy='30%' r='72%'>",
-        "<stop offset='0%' stop-color='#fff774'/><stop offset='100%' stop-color='#ffd900'/>",
-        "</radialGradient>",
-        "</defs>",
-        "<circle class='token-station__ring' cx='300' cy='300' r='210'/>",
+        "<mask id='token-station-active-mask' maskUnits='userSpaceOnUse' x='0' y='0' width='1448' height='1080'>",
+        "<rect x='0' y='0' width='1448' height='1080' fill='#000'/>",
         "<g class='token-station__nodes'>",
-        "<circle class='token-station__node token-station__node--active' cx='300' cy='90' r='16'/>",
-        "<circle class='token-station__node' cx='448' cy='152' r='16'/>",
-        "<circle class='token-station__node' cx='510' cy='300' r='16'/>",
-        "<circle class='token-station__node token-station__node--active' cx='448' cy='448' r='16'/>",
-        "<circle class='token-station__node' cx='300' cy='510' r='16'/>",
-        "<circle class='token-station__node' cx='152' cy='448' r='16'/>",
-        "<circle class='token-station__node' cx='90' cy='300' r='16'/>",
-        "<circle class='token-station__node' cx='152' cy='152' r='16'/>",
+        "<circle class='token-station__node token-station__node--active' cx='724' cy='116' r='82' fill='#fff'/>",
+        "<circle class='token-station__node' cx='1028' cy='244' r='82' fill='#fff'/>",
+        "<circle class='token-station__node' cx='1144' cy='522' r='82' fill='#fff'/>",
+        "<circle class='token-station__node token-station__node--active' cx='1028' cy='792' r='82' fill='#fff'/>",
+        "<circle class='token-station__node' cx='724' cy='912' r='82' fill='#fff'/>",
+        "<circle class='token-station__node' cx='419' cy='792' r='82' fill='#fff'/>",
+        "<circle class='token-station__node' cx='303' cy='522' r='82' fill='#fff'/>",
+        "<circle class='token-station__node' cx='419' cy='244' r='82' fill='#fff'/>",
         "</g>",
+        "</mask>",
+        "</defs>",
+        "<image class='token-station__active-art' href='./token-stations-orbit.png?v=1' x='0' y='0' width='1448' height='1080' preserveAspectRatio='xMidYMid meet' mask='url(#token-station-active-mask)'/>",
         "</svg>",
       ].join("");
 
@@ -620,8 +614,9 @@
         });
         const sourceX = Number(source.getAttribute("cx"));
         const sourceY = Number(source.getAttribute("cy"));
-        captureLabel.style.left = (sourceX / 6).toFixed(3) + "%";
-        captureLabel.style.top = (sourceY / 6).toFixed(3) + "%";
+        captureLabel.style.left =
+          ((sourceX - 184) / 10.8).toFixed(3) + "%";
+        captureLabel.style.top = (sourceY / 10.8).toFixed(3) + "%";
 
         let startTransform =
           "translate3d(-50%, -190%, 0) scale(0.94)";
@@ -632,12 +627,12 @@
         let exitTransform =
           "translate3d(-50%, -290%, 0) scale(0.97)";
 
-        if (sourceX > 300) {
+        if (sourceX > 724) {
           startTransform = "translate3d(85%, -10%, 0) scale(0.96)";
           visibleTransform = "translate3d(85%, -50%, 0) scale(1)";
           holdTransform = "translate3d(85%, -50%, 0) scale(1)";
           exitTransform = "translate3d(85%, -90%, 0) scale(0.98)";
-        } else if (sourceX < 300) {
+        } else if (sourceX < 724) {
           startTransform = "translate3d(-185%, -10%, 0) scale(0.96)";
           visibleTransform = "translate3d(-185%, -50%, 0) scale(1)";
           holdTransform = "translate3d(-185%, -50%, 0) scale(1)";
