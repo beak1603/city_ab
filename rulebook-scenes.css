@@ -670,7 +670,7 @@
   background: transparent;
   box-shadow: none;
   filter: none;
-  transform: translate(calc(-1 * var(--guide-art-left-shift)), -50%);
+  transform: translate(calc(-1 * var(--guide-art-left-shift) - 40px), -50%);
 }
 
 #guide .token-station__art,
@@ -765,7 +765,7 @@
     right: auto;
     width: min(86vw, 360px);
     margin: 24px auto 0;
-    transform: translateX(calc(-1 * var(--guide-art-left-shift)));
+    transform: translateX(calc(-1 * var(--guide-art-left-shift) - 8px));
   }
 }
 
