@@ -707,7 +707,7 @@
 
         // Move both slides continuously on one clock, with no wait between exit and entry.
         const options = {
-          duration: 360,
+          duration: 450,
           easing: "cubic-bezier(0.2, 0.72, 0.28, 1)",
           fill: "both",
         };
