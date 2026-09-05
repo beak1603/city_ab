@@ -1,5 +1,9 @@
 @import url("./rulebook-scenes-base.css?v=50");
 
+#guide {
+  --guide-art-left-shift: clamp(8px, calc(5vw - 36px), 48px);
+}
+
 /* Give every remaining scene the same frame and overlay as Final preparation. */
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(1),
 #guide .guide-detail__panel--scenes[data-guide-id="pre-game"] .guide-scene:nth-child(2),
@@ -299,7 +303,7 @@
   align-items: center !important;
   justify-content: space-between;
   gap: clamp(12px, 2vw, 28px);
-  transform: translateX(-48px);
+  transform: translateX(calc(-48px - var(--guide-art-left-shift)));
 }
 
 #guide .support-ability__arrow {
@@ -444,7 +448,7 @@
     margin: 0 auto;
     justify-content: center;
     gap: 12px;
-    transform: none;
+    transform: translateX(calc(-1 * var(--guide-art-left-shift)));
   }
 
   #guide .support-ability__arrow {
@@ -587,7 +591,7 @@
   background: transparent;
   box-shadow: none;
   filter: none;
-  transform: translateY(-50%);
+  transform: translate(calc(-1 * var(--guide-art-left-shift)), -50%);
 }
 
 #guide .token-station__art,
@@ -643,7 +647,7 @@
 
 #guide .token-station__node {
   opacity: 0;
-  transition: opacity 1300ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 975ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 #guide .token-station__node--active {
@@ -682,7 +686,7 @@
     right: auto;
     width: min(86vw, 360px);
     margin: 24px auto 0;
-    transform: none;
+    transform: translateX(calc(-1 * var(--guide-art-left-shift)));
   }
 }
 
@@ -848,7 +852,7 @@
 #guide .token-shop__villager {
   position: absolute;
   z-index: 2;
-  right: clamp(16px, 3vw, 64px);
+  right: calc(clamp(16px, 3vw, 64px) + var(--guide-art-left-shift));
   bottom: 0;
   display: block;
   height: 92%;
@@ -879,7 +883,7 @@
   }
 
   #guide .guide-scene--token-shop .token-shop__villager {
-    right: 12px;
+    right: calc(12px + var(--guide-art-left-shift));
     height: 300px;
     max-width: 85%;
   }

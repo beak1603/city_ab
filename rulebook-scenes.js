@@ -82,7 +82,7 @@
             { name: "광역 탐색기", image: "./support-wide-area-scanner.webp", description: "필드상자 감지 범위를 2배 증가시킵니다." },
             { name: "돌풍 질주", image: "./support-gust-dash.webp", description: "바라보는 수평 방향으로 빠르게 돌진합니다." },
             { name: "비상 가속", image: "./support-emergency-boost.webp", description: "피해를 받고 체력이 일정 체력 이하가 되면 일정 시간 동안 빠른 이동 속도를 얻습니다." },
-            { name: "상승기류", image: "./support-updraft.webp", description: "사용 시 높게 뛰어오르며 그 순간만 낙하 피해를 무효화합니다." },
+            { name: "상승 기류", image: "./support-updraft.webp", description: "사용 시 높게 뛰어오르며 그 순간만 낙하 피해를 무효화합니다." },
             { name: "생명 포식", image: "./support-life-devour.webp", description: "다른 플레이어를 처치하면 일시적으로 재생효과를 얻습니다." },
             { name: "생체 분석기", image: "./support-bio-analyzer.webp", description: "다른 플레이어들의 남은 체력을 확인할 수 있습니다." },
             { name: "위치 투영기", image: "./support-position-projector.webp", description: "사용 시 주변 플레이어 위치에 잔상을 남깁니다." },
@@ -818,7 +818,7 @@
             { opacity: 0, transform: exitTransform },
           ],
           {
-            duration: 3000,
+            duration: 2250,
             easing: "cubic-bezier(0.22, 1, 0.36, 1)",
             fill: "both",
           }
@@ -830,12 +830,12 @@
       ).matches;
       if (!reduceTokenMotion) {
         const animationSteps = [
-          { delay: 4000, source: 0, active: [6, 3] },
-          { delay: 3500, source: 3, active: [6, 5] },
-          { delay: 3500, source: 6, active: [1, 5] },
-          { delay: 3500, source: 5, active: [1, 7] },
-          { delay: 3500, active: [0, 1, 2, 3, 4, 5, 6, 7] },
-          { delay: 4000, active: [0, 3] },
+          { delay: 3000, source: 0, active: [6, 3] },
+          { delay: 2625, source: 3, active: [6, 5] },
+          { delay: 2625, source: 6, active: [1, 5] },
+          { delay: 2625, source: 5, active: [1, 7] },
+          { delay: 2625, active: [0, 1, 2, 3, 4, 5, 6, 7] },
+          { delay: 3000, active: [0, 3] },
         ];
         let animationStep = 0;
 
