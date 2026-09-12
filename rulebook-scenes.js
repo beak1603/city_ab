@@ -998,30 +998,17 @@
         });
         const sourceX = Number(source.getAttribute("data-x"));
         const sourceY = Number(source.getAttribute("data-y"));
-        captureLabel.style.left =
-          ((sourceX - 184) / 10.8).toFixed(3) + "%";
-        captureLabel.style.top = (sourceY / 10.8).toFixed(3) + "%";
+        // Keep the badge inside the empty orbit, offset toward the captured
+        // station. The surrounding eight icons stay fully visible on mobile too.
+        const sourceLeft = ((sourceX - 181) / 1086) * 100;
+        const sourceTop = (sourceY / 1086) * 100;
+        captureLabel.style.left = (50 + (sourceLeft - 50) * 0.22).toFixed(3) + "%";
+        captureLabel.style.top = (48 + (sourceTop - 48) * 0.22).toFixed(3) + "%";
 
-        let startTransform =
-          "translate3d(-50%, -290%, 0) scale(0.94)";
-        let visibleTransform =
-          "translate3d(-50%, -350%, 0) scale(1)";
-        let holdTransform =
-          "translate3d(-50%, -360%, 0) scale(1)";
-        let exitTransform =
-          "translate3d(-50%, -410%, 0) scale(0.97)";
-
-        if (sourceX > 724) {
-          startTransform = "translate3d(105%, -10%, 0) scale(0.96)";
-          visibleTransform = "translate3d(105%, -50%, 0) scale(1)";
-          holdTransform = "translate3d(105%, -50%, 0) scale(1)";
-          exitTransform = "translate3d(105%, -90%, 0) scale(0.98)";
-        } else if (sourceX < 724) {
-          startTransform = "translate3d(-205%, -10%, 0) scale(0.96)";
-          visibleTransform = "translate3d(-205%, -50%, 0) scale(1)";
-          holdTransform = "translate3d(-205%, -50%, 0) scale(1)";
-          exitTransform = "translate3d(-205%, -90%, 0) scale(0.98)";
-        }
+        const startTransform = "translate3d(-50%, calc(-50% + 6px), 0) scale(0.94)";
+        const visibleTransform = "translate3d(-50%, -50%, 0) scale(1)";
+        const holdTransform = visibleTransform;
+        const exitTransform = "translate3d(-50%, calc(-50% - 6px), 0) scale(0.97)";
 
         captureLabel.animate(
           [
