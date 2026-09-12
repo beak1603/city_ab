@@ -86,7 +86,7 @@
         },
         {
           title: "3-1. 토큰생성소",
-          description: "- 토큰생성소는 총 8개입니다\n- 토큰생성소에 일정 시간 머무르면 자동으로 점령되며 충전된 토큰이 지급됩니다\n- 토큰생성소 점령 도중 다른 플레이어가 들어올 경우 점령은 취소됩니다\n- 토큰생성소에 토큰은 최대 5개까지 충전됩니다\n- 2개밖에 충전되지 않은 토큰생성소를 점령시 토큰 2개만 획득할 수 있습니다\n- 게임시작시 8개 중 2개만 활성화되며, 누군가 토큰 생성소 점령 완료 했을 경우 다른 토큰생성소가 활성화 됩니다\n- 일정시간 이후에는 모든 토큰생성소가 활성화됩니다",
+          description: "- 토큰생성소는 총 8개입니다\n- 게임시작시 2개만 활성화되며 토큰생성소를 점령하면 충전된 토큰을 획득합니다\n- 토큰생성소가 점령될시 토큰생성소 활성화 위치는 다른곳으로 이동합니다\n- 일정시간 이후에는 8개 모두 활성화됩니다",
           diagram: "token-stations",
         },
         {
@@ -109,7 +109,7 @@
           abilities: [
             { name: "상승 기류", category: "mobility", image: "./support-updraft.webp", description: "사용 시 높게 뛰어오르며 그 순간만 낙하 피해를 무효화합니다." },
             { name: "돌풍 질주", category: "mobility", image: "./support-gust-dash.webp", description: "바라보는 수평 방향으로 빠르게 돌진합니다." },
-            { name: "불안정도약", category: "mobility", image: "./support-unstable-leap.png", description: "능력 사용시 무작위 지점으로 순간이동합니다" },
+            { name: "불안정 도약", category: "mobility", image: "./support-unstable-leap.png", description: "능력 사용시 무작위 지점으로 순간이동합니다" },
             { name: "비상 가속", category: "survival", image: "./support-emergency-boost.webp", description: "피해를 받고 체력이 일정 체력 이하가 되면 일정 시간 동안 빠른 이동 속도를 얻습니다." },
             { name: "생명 포식", category: "survival", image: "./support-life-devour.webp", description: "다른 플레이어를 처치하면 일시적으로 재생효과를 얻습니다." },
             { name: "정화 장막", category: "survival", image: "./support-purifying-barrier.webp", description: "사용 시 본인에게 적용되는 해로운 효과들을 일시적으로 막습니다." },
