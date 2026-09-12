@@ -99,7 +99,7 @@
         },
         {
           title: "PVP 시스템",
-          cornerArt: { kind: "pvp", src: "./scene-pvp-shield-v1.png", alt: "방패를 든 스티브", width: 1254, height: 1254 },
+          cornerArt: { kind: "pvp", src: "./scene-pvp-swords-v2.png", alt: "교차한 마인크래프트 검과 PVP 글자", width: 1254, height: 1254 },
           description: "- PVP를 못하셔도 괜찮습니다!\n- 연타 시스템 도입으로 마우스를 광클해도 최대 데미지로 피격할 수 있습니다",
         },
         {
