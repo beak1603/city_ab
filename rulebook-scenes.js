@@ -7,6 +7,7 @@
     #guide .guide-scene--token-shop .token-shop__villager {
       top: 50%; bottom: auto; transform: translateY(-50%);
       width: 34%; max-width: 680px; height: auto; object-position: center;
+      border-radius: 16px;
     }
     @media (max-width: 1100px) {
       #guide .guide-scene--token-shop .guide-scene__content {
