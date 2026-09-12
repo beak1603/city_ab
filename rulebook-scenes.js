@@ -118,6 +118,7 @@
             { name: "고속 추출기", category: "resource", image: "./support-high-speed-extractor.webp", description: "토큰 생성소 점령시간이 절반으로 줄어듭니다." },
             { name: "현상금 증폭기", category: "resource", image: "./support-bounty-amplifier.webp", description: "플레이어 처치 보상이 토큰 2개에서 3개로 증가합니다." },
             { name: "광역 탐색기", category: "resource", image: "./support-wide-area-scanner.webp", description: "필드상자 감지 범위를 2배 증가시킵니다." },
+            { name: "능력 탐지", category: "information", image: "./support-ability-detection.png", description: "토큰 1개를 소비하여 상대 능력을 탐지합니다" },
           ],
         },
         {
