@@ -273,28 +273,18 @@
     heading.appendChild(eyebrow);
     heading.appendChild(title);
 
-    const stats = document.createElement("div");
-    stats.className = "game-goal__stats";
-    stats.setAttribute("aria-label", "41개의 능력 20분의 시간 1명의 생존자");
-
-    [
-      { number: "41", label: "개의 능력" },
-      { number: "20", label: "분의 시간" },
-      { number: "1", label: "명의 생존자" },
-    ].forEach(function (item) {
-      const stat = document.createElement("div");
-      stat.className = "game-goal__stat";
-
-      const number = document.createElement("strong");
-      number.textContent = item.number;
-
-      const label = document.createElement("span");
-      label.textContent = item.label;
-
-      stat.appendChild(number);
-      stat.appendChild(label);
-      stats.appendChild(stat);
-    });
+    const stats = document.createElement("p");
+    stats.className = "game-goal__sentence";
+    stats.innerHTML = [
+      '<span class="game-goal__sentence-row">',
+      '<span class="game-goal__sentence-chunk">총 <strong>44</strong>개의 능력으로 </span>',
+      '<span class="game-goal__sentence-chunk"><strong>20</strong>분의 시간동안 </span>',
+      '</span>',
+      '<span class="game-goal__sentence-row">',
+      '<span class="game-goal__sentence-chunk">도시에서 살아남는 </span>',
+      '<span class="game-goal__sentence-chunk">최후의 <strong>1</strong>인이되세요!</span>',
+      '</span>',
+    ].join("");
 
     section.appendChild(heading);
     section.appendChild(stats);
