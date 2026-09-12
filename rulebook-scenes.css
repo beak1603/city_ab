@@ -712,36 +712,16 @@
 #guide .token-station__capture {
   position: absolute;
   z-index: 3;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  min-width: 84px;
-  height: 36px;
-  padding: 0 18px;
-  border: 1px solid #c78cda;
-  border-radius: 999px;
-  background: linear-gradient(160deg, #a34db0 0%, #853b96 100%);
-  box-shadow: 0 3px 10px rgba(20, 5, 29, 0.24);
   opacity: 0;
-  color: #fff5ff;
+  color: #ffe11a;
   font-size: 16px;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1;
-  letter-spacing: 0.035em;
+  letter-spacing: -0.01em;
   white-space: nowrap;
   pointer-events: none;
-  text-shadow: 0 1px 1px rgba(41, 10, 51, 0.2);
-  transform: translate3d(-50%, -50%, 0);
-}
-
-#guide .token-station__capture::before {
-  content: "";
-  position: absolute;
-  inset: 4px;
-  border: 1px solid rgba(248, 219, 255, 0.65);
-  border-radius: inherit;
-  pointer-events: none;
+  text-shadow: none;
+  transform: translate3d(-50%, -250%, 0);
 }
 
 #guide .token-station__node {
