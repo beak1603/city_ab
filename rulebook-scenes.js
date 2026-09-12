@@ -8,12 +8,6 @@
       top: 50%; bottom: auto; transform: translateY(-50%);
       width: 34%; max-width: 680px; height: auto; object-position: center;
     }
-    #guide .guide-scene--token-shop .guide-scene__content {
-      padding-right: 43%;
-    }
-    #guide .guide-scene--token-shop .guide-scene__description {
-      white-space: pre-line; overflow-wrap: break-word;
-    }
     @media (max-width: 1100px) {
       #guide .guide-scene--token-shop .guide-scene__content {
         grid-row: 1; padding: 30px 22px 24px;
