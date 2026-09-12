@@ -298,11 +298,11 @@
 
     const stats = document.createElement("div");
     stats.className = "game-goal__stats";
-    stats.setAttribute("aria-label", "41개의 능력 20분의 시간 1명의 생존자");
+    stats.setAttribute("aria-label", "45개의 능력 25분의 시간 1명의 생존자");
 
     [
-      { number: "41", label: "개의 능력" },
-      { number: "20", label: "분의 시간" },
+      { number: "45", label: "개의 능력" },
+      { number: "25", label: "분의 시간" },
       { number: "1", label: "명의 생존자" },
     ].forEach(function (item) {
       const stat = document.createElement("div");
