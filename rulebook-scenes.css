@@ -1455,24 +1455,20 @@
 }
 
 /* A continuous game objective, with the established oversized green numbers. */
-.game-goal {
-  container-type: inline-size;
-}
 .game-goal__sentence {
   margin: 0;
-  white-space: nowrap;
   color: var(--text);
-  font-size: min(21px, 1.8cqw);
+  font-size: clamp(18px, 1.9vw, 24px);
   font-weight: 620;
   line-height: 1.6;
   letter-spacing: -0.045em;
   text-align: center;
 }
 .game-goal__sentence-row {
-  display: inline;
+  display: block;
 }
 .game-goal__sentence-row + .game-goal__sentence-row {
-  margin-top: 0;
+  margin-top: clamp(18px, 3vw, 36px);
 }
 .game-goal__sentence-chunk {
   display: inline-block;
@@ -1482,7 +1478,7 @@
   display: inline-block;
   margin: 0 0.1em;
   color: var(--green-soft);
-  font-size: min(88px, 7.5cqw);
+  font-size: clamp(88px, 11vw, 148px);
   font-weight: 950;
   line-height: 1;
   letter-spacing: -0.085em;
@@ -1490,9 +1486,13 @@
 }
 @media (max-width: 720px) {
   .game-goal__sentence {
+    font-size: clamp(17px, 4.7vw, 21px);
     line-height: 1.8;
   }
+  .game-goal__sentence strong {
+    font-size: clamp(64px, 18vw, 88px);
+  }
   .game-goal__sentence-chunk {
-    margin-top: 0;
+    margin-top: 8px;
   }
 }
