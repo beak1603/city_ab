@@ -52,15 +52,15 @@
       scenes: [
         {
           title: "1. 준비",
-          description: "12명의 플레이어가 모두 준비되면 인첸트룸으로 이동합니다",
+          description: "12명의 플레이어가 모두 준비되면 인챈트룸으로 이동합니다",
         },
         {
           title: "2. 능력 추첨",
-          description: "인첸트룸에서 능력 티켓으로 능력을 뽑습니다\n리롤은 단 한 번만 가능합니다",
+          description: "인챈트룸에서 능력 티켓으로 능력을 뽑습니다\n리롤은 단 한 번만 가능합니다",
         },
         {
-          title: "3. 인첸트",
-          description: "기본템을 인첸트하여 도시에서 싸울 준비를 마칩니다",
+          title: "3. 인챈트",
+          description: "기본템을 인챈트하여 도시에서 싸울 준비를 마칩니다",
         },
         {
           title: "4. 최종 준비",
@@ -1208,7 +1208,7 @@
         alt: "마인크래프트 스타일 입체 픽셀 물음표",
         anchorX: 0.673,
       },
-      "3. 인첸트": {
+      "3. 인챈트": {
         src: "./scene-enchant-supplied-v5.png",
         width: 1402,
         height: 1122,
@@ -1261,7 +1261,7 @@
       suppliedImage.className = "guide-scene__isolated-icon";
       suppliedImage.onload = function () { balanceSceneArtwork(suppliedImage); };
       suppliedImage.src = isolatedIcon.src;
-      suppliedImage.alt = isolatedIcon.alt || "첨부한 인첸트 테이블 이미지";
+      suppliedImage.alt = isolatedIcon.alt || "첨부한 인챈트 테이블 이미지";
       suppliedImage.width = isolatedIcon.width || 2172;
       suppliedImage.height = isolatedIcon.height || 724;
       suppliedImage.decoding = "async";
