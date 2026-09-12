@@ -1453,3 +1453,9 @@
     height: 228px;
   }
 }
+
+/* Keep the current guide tab as bright as its hover state. */
+#guide .guide-tab.is-selected,
+#guide .guide-tab[aria-selected="true"] {
+  color: var(--text);
+}

@@ -135,7 +135,7 @@
     },
   };
 
-  let activeGuide = null;
+  let activeGuide = "pre-game";
 
   function ensureScrollRevealStyle() {
     if (document.getElementById("city-scroll-reveal-style")) return;
@@ -1491,6 +1491,7 @@
 
     if (isAlreadyOpen) {
       if (!forceOpen) closeGuide();
+      else setSelected(id);
       return;
     }
 
@@ -1550,7 +1551,7 @@
   ensureGameGoal();
   keepLabelsCurrent();
   installScrollReveal();
-  closeGuide();
+  openGuide("pre-game", true);
 
   window.addEventListener(
     "load",
