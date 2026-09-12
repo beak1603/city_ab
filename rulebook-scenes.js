@@ -104,7 +104,7 @@
         },
         {
           title: "점프패드",
-          cornerArt: { kind: "jump-pad", src: "./scene-jump-pad-arrow-v1.png", alt: "위쪽을 가리키는 초록색 화살표", width: 1230, height: 1278 },
+          cornerArt: { kind: "jump-pad", src: "./scene-jump-pad-v2.png", alt: "초록색 화살표가 솟아오르는 마인크래프트 점프패드", width: 1254, height: 1254 },
           description: "- 맵 곳곳에는 점프패드가 있습니다\n- 점프패드별로 점프 높이가 다릅니다\n- 점프패드로 떨어지면 낙하피해를 입지 않습니다",
         },
       ],
