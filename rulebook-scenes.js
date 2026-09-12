@@ -275,16 +275,7 @@
 
     const stats = document.createElement("p");
     stats.className = "game-goal__sentence";
-    stats.innerHTML = [
-      '<span class="game-goal__sentence-row">',
-      '<span class="game-goal__sentence-chunk">총 <strong>44</strong>개의 능력으로 </span>',
-      '<span class="game-goal__sentence-chunk"><strong>20</strong>분의 시간동안 </span>',
-      '</span>',
-      '<span class="game-goal__sentence-row">',
-      '<span class="game-goal__sentence-chunk">도시에서 살아남는 </span>',
-      '<span class="game-goal__sentence-chunk">최후의 <strong>1</strong>인이되세요!</span>',
-      '</span>',
-    ].join("");
+    stats.innerHTML = '총 <strong>44</strong>개의 능력으로 <strong>20</strong>분의 시간 동안 도시에서 살아남는 최후의 <strong>1</strong>인이 되세요!';
 
     section.appendChild(heading);
     section.appendChild(stats);
